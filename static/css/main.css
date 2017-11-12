@@ -1,0 +1,1267 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    /* background: rgb(244, 246, 247); */
+}
+
+ul#nav {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    list-style-type: none;
+    overflow: hidden;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, .1);
+}
+
+ul#nav li.left {
+    float: left;
+}
+
+ul#nav li.right {
+    float: right;
+}
+
+ul#nav li.title {
+    padding-left: 5%;
+    padding-right: 30px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 60px;
+    font-weight: normal;
+}
+
+ul#nav li a {
+    display: block;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    color: rgb(68, 68, 68);
+}
+
+ul#nav li a.active {
+    background: rgb(240, 240, 240);
+}
+
+ul#nav li a:hover {
+    background: rgb(240, 240, 240);
+}
+
+li#person:hover>.personnav {
+    display: block;
+}
+
+ul.personnav {
+    display: none;
+    position: fixed;
+    list-style-type: none;
+    padding-left: 0px;
+    background: #fff;
+    z-index: 1000;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, .2);
+    width: 150px;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 5px 0px 5px 0px;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.totop {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    bottom: 60px;
+    right: 40px;
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, .1); */
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+}
+
+.totop i {
+    width: 100%;
+    line-height: 50px;
+    font-size: 30px;
+}
+
+.pages {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+}
+
+.pages ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.pages ul li {
+    float: left;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+}
+
+.pages ul li:nth-child(1) {
+    border-left-width: 1px;
+}
+
+.pages ul li i {
+    font-weight: bold;
+}
+
+.pages ul li.active {
+    background: rgb(202, 202, 202);
+}
+
+.pages ul li a {
+    color: #000;
+    display: inline-block;
+    padding: 7px 10px 7px 10px;
+    text-decoration: none;
+}
+
+
+/* ------------------------------------ */
+
+.main {
+    margin-top: 70px;
+}
+
+
+/* index */
+
+.index {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.index .left {
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 200px;
+}
+
+
+/* right */
+
+.index .right {
+    width: 300px;
+    margin-bottom: 200px;
+    padding: 10px;
+    float: right;
+    display: inline-block;
+}
+
+.index .right .author {
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
+    border: 1px solid #ddd;
+    padding: 5px;
+    background: #fff;
+}
+
+.index .right .author .title {
+    padding: 5px;
+    color: #848484;
+}
+
+.index .right .author .more {
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+    background: rgb(230, 230, 230);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.index .right .author .more:active {
+    background: rgb(219, 219, 219);
+}
+
+.index .right .author .list {
+    max-height: 330px;
+    overflow: hidden;
+}
+
+.index .right .author .list .person {
+    position: relative;
+    height: 60px;
+    margin-bottom: 5px;
+}
+
+.index .right .author .list .person .headimage {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: 50%;
+    margin-top: -25px;
+    margin-left: 5px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.index .right .author .list .person .name {
+    padding-top: 10px;
+    margin-left: 65px;
+}
+
+.index .right .author .list .person .content {
+    margin-left: 65px;
+    padding-right: 80px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-size: 15px;
+    color: rgb(94, 94, 94);
+}
+
+.index .right .author .list .person .follow {
+    position: absolute;
+    line-height: 30px;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 30px;
+    top: 50%;
+    margin-top: -15px;
+    right: 10px;
+    background: rgb(230, 230, 230);
+    display: inline;
+    border-radius: 7%;
+    cursor: pointer;
+}
+
+.index .right .author .list .person .follow:hover {
+    background: rgb(116, 181, 255);
+    color: #fff;
+}
+
+
+/* left */
+
+.index .left .search {
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+
+.index .left .search .searchInput {
+    height: 40px;
+    width: 100%;
+    float: left;
+    overflow: hidden;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.index .left .search .searchButton {
+    position: absolute;
+    text-align: center;
+    right: 3px;
+    transform: translate(0px, -50%);
+    overflow: hidden;
+    padding: 7px 10px 7px 10px;
+    top: 50%;
+    cursor: pointer;
+    border-left: 1px solid #ddd;
+    color: rgb(141, 141, 141);
+}
+
+.index .left .search .searchButton:hover {
+    color: rgb(68, 68, 68);
+}
+
+.index .left .search .clear {
+    position: absolute;
+    right: 90px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translate(0px, -50%);
+    cursor: pointer;
+    font-size: 15px;
+    color: rgb(141, 141, 141);
+    background: rgb(233, 233, 233);
+    text-align: center;
+    line-height: 14px;
+    border-radius: 50%;
+}
+
+.index .left .search .clear:hover {
+    background: rgb(224, 224, 224);
+}
+
+.index .left .list {
+    margin-top: 20px;
+}
+
+.index .left .list .article,
+.personal .left .list .article,
+.followed .right .list .article {
+    box-sizing: border-box;
+    padding: 10px;
+    padding-left: 20px;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #ECECEC;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
+    overflow: hidden;
+}
+
+.index .left .list .article .top,
+.personal .left .list .article .top,
+.followed .right .list .article .top {
+    position: relative;
+    height: 45px;
+}
+
+.index .left .list .article .top .headimage,
+.personal .left .list .article .top .headimage,
+.followed .right .list .article .top .headimage {
+    position: absolute;
+    float: left;
+    width: 36px;
+    height: 36px;
+    top: 50%;
+    margin-top: -19px;
+    /* margin-left: 7px; */
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.index .left .list .article .top .name,
+.personal .left .list .article .top .name,
+.index .left .list .article .top .time,
+.personal .left .list .article .top .time,
+.followed .right .list .article .top .name,
+.followed .right .list .article .top .time {
+    color: #6F6F6F;
+    line-height: 45px;
+    float: left;
+}
+
+.index .left .list .article .top .name,
+.personal .left .list .article .top .name,
+.followed .right .list .article .top .name {
+    margin-left: 45px;
+}
+
+.index .left .list .article .top .time,
+.personal .left .list .article .top .time,
+.followed .right .list .article .top .time {
+    margin-left: 10px;
+}
+
+.index .left .list .article .middle,
+.personal .left .list .article .middle,
+.followed .right .list .article .middle {
+    margin-top: 5px;
+}
+
+.index .left .list .article .middle .title,
+.personal .left .list .article .middle .title,
+.followed .right .list .article .middle .title {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4D4D4D;
+    text-decoration: none;
+}
+
+.index .left .list .article .middle .title:hover,
+.personal .left .list .article .middle .title:hover,
+.followed .right .list .article .middle .title:hover {
+    text-decoration: underline;
+}
+
+.index .left .list .article .middle .content,
+.personal .left .list .article .middle .content,
+.followed .right .list .article .middle .content {
+    display: inline-block;
+    margin-top: 7px;
+    font-size: 16px;
+    color: #4D4D4D;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.index .left .list .article .bottom,
+.personal .left .list .article .bottom,
+.followed .right .list .article .bottom {
+    position: relative;
+    height: 30px;
+    margin-top: 7px;
+}
+
+.index .left .list .article .bottom .num,
+.personal .left .list .article .bottom .num,
+.followed .right .list .article .bottom .num {
+    margin-right: 12px;
+    float: left;
+    line-height: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #6F6F6F;
+}
+
+
+/* -------------------------------------------- */
+
+
+/* person-setting */
+
+.setting {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.setting .left {
+    position: fixed;
+    width: 230px;
+    background: #fff;
+    float: left;
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
+    border: 1px solid #ddd;
+}
+
+.setting .right {
+    overflow: hidden;
+    background: rgb(255, 255, 255);
+    margin-bottom: 100px;
+    margin-left: 240px;
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
+}
+
+.setting .left .title {
+    padding: 20px;
+    text-align: center;
+    font-size: 25px;
+    color: rgb(58, 58, 58);
+}
+
+.setting .left .editprofile,
+.setting .left .changepassword {
+    color: rgb(58, 58, 58);
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.setting .right #editprofile,
+.setting .right #changepassword {
+    padding: 50px;
+    padding-top: 20px;
+    display: none;
+}
+
+.setting .right #editprofile .row1 {
+    height: 150px;
+    position: relative;
+}
+
+.setting .right #editprofile .row1 .headimage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    float: left;
+}
+
+.setting .right #editprofile .row1 .changeimage {
+    margin-left: 120px;
+    position: absolute;
+    top: 50%;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 40px;
+    display: inline-block;
+    overflow: hidden;
+    margin-top: -20px;
+    cursor: pointer;
+    background: rgb(247, 247, 247);
+}
+
+.setting .right #editprofile .row,
+.setting .right #changepassword .row {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.setting .right #editprofile .row input,
+.setting .right #changepassword .row input,
+#gender {
+    margin-top: 5px;
+    padding-left: 10px;
+    font-size: 20px;
+    outline: none;
+    height: 45px;
+    width: 50%;
+    box-sizing: border-box;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+    border: 1px solid #ccc;
+}
+
+.setting .right #changepassword .row span {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+    margin-left: -50px;
+}
+
+.setting .right #editprofile .row textarea {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+    border: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    height: 150px;
+    margin-top: 10px;
+    outline: none;
+    font-size: 20px;
+    padding: 10px;
+    font-family: '微软雅黑';
+}
+
+.edit,
+.save {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100px;
+    margin-top: 15px;
+    font-size: 20px;
+    display: inline-block;
+    text-align: center;
+    background: rgb(247, 247, 247);
+    cursor: pointer;
+}
+
+
+/* -------------------------------------- */
+
+
+/* personal */
+
+.personal {
+    margin: 0 auto;
+    width: 90%;
+    padding-top: 10px;
+}
+
+.personal .left {
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+
+.personal .right {
+    margin-left: 20px;
+    float: right;
+    width: 300px;
+    margin-bottom: 100px;
+}
+
+.personal .right .one {
+    background: #fff;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
+    border: 1px solid #ddd;
+}
+
+.personal .right .row1 {
+    padding-left: 13px;
+    position: relative;
+    height: 90px;
+}
+
+.personal .right .row1 img {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    float: left;
+    top: 50%;
+    margin-top: -35px;
+    margin-left: 10px;
+    border: 1px solid #ddd;
+}
+
+.personal .right .row1 span {
+    margin-left: 100px;
+    font-size: 20px;
+    display: block;
+    padding-top: 12px;
+}
+
+.personal .right .row1 .follow {
+    margin-left: 100px;
+    display: inline-block;
+    background: rgb(230, 230, 230);
+    padding: 5px 10px 5px 10px;
+    margin-top: 7px;
+    border-radius: 3%;
+    cursor: pointer;
+    border-radius: 7%;
+}
+
+.personal .right .row1 .follow i {
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.personal .right .row2 {
+    height: 50px;
+    padding: 3px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.personal .right .row2 .box {
+    flex-grow: 1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.personal .right .row2 .box span {
+    display: block;
+}
+
+.split {
+    height: 1px;
+    background: #ddd;
+    margin: 0 auto;
+}
+
+.personal .right .row3 {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.personal .right .row3 .like {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: rgb(230, 230, 230);
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+.personal .right .row3 input {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border: 1px solid #ddd;
+}
+
+.personal .right .row3 .clear {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
+    background: rgb(233, 233, 233);
+    transform: translate(0px, -50%);
+    cursor: pointer;
+    color: rgb(141, 141, 141);
+    text-align: center;
+    border-radius: 50%;
+}
+
+.personal .right .row3 .clear:hover {
+    background: rgb(224, 224, 224);
+}
+
+.personal .right .row3 .clear:hover::before {
+    /* display: block; */
+}
+
+.personal .right .row3 .clear::before {
+    display: none;
+    content: '清除';
+    position: absolute;
+    width: 25px;
+    right: 13px;
+    top: 60%;
+    font-size: 12px;
+    transform: translate(0px, -50%);
+    background: #ddd;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.personal .right .row3 i {
+    cursor: pointer;
+    position: absolute;
+    padding: 5px;
+    right: 13px;
+    top: 50%;
+    transform: translate(0px, -50%);
+    font-size: 20px;
+    color: rgb(141, 141, 141);
+}
+
+.personal .right .row3 i:hover {
+    color: rgb(81, 81, 81);
+}
+
+.personal .right .row4 {
+    padding: 20px;
+    padding-bottom: 2px;
+}
+
+.personal .right .row4 span {
+    display: block;
+    padding: 5px;
+    border-left: 5px solid rgb(179, 179, 179);
+}
+
+.personal .right .row4 ul {
+    padding: 0;
+    list-style: none;
+}
+
+.personal .right .row4 li {
+    margin-top: 10px;
+}
+
+.personal .right .row4 .article {
+    margin-top: 10px;
+    font-weight: bold;
+    color: rgb(94, 94, 94);
+    text-decoration: none;
+}
+
+.personal .right .row4 .article:hover {
+    text-decoration: underline;
+}
+
+.personal .left .tabs {
+    background: #fff;
+    display: flex;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
+    border-bottom: 1px solid #ddd;
+}
+
+.personal .left .tabs i {
+    position: relative;
+    right: 5px;
+}
+
+.personal .left .tabs .box {
+    /* flex-grow: 1; */
+    width: 15%;
+    text-align: center;
+    padding-top: 20px;
+    color: rgb(100, 100, 100);
+    font-size: 17px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.personal .left .tabs .box.active:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: rgb(100, 100, 100);
+    bottom: 0;
+    left: 0;
+}
+
+.personal .left .list {
+    margin-top: 10px;
+}
+
+.personal .left .list .noperson {
+    font-size: 25px;
+    text-align: center;
+    background: #fff;
+    height: 100px;
+    line-height: 100px;
+}
+
+.personal .left .list .article .top .delete {
+    position: relative;
+    float: right;
+    cursor: pointer;
+}
+
+.personal .left .list .article .top .delete:hover::after {
+    display: block;
+}
+
+.personal .left .list .article .top .delete:hover::before {
+    display: block;
+}
+
+.personal .left .list .article .top .delete:after {
+    display: none;
+    content: '删除';
+    position: absolute;
+    width: 50px;
+    right: 23px;
+    text-align: center;
+    top: -3px;
+    background: rgb(70, 70, 70);
+    border-radius: 10%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: #fff;
+}
+
+.personal .left .list .article .top .delete:before {
+    display: none;
+    content: '';
+    position: absolute;
+    right: 16px;
+    width: 0;
+    height: 0;
+    top: 1px;
+    border-top: 10px solid transparent;
+    border-left: 20px solid rgb(70, 70, 70);
+    border-bottom: 10px solid transparent;
+}
+
+.personal .left .list .followperson {
+    height: 100px;
+    width: 100%;
+    background: #fff;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+.personal .left .list .followperson img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    border: 1px solid #ddd;
+    margin-left: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+.personal .left .list .followperson .info .name {
+    display: inline-block;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.personal .left .list .followperson .info .name:hover {
+    text-decoration: underline;
+}
+
+.personal .left .list .followperson .info .content,
+.personal .left .list .followperson .info span {
+    font-size: 14px;
+    color: rgb(95, 95, 95);
+}
+
+.personal .left .list .followperson .info {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: block;
+    margin-left: 110px;
+}
+
+.personal .left .list .followperson .btn,
+.personal .left .list .followperson .btn1 {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.personal .left .list .followperson .btn span:nth-child(2) {
+    display: none;
+}
+
+.personal .left .list .followperson .btn:hover span:nth-child(2) {
+    display: block;
+}
+
+.personal .left .list .followperson .btn:hover span:nth-child(1) {
+    display: none;
+}
+
+
+/* ----------------------------------------- */
+
+
+/* follow */
+
+.followed,
+.message {
+    margin: 0 auto;
+    width: 90%;
+    padding-top: 10px;
+    margin-bottom: 200px;
+}
+
+.followed .left,
+.message .left {
+    width: 300px;
+    /* height: 100%; */
+    float: left;
+    background: #fff;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
+    border: 1px solid #ddd;
+    display: block;
+    position: fixed;
+}
+
+.followed .right,
+.message .right {
+    margin-left: 310px;
+    background: #fff;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
+    display: block;
+}
+
+.followed .left .title {
+    /* height: 43px; */
+}
+
+.followed .left .title span {
+    padding: 10px;
+}
+
+.followed .left .title span:nth-child(1) {
+    margin-left: 5px;
+    float: left;
+}
+
+.followed .left .title span:nth-child(2) {
+    float: right;
+    margin-right: 5px;
+}
+
+.followed .left .title span:nth-child(2):hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.followed .left .userlist {
+    height: 400px;
+    overflow: auto;
+}
+
+.followed .left .userlist .user {
+    position: relative;
+    height: 70px;
+}
+
+.followed .left .userlist .user:hover {
+    cursor: pointer;
+    background: rgb(240, 240, 240);
+}
+
+.followed .left .userlist .user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    margin-left: 10px;
+    float: left;
+}
+
+.followed .left .userlist .user .name {
+    margin-left: 70px;
+    line-height: 70px;
+}
+
+.message .left .msglist span {
+    display: block;
+    padding: 20px;
+    font-size: 17px;
+    padding-left: 23px;
+    cursor: pointer;
+}
+
+.message .left .msglist span i {
+    position: relative;
+    top: -2px;
+    right: 6px;
+    vertical-align: middle;
+    font-size: 25px;
+    color: rgb(148, 148, 148);
+}
+
+.message .left .msglist span:hover {
+    background: rgb(233, 233, 233);
+}
+
+
+/* ---------------------------------------- */
+
+
+/* write*/
+
+.write {
+    width: 60%;
+    margin: 0 auto;
+    /* background: lightblue; */
+    padding: 10px;
+    margin-bottom: 100px;
+}
+
+.write input {
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
+    height: 60px;
+    display: block;
+    font-size: 17px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    padding: 10px;
+    padding-bottom: 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+.savearticle {
+    position: fixed;
+    right: -3px;
+    width: 60px;
+    top: 50%;
+    transform: translate(0px, -50%);
+    background: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
+    border: 1px solid #ddd;
+}
+
+
+/* ---------------------------------------- */
+
+
+/* intoarticle */
+
+.intoarticle {
+    margin: 0 auto;
+    width: 50%;
+    background: #fff;
+    padding: 20px;
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
+    margin-bottom: 100px;
+    overflow: hidden;
+}
+
+.intoarticle .title {
+    padding: 10px;
+    font-size: 35px;
+}
+
+.intoarticle .userinfo,
+.intoarticle .authorinfo {
+    margin: 10px 0px 10px 0px;
+    position: relative;
+    height: 60px;
+}
+
+.intoarticle .userinfo .sec,
+.intoarticle .authorinfo .sec {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translate(0px, -50%);
+}
+
+.intoarticle .userinfo .headimage,
+.intoarticle .authorinfo .headimage {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    float: left;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.intoarticle .userinfo .name,
+.intoarticle .authorinfo .name {
+    cursor: pointer;
+    float: left;
+}
+
+.intoarticle .userinfo .follow {
+    display: inline-block;
+    margin-left: 10px;
+    border-radius: 20px;
+    background: rgb(54, 118, 255);
+    color: #fff;
+    font-size: 13px;
+    padding: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
+    cursor: pointer;
+}
+
+.intoarticle .userinfo .info {
+    margin-top: 5px;
+    font-size: 14px;
+    color: rgb(161, 161, 161);
+}
+
+.intoarticle .content {
+    padding: 5px;
+}
+
+.intoarticle .content img {
+    max-width: 60%;
+}
+
+.intoarticle .copyright {
+    margin-top: 20px;
+    float: right;
+    font-size: 13px;
+    color: #ddd;
+}
+
+.intoarticle .card {
+    border: 1px solid #ddd;
+    margin-top: 70px;
+    padding: 10px;
+}
+
+.intoarticle .authorinfo .name {
+    float: none;
+}
+
+.intoarticle .authorinfo .info {
+    color: rgb(161, 161, 161);
+    font-size: 14px;
+}
+
+.intoarticle .authorinfo .sec {
+    left: 90px;
+}
+
+.intoarticle .authorinfo .btn1 {
+    float: right;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 20px;
+    background: rgb(54, 118, 255);
+    color: #fff;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.intoarticle .card .content {
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.intoarticle .menu {
+    position: fixed;
+    top: 50%;
+    right: 19%;
+    transform: translate(0, -50%);
+}
+
+.intoarticle .menu div {
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .2);
+    position: relative;
+    margin-bottom: 10px;
+    padding: 6px;
+}
+
+.intoarticle .menu div:after {
+    content: attr(data-text);
+    width: 60px;
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: rgb(245, 245, 245);
+    padding: 10px;
+    display: none;
+    text-align: center;
+}
+
+.intoarticle .menu div:hover:after {
+    display: block;
+}
+
+.intoarticle .menu div i {
+    color: rgb(107, 107, 107);
+    font-size: 25px;
+}

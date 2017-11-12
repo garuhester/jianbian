@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/ico/font_ys2lo7g5f5vobt9/iconfont.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <ul id="nav">
+        <li class="title left">渐变</li>
+        <li class="left"><a href="/">首页</a></li>
+        <li class="left"><a href="/follow/all">关注</a></li>
+        <li class="left"><a href="/message">消息</a></li>
+        <% if(user!='no'){ %>
+            <li class="right" style="padding-right:5%;"><a href="/write"><i class="iconfont icon-icon" style="position:relative;top:-2px;margin-right:5px;"></i>写文章</a></li>
+            <li class="right" id="person">
+                <a id="per" href="/personal/article/<%= user.id %>"><i class="iconfont icon-gerenzhongxinzhuyegerenziliao" style="margin-right:5px;"></i>个人中心</a>
+                <ul class="personnav">
+                    <li><a href="/personal/article/<%= user.id %>">我的文章</a></li>
+                    <li><a href="/personal/follow/<%= user.id %>">关注用户</a></li>
+                    <li><a href="/personal/fans/<%= user.id %>">我的粉丝</a></li>
+                    <li><a href="/personal/collectarticle/<%= user.id %>">收藏的文章</a></li>
+                    <li><a href="/personal/likearticle/<%= user.id %>">喜欢的文章</a></li>
+                    <li><a href="/personal/setting/<%= user.id %>">设置</a></li>
+                    <li>
+                        <a href="" onclick="logout()">退出</a></a>
+                    </li>
+                </ul>
+            </li>
+            <% }else{ %>
+                <li class="right" id="person">
+                    <a id="per" href="/login">登录 | 注册</a>
+                </li>
+                <% } %>
+
+    </ul>
+    <div class="main">
+        <script src="/js/main.js"></script>

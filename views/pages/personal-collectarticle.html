@@ -1,0 +1,30 @@
+<% include ../sharePages/header.html %>
+
+    <% include ../sharePages/personal.html %>
+        <div class="left">
+            <div class="tabs">
+                <div class="box active" onclick="location.href='/personal/collectarticle/<%= goto %>'"><i class="iconfont icon-shoucang"></i>收藏的文章</div>
+                <div class="box" onclick="location.href='/personal/likearticle/<%= goto %>'"><i class="iconfont icon-xihuan"></i>喜欢的文章</div>
+            </div>
+            <div class="list">
+                <div class="article">
+                    <div class="top">
+                        <img src="https://cdn.dribbble.com/users/642793/screenshots/3861995/abstract_1x.png" alt="" class="headimage">
+                        <div class="name">hester</div>
+                        <div class="time">2017-06-12</div>
+                    </div>
+                    <div class="middle">
+                        <a href="#" class="title">你见过最上进的人是怎样的？</a>
+                        <div class="content">1 不是每个人都天生拿到一副好牌的，也不是每个人选的路都一直正确，但我见过最上进人，他们没拿到好牌，甚至没有天赋，却能一直默默无声地坚持着。 这1 不是每个人都天生拿到一副好牌的，也不是每个人选的路都一直正确，但我见过最上进人，他们没拿到好牌，甚至没有天赋，却能一直默默无声地坚持着。 这</div>
+                    </div>
+                    <div class="bottom">
+                        <div class="num">浏览:123</div>
+                        <div class="num">评论:23</div>
+                        <div class="num">喜欢:57</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <% include ../sharePages/footer.html %>

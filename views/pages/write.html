@@ -1,0 +1,71 @@
+<% include ../sharePages/header.html %>
+
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js">
+    </script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js">
+    </script>
+    <div class="write">
+        <input id="title" type="text" placeholder="请输入标题">
+        <input id="tag" type="text" placeholder="请输入标签，空格隔开">
+        <script id="editor" type="text/plain" style="height:1000px;width:100%;"></script>
+        <div class="savearticle" onclick="savearticle()">保存</div>
+    </div>
+
+    <script>
+        var ue = UE.getEditor('editor');
+        $(function() {
+            var ie6 = document.all;
+            var dv = $('#edui1_toolbarbox'),
+                st;
+            dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离
+            $(window).scroll(function() {
+                st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
+                if (st > parseInt(dv.attr('otop'))) {
+                    if (ie6) { //IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
+                        dv.css({
+                            position: 'absolute',
+                            top: st
+                        });
+                    } else if (dv.css('position') != 'fixed') dv.css({
+                        'position': 'fixed',
+                        top: 60 + 'px',
+                        width: 60 + '%'
+                    });
+                } else if (dv.css('position') != 'static') dv.css({
+                    'position': 'static',
+                    width: 'auto'
+                });
+            });
+        });
+
+        function savearticle() {
+            var title = $('#title').val();
+            var tag = $('#tag').val() || "notag";
+            var content = UE.getEditor('editor').getContent();
+            var text = UE.getEditor('editor').getContentTxt();
+            if (title != '' && content != '') {
+                $.ajax({
+                    type: 'post',
+                    url: '/savearticle',
+                    data: {
+                        title,
+                        tag,
+                        content,
+                        text,
+                    },
+                    success(data) {
+                        if (data.result == 'ok') {
+                            alert('保存成功');
+                            location.href = '/personal/article/<%= user.id %>';
+                        }
+                    }
+                });
+            } else {
+                alert('请完善内容');
+            }
+        }
+    </script>
+
+
+    <% include ../sharePages/footer.html %>

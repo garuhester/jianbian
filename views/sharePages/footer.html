@@ -1,0 +1,29 @@
+</div>
+
+<div class="footer">
+    copyright @ by hester
+</div>
+
+<div class="totop" style="visibility:hidden">
+    <i class="iconfont icon-packup"></i>
+</div>
+
+<script>
+    $(window).scroll(function() {
+        ($(this).scrollTop() > 70) ? $('.totop').css({
+            'visibility': 'visible'
+        }): $('.totop').css({
+            'visibility': 'hidden'
+        });
+    });
+    $('.totop').click(function() {
+        $("html").animate({
+            "scrollTop": 0
+        }, 300);
+    });
+</script>
+
+
+</body>
+
+</html>

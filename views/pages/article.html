@@ -1,0 +1,57 @@
+<% include ../sharePages/header.html %>
+
+    <div class="intoarticle">
+        <div class="title">
+            <%= data.article.title %>
+        </div>
+        <div class="userinfo">
+            <img class="headimage" src="<%= data.user.headImage %>" alt="" onclick="location.href='/personal/article/<%= data.user._id %>'">
+            <div class="sec">
+                <div class="name" onclick="location.href='/personal/article/<%= data.user._id %>'">
+                    <%= data.user.name %>
+                </div>
+                <div class="follow">+关注</div>
+                <div class="info">
+                    <%= dateFormat(data.article.createTime) %> |
+                        <b><%= data.article.lookNum %></b>阅读 | <b>0</b>评论 | <b>0</b>收藏 | <b>0</b>喜欢 | <b>0</b>分享</div>
+            </div>
+        </div>
+        <div class="content">
+            <%- data.article.content %>
+        </div>
+        <div class="copyright">© 著作权归作者所有</div>
+        <div class="card">
+            <div class="authorinfo">
+                <img class="headimage" src="<%= data.user.headImage %>" alt="" onclick="location.href='/personal/article/<%= data.user._id %>'">
+                <div class="sec">
+                    <div class="name" onclick="location.href='/personal/article/<%= data.user._id %>'">
+                        <%= data.user.name %>
+                    </div>
+                    <div class="info">
+                        文章
+                        <%= data.user.articleNum %> | 关注
+                            <%= data.user.followNum %> | 粉丝
+                                <%= data.user.fansNum %>
+                    </div>
+                </div>
+                <div class="btn1" id="<%= data.user._id %>" onclick="followPerson(this)"><span><i class="iconfont icon-add"></i>关注</span></div>
+            </div>
+            <div class="split" style="clear:both;margin-top:20px"></div>
+            <div class="content">
+                <% if(data.user.content) {%>
+                    <%= data.user.content %>
+                        <% }else{ %>
+                            暂无简介
+                            <% } %>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="like" data-text="喜欢 12"><i class="iconfont icon-like"></i></div>
+            <div class="collect" data-text="收藏 34"><i class="iconfont icon-collection"></i></div>
+            <div class="share" data-text="分享 56"><i class="iconfont icon-share"></i></div>
+        </div>
+    </div>
+    <script>
+    </script>
+
+    <% include ../sharePages/footer.html %>

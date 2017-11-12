@@ -1,0 +1,91 @@
+<% include ../sharePages/header.html %>
+
+    <script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+    <div class="setting">
+        <div class="left">
+            <div class="title">设置</div>
+            <div class="split"></div>
+            <div class="editprofile" onclick="change('editprofile','changepassword')">
+                修改资料</div>
+            <div class="changepassword" onclick="change('changepassword','editprofile')">
+                更改密码</div>
+        </div>
+        <div class="right">
+            <div id="editprofile">
+                <div class="row1">
+                    <img class="headimage" src="<%= data.headImage %>" alt="">
+                    <div class="changeimage" onclick="changeHeadImage()">更换头像</div>
+                    <form id="uploadform" action="/saveHeadImage" method="post" enctype="multipart/form-data">
+                        <input id="imgchoose" name="headimage" type="file" accept="image/*" hidden onchange="uploadImage()">
+                        <!-- document.getElementById('headimageupload').submit() -->
+                    </form>
+                </div>
+                <div class="row">
+                    <span>昵称：</span>
+                    <input id="name" type="text" value="<%= data.name %>">
+                </div>
+                <div class="row">
+                    <span>性别：</span>
+                    <select name="gender" id="gender">
+                        <option value="0">男</option>
+                        <option value="1">女</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <span>年龄：</span>
+                    <input id="age" type="text" value="<%= data.age %>">
+                </div>
+                <div class="row">
+                    <span>电话：</span>
+                    <input id="tel" type="text" value="<%= data.tel %>">
+                </div>
+                <div class="row">
+                    <span>邮箱：</span>
+                    <input id="email" type="text" value="<%= data.email %>">
+                </div>
+                <div class="row">
+                    <span>个人介绍：</span>
+                    <textarea name="content" id="content"></textarea>
+                </div>
+                <div class="save" onclick="saveProfile()">保存</div>
+            </div>
+            <div id="changepassword">
+                <div class="row">
+                    <span>当前密码：</span>
+                    <input id="nowpwd" type="password" value="">
+                </div>
+                <div class="row">
+                    <span>新密码：</span>
+                    <input id="newpwd" type="password" value="">
+                </div>
+                <div class="row">
+                    <span>重复新密码：</span>
+                    <input id="repeatnewpwd" type="password" value="">
+                </div>
+                <div class="edit" onclick="changePassword()">修改</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        setting();
+
+        $('#gender').val('<%= data.gender %>');
+        document.getElementById('content').value = '<%= data.content %>';
+
+        function changeHeadImage() {
+            $('#imgchoose').trigger('click');
+        }
+
+        function uploadImage() {
+            $('#uploadform').ajaxSubmit({
+                success(data) {
+                    var path = data.result;
+                    path = path.replace('static', '');
+                    $('img.headimage').attr('src', path + '?' + Math.random());
+                }
+            });
+        }
+    </script>
+
+
+    <% include ../sharePages/footer.html %>

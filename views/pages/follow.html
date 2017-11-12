@@ -1,0 +1,115 @@
+<% include ../sharePages/header.html %>
+
+    <div class="followed">
+        <div class="left">
+            <div class="title">
+                <span>全部关注</span>
+                <span><i class="iconfont icon-add" style="font-weight:bold"></i>添加关注</span>
+            </div>
+            <div class="split" style="clear:both"></div>
+            <div class="userlist">
+                <div class="user" id="all" onclick="loadArticle(this)">
+                    <img src="/ico/jianbianquan.png" alt="">
+                    <div class="name">渐变圈</div>
+                </div>
+                <% 
+                if(data!=null){
+                    for(var i=0;i<data[0].followList.length;i++) {
+                %>
+                    <% if(data[0].followList[i].followType == 0) { %>
+                        <div class="user" id="<%= data[0].followList[i].followId._id %>" onclick="loadArticle(this)">
+                            <img src="<%= data[0].followList[i].followId.headImage %>" alt="">
+                            <div class="name">
+                                <%= data[0].followList[i].followId.name %>
+                            </div>
+                        </div>
+                        <% }}} %>
+            </div>
+        </div>
+        <div class="right">
+            <div class="list ">
+                <% 
+                    if(data!=null){
+                        for(var j=0;j<data.art.length;j++){
+                            var a = data.art[j];
+                            var u = data.art[j].authorId;
+                %>
+                    <div class="article">
+                        <div class="top">
+                            <img src="<%= u.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= u._id %>'">
+                            <div class="name">
+                                <%= u.name %>
+                            </div>
+                            <div class="time">
+                                <%= dateFormat(a.createTime) %>
+                            </div>
+                        </div>
+                        <div class="middle">
+                            <a href="/article/<%=u._id %>/<%= a._id %>" class="title">
+                                <%= a.title %>
+                            </a>
+                            <div class="content">
+                                <%= a.text %>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="num">浏览:
+                                <%= a.lookNum %>
+                            </div>
+                            <div class="num">评论:
+                                <%= a.msgNum %>
+                            </div>
+                            <div class="num">喜欢:
+                                <%= a.likeNum %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }} %>
+            </div>
+            <div class="pages">
+                <ul>
+                    <% if(data.currentPage==1) {%>
+                        <li><a href="/follow/<%= data.id %>/?page=1"><i class="iconfont icon-return"></i></a></li>
+                        <% }else{ var lastPage = data.currentPage - 1;%>
+                            <li><a href="/follow/<%= data.id %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
+                            <% } %>
+
+                                <% 
+                        for(var i=1;i<=data.allPage;i++){ 
+                            if(data.currentPage == i){
+                    %>
+                                    <li class="active">
+                                        <a href="/follow/<%= data.id %>/?page=<%= i %>">
+                                            <%= i %>
+                                        </a>
+                                    </li>
+                                    <% }else{ %>
+                                        <li>
+                                            <a href="/follow/<%= data.id %>/?page=<%= i %>">
+                                                <%= i %>
+                                            </a>
+                                        </li>
+                                        <% }} %>
+
+                                            <% if(data.currentPage==data.allPage) {%>
+                                                <li><a href="/follow/<%= data.id %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                <% }else{ var nextPage = data.currentPage + 1;%>
+                                                    <li><a href="/follow/<%= data.id %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var url = location.href.split('/')[4];
+        $('#' + url).css({
+            "background": "rgb(240, 240, 240)"
+        });
+
+        function loadArticle(obj) {
+            location.href = "/follow/" + obj.id;
+        }
+        console.log(location.pathname);
+    </script>
+
+    <% include ../sharePages/footer.html %>

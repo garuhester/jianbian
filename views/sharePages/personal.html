@@ -1,0 +1,68 @@
+<div class="personal">
+    <div class="right">
+        <div class="one">
+            <div class="row1">
+                <img src="<%= data.user.headImage %>" alt="">
+                <span><%= data.user.name %></span>
+                <div class="follow">
+                    <i class="iconfont icon-add" style="font-weight:bold"></i>关注
+                </div>
+            </div>
+            <div class="row2">
+                <div class="box" onclick="location.href='/personal/article/<%= goto %>'">
+                    <span><%= data.user.articleNum %></span> 文章
+                </div>
+                <div class="box" onclick="location.href='/personal/follow/<%= goto %>'">
+                    <span><%= data.user.followNum %></span> 关注
+                </div>
+                <div class="box" onclick="location.href='/personal/fans/<%= goto %>'">
+                    <span><%= data.user.fansNum %></span> 粉丝
+                </div>
+            </div>
+            <div class="split"></div>
+            <div class="row3">
+                <div class="like" onclick="location.href='/personal/collectarticle/<%= goto %>'">收藏和喜欢的文章 <i class="iconfont icon-enter" style="font-weight:bold"></i></div>
+            </div>
+            <div class="split"></div>
+            <div class="row3">
+                <input type="text" placeholder="文章搜索">
+                <span class="clear" onclick="$(this).prev('input').val('')">x</span>
+                <i class="iconfont icon-search" style="font-weight:bold;"></i>
+            </div>
+            <div class="split"></div>
+            <div class="row4">
+                <span>文章推荐</span>
+                <ul>
+                    <li><a href="" class="article">html、css、javascript系列教程</a></li>
+                    <li><a href="" class="article">Handlebars 和 angularjs 之间的区别</a></li>
+                    <li><a href="" class="article">CSS3 Transitions, Transforms和Animation使用简介</a></li>
+                    <li><a href="" class="article">JavaScript模板引擎原理，几行代码的事儿</a></li>
+                </ul>
+            </div>
+            <div class="split"></div>
+            <div class="row4">
+                <span>文章分类</span>
+                <!-- <div class="article">无</div> -->
+                <ul>
+                    <li><a href="" class="article">css&nbsp;&nbsp;&nbsp;(2)</a></li>
+                    <li><a href="" class="article">java&nbsp;&nbsp;&nbsp;(3)</a></li>
+                    <li><a href="" class="article">html&nbsp;&nbsp;&nbsp;(10)</a></li>
+                    <li><a href="" class="article">javascript&nbsp;&nbsp;&nbsp;(6)</a></li>
+                </ul>
+            </div>
+            <div class="split"></div>
+            <div class="row4">
+                <span>文章存档</span>
+                <ul>
+                    <li><a href="" class="article">2016-08-10&nbsp;&nbsp;&nbsp;(3)</a></li>
+                    <li><a href="" class="article">2016-08-11&nbsp;&nbsp;&nbsp;(3)</a></li>
+                    <li><a href="" class="article">2016-08-12&nbsp;&nbsp;&nbsp;(3)</a></li>
+                    <li><a href="" class="article">2016-08-13&nbsp;&nbsp;&nbsp;(7)</a></li>
+                    <li><a href="" class="article">2016-08-14&nbsp;&nbsp;&nbsp;(2)</a></li>
+                    <li><a href="" class="article">2016-08-15&nbsp;&nbsp;&nbsp;(1)</a></li>
+                    <li><a href="" class="article">2016-08-16&nbsp;&nbsp;&nbsp;(1)</a></li>
+                    <li><a href="" class="article">2016-08-17&nbsp;&nbsp;&nbsp;(4)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,173 @@
+<% include ../sharePages/header.html %>
+
+    <div class="index">
+        <div class="right">
+            <div class="author">
+                <div class="title">推荐作者</div>
+                <div class="list">
+                    <%
+                        var user = data.user[0];
+                        for(var i=0;i < user.length;i++) { 
+                    %>
+                        <div class="person">
+                            <img class="headimage" src="<%= user[i].headImage %>" alt="" onclick="location.href='/personal/article/<%= user[i]._id %>'">
+                            <div class="name">
+                                <%= user[i].name %>
+                            </div>
+                            <div class="content">
+                                <% if(user[i].content){ %>
+                                    <%= user[i].content %>
+                                        <% }else{ %>
+                                            暂无简介~
+                                            <% } %>
+                            </div>
+                            <% if(user[i].isFollow) {%>
+                                <div class="follow isfollow" id="<%= user[i]._id %>" style="background: rgb(116, 181, 255);color: #fff;pointer-events:none">已关注</div>
+                                <% }else{ %>
+                                    <div class="follow" id="<%= user[i]._id %>" onclick="followPerson(this)"><i class="iconfont icon-add" style="font-weight:bold"></i>关注</div>
+                                    <% } %>
+                        </div>
+                        <% } %>
+                </div>
+                <div class="more">
+                    更多作者
+                    <i class="iconfont icon-enter" style="font-weight:bold"></i>
+                </div>
+            </div>
+        </div>
+        <div class=" left">
+            <div class="search">
+                <input type="text" class="searchInput " placeholder="搜索文章 ">
+                <span class="clear" onclick="$(this).prev('input').val('')">x</span>
+                <div class="searchButton" onclick="searchArticle()">
+                    <i class="iconfont icon-search" style="font-weight:bold;margin-right:5px"></i> 搜索
+                </div>
+            </div>
+
+            <div class="list">
+                <% 
+                    var article = data.article;
+                    for(var i=0;i < article.length;i++) { 
+                        var a = article[i];
+                %>
+                    <div class="article" id="<%= article[i]._id %>">
+                        <div class="top">
+                            <img src="<%= a.authorId.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= a.authorId._id %>'">
+                            <div class="name">
+                                <%=a.authorId.name %>
+                            </div>
+                            <div class="time">
+                                <%= dateFormat(a.createTime) %>
+                            </div>
+                        </div>
+                        <div class="middle">
+                            <a href="/article/<%= a.authorId._id %>/<%= article[i]._id %>" class="title">
+                                <%= a.title %>
+                            </a>
+                            <div class="content">
+                                <%= a.text %>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="num">浏览:
+                                <%= a.lookNum %>
+                            </div>
+                            <div class="num">评论:
+                                <%= a.msgNum %>
+                            </div>
+                            <div class="num">喜欢:
+                                <%= a.likeNum %>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+            <div class="pages">
+                <ul>
+                    <% if(data.currentPage==1) {%>
+                        <li><a href="/?page=1"><i class="iconfont icon-return"></i></a></li>
+                        <% }else{ var lastPage = data.currentPage - 1;%>
+                            <li><a href="/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
+                            <% } %>
+
+                                <% 
+                        for(var i=1;i<=data.allPage;i++){ 
+                            if(data.currentPage == i){
+                    %>
+                                    <li class="active">
+                                        <a href="/?page=<%= i %>">
+                                            <%= i %>
+                                        </a>
+                                    </li>
+                                    <% }else{ %>
+                                        <li>
+                                            <a href="/?page=<%= i %>">
+                                                <%= i %>
+                                            </a>
+                                        </li>
+                                        <% }} %>
+
+                                            <% if(data.currentPage==data.allPage) {%>
+                                                <li><a href="/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                <% }else{ var nextPage = data.currentPage + 1;%>
+                                                    <li><a href="/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var search = window.location.search;
+        var arr = {};
+        if (search.indexOf('?') != -1) {
+            var str = search.slice(search.indexOf('?') + 1);
+            var strs = str.split('&');
+            for (var i = 0; i < strs.length; i++) {
+                arr[strs[i].split('=')[0]] = strs[i].split('=')[1];
+            }
+            if (arr.articlename) {
+                $('.searchInput').val(decodeURIComponent(arr.articlename));
+            }
+        }
+
+
+        function searchArticle() {
+            var searchText = $('.searchInput').val();
+            location.href = "?articlename=" + searchText;
+        }
+
+        function followPerson(obj) {
+            var otherid = obj.id;
+            $.ajax({
+                type: 'post',
+                url: '/followperson',
+                data: {
+                    otherid,
+                },
+                success(data) {
+                    if (data.result == 0) {
+                        var re = confirm("登录后才可以关注(#^.^#)");
+                        if (re) {
+                            location.href = "/login";
+                        }
+                    } else if (data.result == 1) {
+                        alert("不能关注自己哦(●'◡'●)");
+                    } else if (data.result == 2) {
+                        alert("已经关注过啦！");
+                    } else if (data.result == 3) {
+                        alert("关注成功！");
+                        $(obj).html("已关注");
+                        $(obj).removeAttr('onclick');
+                        $(obj).css({
+                            "background": "rgb(116, 181, 255)",
+                            'color': '#fff',
+                            "pointer-events": "none"
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+
+    <% include ../sharePages/footer.html %>

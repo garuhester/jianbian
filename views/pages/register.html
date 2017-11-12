@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/loginandregist.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="logo" onclick="location.href='/'">渐变</div>
+    <div id="register">
+        <div class="title">注册</div>
+        <div class="info"></div>
+        <div class="form">
+            <input type="text" id="username" placeholder="用户名">
+            <input type="password" id="password" placeholder="密码">
+            <input type="password" id="apassword" placeholder="重复密码">
+            <input type="submit" value="注册" onclick="submit()">
+            <input type="button" value="去登录" onclick="location='/login'">
+        </div>
+    </div>
+    <div class="footer">
+        copyright @ by hester
+    </div>
+    <script type="text/javascript">
+        function submit() {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var apassword = $('#apassword').val();
+            if (username != '' && password != '' && apassword != '') {
+                if (password != apassword) {
+                    $('.info').text('两次输入密码不同，请重新输入');
+                    $('#password').val('');
+                    $('#apassword').val('');
+                } else {
+                    $.ajax({
+                        type: 'post',
+                        url: '/register',
+                        data: {
+                            username,
+                            password,
+                            apassword,
+                        },
+                        success(data) {
+                            var s = data.result;
+                            if (s == 0) {
+                                $('.info').text('注册失败，用户名已经存在');
+                            } else if (s == 1) {
+                                alert('注册成功');
+                                location = '/login';
+                            }
+                        }
+                    });
+                }
+            } else {
+                $('.info').text('请输入用户名、密码和重复密码');
+            }
+
+        }
+    </script>
+</body>
+
+</html>
