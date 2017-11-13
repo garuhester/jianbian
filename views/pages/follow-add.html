@@ -8,7 +8,7 @@
             </div>
             <div class="split" style="clear:both"></div>
             <div class="userlist">
-                <div class="user" id="all" onclick="loadArticle(this)">
+                <div class="user" id="all" onclick="location.href='/follow/all'">
                     <img src="/ico/jianbianquan.png" alt="">
                     <div class="name">渐变圈</div>
                 </div>
@@ -29,47 +29,8 @@
             </div>
         </div>
         <div class="right">
-            <div class="list ">
-                <% 
-                    if(data!=null){
-                        if(data[0].followNum!=0){
-                            for(var j=0;j<data.art.length;j++){
-                                var a = data.art[j];
-                                var u = data.art[j].authorId;
-                %>
-                    <div class="article">
-                        <div class="top">
-                            <img src="<%= u.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= u._id %>'">
-                            <div class="name">
-                                <%= u.name %>
-                            </div>
-                            <div class="time">
-                                <%= dateFormat(a.createTime) %>
-                            </div>
-                        </div>
-                        <div class="middle">
-                            <a href="/article/<%=u._id %>/<%= a._id %>" class="title">
-                                <%= a.title %>
-                            </a>
-                            <div class="content">
-                                <%= a.text %>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <div class="num">浏览:
-                                <%= a.lookNum %>
-                            </div>
-                            <div class="num">评论:
-                                <%= a.msgNum %>
-                            </div>
-                            <div class="num">喜欢:
-                                <%= a.likeNum %>
-                            </div>
-                        </div>
-                    </div>
-                    <% }}else{ %>
-                        <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">没有文章</div>
-                        <% }} %>
+            <div class="adduserlist">
+
             </div>
             <% if(data[0].followNum!=0){ %>
                 <div class="pages">
@@ -108,14 +69,6 @@
         </div>
     </div>
     <script>
-        var url = location.href.split('/')[4];
-        $('#' + url).css({
-            "background": "rgb(247, 247, 247)"
-        });
-
-        function loadArticle(obj) {
-            location.href = "/follow/" + obj.id;
-        }
     </script>
 
     <% include ../sharePages/footer.html %>

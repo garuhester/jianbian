@@ -79,11 +79,19 @@ module.exports = function(app) {
             var currentPage = req.query.page || 1;
             follow.getFollowAllData(selfid, id, currentPage).then(function(data) {
                 //渐变圈
-                res.render('follow', {
-                    title: '渐变-关注',
-                    user: req.session.user,
-                    data,
-                });
+                if (id == 'add') {
+                    res.render('follow-add', {
+                        title: '渐变-添加关注',
+                        user: req.session.user,
+                        data,
+                    });
+                } else {
+                    res.render('follow', {
+                        title: '渐变-关注',
+                        user: req.session.user,
+                        data,
+                    });
+                }
             });
         } else {
             res.redirect('/login');

@@ -17,8 +17,10 @@ var getFollowAllData = function(selfid, id, currentPage) {
             if (id == 'all') {
                 var arr = [];
                 follow[0].followList.forEach(function(f) {
-                    var aid = f.followId._id + '';
-                    arr.push(aid);
+                    if (f.followType == 0) {
+                        var aid = f.followId._id + '';
+                        arr.push(aid);
+                    }
                 });
                 var updateStr = { 'authorId': { '$in': arr } };
                 Article.find(updateStr).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function(err, art) {
@@ -28,6 +30,8 @@ var getFollowAllData = function(selfid, id, currentPage) {
                         resolve(follow);
                     });
                 });
+            } else if (id == 'add') {
+                resolve(follow);
             } else {
                 Article.find({ 'authorId': id }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function(err, art) {
                     Article.count({ 'authorId': id }, function(err, a) {
