@@ -29,10 +29,42 @@
             </div>
         </div>
         <div class="right">
+            <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">更多作者</div>
             <div class="adduserlist">
-
+                <% 
+                if(data!=null){
+                    if(data.user.length != 0){
+                        for(var i=0;i<data.user.length;i++){
+                                var f = data.user[i];
+            %>
+                    <div class="followperson">
+                        <img src="<%= f.headImage %>" alt="" onclick="location.href='/personal/article/<%= f._id %>'">
+                        <div class="info">
+                            <div class="name" onclick="location.href='/personal/article/<%= f._id %>'">
+                                <%= f.name %>
+                            </div>
+                            <div class="content">
+                                <% if(f.content){ %>
+                                    <%= f.content %>
+                                        <% }else { %>
+                                            暂无简介~
+                                            <% } %>
+                            </div>
+                            <span class="articlen">文章 <%= f.articleNum %></span> |
+                            <span class="follown">关注 <%= f.followNum %></span> |
+                            <span class="fansn">粉丝 <%= f.fansNum %></span>
+                        </div>
+                        <% if(f.isFollow){ %>
+                            <div class="btn" id="<%= f._id %>" onclick="unfollow(this)"><span>√ 已关注</span><span>× 取消关注</span> </div>
+                            <% }else{ %>
+                                <div class="btn1" id="<%= f._id %>" onclick="followPerson(this)"><i class="iconfont icon-add" style="font-weight:bold"></i><span>关注</span></div>
+                                <% } %>
+                    </div>
+                    <% }}else{ %>
+                        <div class="noperson">没有关注的人哦~</div>
+                        <% }} %>
             </div>
-            <% if(data[0].followNum!=0){ %>
+            <% if(data.user.length!=0){ %>
                 <div class="pages">
                     <ul>
                         <% if(data.currentPage==1) {%>
@@ -68,7 +100,5 @@
                 <% } %>
         </div>
     </div>
-    <script>
-    </script>
 
     <% include ../sharePages/footer.html %>

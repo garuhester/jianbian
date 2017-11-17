@@ -881,7 +881,8 @@ ul.personnav {
     border-bottom: 10px solid transparent;
 }
 
-.personal .left .list .followperson {
+.personal .left .list .followperson,
+.followed .right .adduserlist .followperson {
     height: 100px;
     width: 100%;
     background: #fff;
@@ -889,7 +890,8 @@ ul.personnav {
     border-bottom: 1px solid #ddd;
 }
 
-.personal .left .list .followperson img {
+.personal .left .list .followperson img,
+.followed .right .adduserlist .followperson img {
     height: 70px;
     width: 70px;
     border-radius: 50%;
@@ -902,23 +904,28 @@ ul.personnav {
     cursor: pointer;
 }
 
-.personal .left .list .followperson .info .name {
+.personal .left .list .followperson .info .name,
+.followed .right .adduserlist .followperson .info .name {
     display: inline-block;
     font-size: 18px;
     cursor: pointer;
 }
 
-.personal .left .list .followperson .info .name:hover {
+.personal .left .list .followperson .info .name:hover,
+.followed .right .adduserlist .followperson .info .name:hover {
     text-decoration: underline;
 }
 
 .personal .left .list .followperson .info .content,
-.personal .left .list .followperson .info span {
+.personal .left .list .followperson .info span,
+.followed .right .adduserlist .followperson .info .content,
+.followed .right .adduserlist .followperson .info span {
     font-size: 14px;
     color: rgb(95, 95, 95);
 }
 
-.personal .left .list .followperson .info {
+.personal .left .list .followperson .info,
+.followed .right .adduserlist .followperson .info {
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
@@ -927,7 +934,9 @@ ul.personnav {
 }
 
 .personal .left .list .followperson .btn,
-.personal .left .list .followperson .btn1 {
+.personal .left .list .followperson .btn1,
+.followed .right .adduserlist .followperson .btn,
+.followed .right .adduserlist .followperson .btn1 {
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
@@ -939,15 +948,18 @@ ul.personnav {
     cursor: pointer;
 }
 
-.personal .left .list .followperson .btn span:nth-child(2) {
+.personal .left .list .followperson .btn span:nth-child(2),
+.followed .right .adduserlist .followperson .btn span:nth-child(2) {
     display: none;
 }
 
-.personal .left .list .followperson .btn:hover span:nth-child(2) {
+.personal .left .list .followperson .btn:hover span:nth-child(2),
+.followed .right .adduserlist .followperson .btn:hover span:nth-child(2) {
     display: block;
 }
 
-.personal .left .list .followperson .btn:hover span:nth-child(1) {
+.personal .left .list .followperson .btn:hover span:nth-child(1),
+.followed .right .adduserlist .followperson .btn:hover span:nth-child(1) {
     display: none;
 }
 
@@ -979,7 +991,7 @@ ul.personnav {
 
 .followed .right,
 .message .right {
-    margin-left: 310px;
+    margin-left: 330px;
     background: #fff;
     /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
     display: block;

@@ -29,7 +29,7 @@
                         </div>
                         <% } %>
                 </div>
-                <div class="more">
+                <div class="more" onclick="location.href='/follow/add'">
                     更多作者
                     <i class="iconfont icon-enter" style="font-weight:bold"></i>
                 </div>
@@ -37,7 +37,7 @@
         </div>
         <div class=" left">
             <div class="search">
-                <input type="text" class="searchInput " placeholder="搜索文章 ">
+                <input type="text" class="searchInput " placeholder="搜索文章">
                 <span class="clear" onclick="$(this).prev('input').val('')">x</span>
                 <div class="searchButton" onclick="searchArticle()">
                     <i class="iconfont icon-search" style="font-weight:bold;margin-right:5px"></i> 搜索

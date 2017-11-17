@@ -94,10 +94,47 @@ function changePassword() {
     }
 }
 
-// function changeHeadImage() {
-//     $('#imgchoose').trigger('click');
-//     $('#imgchoose').on('change', function() {
-//         console.log(1);
-//         console.log($('#imgchoose').file);
-//     });
-// }
+function followPerson(obj) {
+    var otherid = obj.id;
+    $.ajax({
+        type: 'post',
+        url: '/followperson',
+        data: {
+            otherid,
+        },
+        success(data) {
+            if (data.result == 0) {
+                var re = confirm("登录后才可以关注(#^.^#)");
+                if (re) {
+                    location.href = "/login";
+                }
+            } else if (data.result == 1) {
+                alert("不能关注自己哦(●'◡'●)");
+            } else if (data.result == 3) {
+                alert("关注成功！");
+                location.reload();
+            }
+        }
+    });
+}
+
+function unfollow(obj) {
+    var otherid = obj.id;
+    $.ajax({
+        type: 'post',
+        url: '/unfollowperson',
+        data: {
+            otherid,
+        },
+        success(data) {
+            if (data.result == 1) {
+                alert("取消关注成功");
+                location.reload();
+            }
+        }
+    })
+}
+
+function loadArticle(obj) {
+    location.href = "/follow/" + obj.id;
+}

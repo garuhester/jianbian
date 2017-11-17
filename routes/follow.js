@@ -14,6 +14,7 @@ var getFollowAllData = function(selfid, id, currentPage) {
         }).exec(function(err, follow) {
             follow.currentPage = currentPage;
             follow.id = id;
+            //所有关注人的文章
             if (id == 'all') {
                 var arr = [];
                 follow[0].followList.forEach(function(f) {
@@ -31,8 +32,28 @@ var getFollowAllData = function(selfid, id, currentPage) {
                     });
                 });
             } else if (id == 'add') {
-                resolve(follow);
+                User.find({}).skip(skipNum).limit(pageSize).sort({ 'fansNum': -1 }).exec(function(err, user) {
+                    User.count({}, function(err, a) {
+                        follow.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                        ep.after('next', user.length, function(user) {
+                            follow.user = user[0];
+                            resolve(follow);
+                        });
+                        user.forEach(function(item) {
+                            Follow.find({ 'userId': selfid, 'followList': { '$elemMatch': { 'followId': item._id, 'followType': 0 } } }, function(err, result) {
+                                //已经关注
+                                if (result != 0) {
+                                    item.isFollow = true;
+                                } else {
+                                    item.isFollow = false;
+                                }
+                                ep.emit('next', user);
+                            });
+                        });
+                    });
+                });
             } else {
+                //单个关注人的文章
                 Article.find({ 'authorId': id }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function(err, art) {
                     Article.count({ 'authorId': id }, function(err, a) {
                         follow.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
