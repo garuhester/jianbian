@@ -85,16 +85,16 @@
 
             <div class="pages">
                 <ul>
-                    <% if(data.currentPage==1) {%>
+                    <% if(data.currentPage==1) { %>
                         <li><a href="/?page=1"><i class="iconfont icon-return"></i></a></li>
                         <% }else{ var lastPage = data.currentPage - 1;%>
                             <li><a href="/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
                             <% } %>
 
                                 <% 
-                        for(var i=1;i<=data.allPage;i++){ 
-                            if(data.currentPage == i){
-                    %>
+                                    for(var i=1;i<=data.allPage;i++){ 
+                                        if(data.currentPage == i){
+                                %>
                                     <li class="active">
                                         <a href="/?page=<%= i %>">
                                             <%= i %>
