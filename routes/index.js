@@ -119,8 +119,8 @@ module.exports = function(app) {
             var id = req.params.id; //其他用户个人中心的id
             var goto = req.params.id; //其他用户个人中心跳转参数
             var isSelf; //是否是自己的个人中心
+            var sid = req.session.user.id;
             if (id == req.session.user.id) {
-                id = req.session.user.id;
                 isSelf = true;
             } else {
                 isSelf = false;
@@ -129,7 +129,7 @@ module.exports = function(app) {
             if (type != 'setting') {
                 if (type == 'article') {
                     title = '渐变-文章';
-                    personal.getPersonalArticle(id, currentPage).then(function(data) {
+                    personal.getPersonalArticle(id, sid, currentPage).then(function(data) {
                         res.render('personal-article', {
                             goto,
                             title,
@@ -141,7 +141,7 @@ module.exports = function(app) {
                 } else if (type == 'follow' || type == 'fans') {
                     if (type == 'follow') title = '渐变-关注';
                     else title = '渐变-粉丝';
-                    personal.getPersonalFollowAndFans(id, currentPage, type).then(function(data) {
+                    personal.getPersonalFollowAndFans(id, sid, currentPage, type).then(function(data) {
                         res.render('personal-' + type, {
                             goto,
                             title,
