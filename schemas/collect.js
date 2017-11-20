@@ -9,8 +9,8 @@ var CollectSchema = new Schema({
         collectType: Number, //0代表收藏的文章，1代表喜欢的文章
         collectTime: { type: Date, default: Date.now }
     }],
-    collectNum: { type: Number, default: 0 }, //收藏的文章数
     likeNum: { type: Number, default: 0 }, //喜欢的文章数
+    collectNum: { type: Number, default: 0 }, //收藏的文章数
     createTime: { type: Date, default: Date.now }
 });
 

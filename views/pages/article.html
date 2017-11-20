@@ -55,12 +55,29 @@
             </div>
         </div>
         <div class="menu">
-            <div class="like" data-text="喜欢 12"><i class="iconfont icon-like"></i></div>
-            <div class="collect" data-text="收藏 34"><i class="iconfont icon-collection"></i></div>
-            <div class="share" data-text="分享 56"><i class="iconfont icon-share"></i></div>
+            <% if(data.isLike){ %>
+                <div class="unlike" data-text="取消喜欢" onclick="article('undo',1,this)"><i class="iconfont icon-like_fill"></i></div>
+                <% }else{ %>
+                    <div class="like" data-text="喜欢" onclick="article('do',1,this)"><i class="iconfont icon-like"></i></div>
+                    <% } %>
+                        <% if(data.isCollect){ %>
+                            <div class="uncollect" data-text="取消收藏" onclick="article('undo',0,this)"><i class="iconfont icon-collection_fill"></i></div>
+                            <% }else{ %>
+                                <div class="collect" data-text="收藏" onclick="article('do',0,this)"><i class="iconfont icon-collection"></i></div>
+                                <% } %>
+                                    <div class="share" data-text="分享"><i class="iconfont icon-share"></i></div>
         </div>
     </div>
+
     <script>
+        function article(tag, type, obj) {
+            var a = new Article('<%= data.article._id %>');
+            if (tag === 'do') {
+                a.doArticle(type, obj);
+            } else if (tag === 'undo') {
+                a.undoArticle(type, obj);
+            }
+        }
     </script>
 
     <% include ../sharePages/footer.html %>

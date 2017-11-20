@@ -11,6 +11,7 @@ var ArticleSchema = new Schema({
     lookNum: { type: Number, default: 0 }, //浏览数量
     msgNum: { type: Number, default: 0 }, //评论数
     likeNum: { type: Number, default: 0 }, //喜欢数量
+    collectNum: { type: Number, default: 0 }, //收藏数量
     createTime: { type: Date, default: Date.now } //创建时间
 });
 

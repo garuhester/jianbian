@@ -1240,9 +1240,9 @@ ul.personnav {
 }
 
 .intoarticle .menu {
-    position: fixed;
+    position: absolute;
     top: 50%;
-    right: 19%;
+    right: 5%;
     transform: translate(0, -50%);
 }
 
@@ -1256,17 +1256,26 @@ ul.personnav {
     padding: 6px;
 }
 
+.intoarticle .menu div:hover {
+    background: rgb(245, 245, 245);
+}
+
 .intoarticle .menu div:after {
     content: attr(data-text);
-    width: 60px;
+    /* width: 60px; */
     position: absolute;
-    right: -100px;
+    left: -45px;
     top: 50%;
     transform: translate(0, -50%);
-    background: rgb(245, 245, 245);
-    padding: 10px;
+    /* background: rgb(245, 245, 245); */
+    /* padding: 6px; */
     display: none;
     text-align: center;
+}
+
+.intoarticle .menu .unlike:after,
+.intoarticle .menu .uncollect:after {
+    left: -75px;
 }
 
 .intoarticle .menu div:hover:after {

@@ -1,6 +1,7 @@
 var Article = require('../schemas/article');
 var User = require('../schemas/user');
 var Follow = require('../schemas/follow');
+var Collect = require('../schemas/collect');
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 
@@ -89,6 +90,19 @@ var getPersonalFollowAndFans = function(id, sid, currentPage, type) {
     });
 }
 
+var getPersonalLikeAndCollect = function(id, sid, currentPage, type) {
+    return new Promise(function(resolve, reject) {
+        var pageSize = 20;
+        var skipNum = (currentPage - 1) * pageSize;
+        var data = {};
+        data.currentPage = currentPage;
+        User.findById(id, function(err, user) {
+            data.user = user;
+            resolve(data);
+        });
+    })
+}
+
 var pagination = function(pageSize, skipNum, arr) {
     return (skipNum + pageSize >= arr.length) ? arr.slice(skipNum, arr.length) : arr.slice(skipNum, skipNum + pageSize);
 }
@@ -97,4 +111,5 @@ module.exports = {
     getPersonalArticle,
     deleteArticle,
     getPersonalFollowAndFans,
+    getPersonalLikeAndCollect,
 }

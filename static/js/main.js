@@ -138,3 +138,61 @@ function unfollow(obj) {
 function loadArticle(obj) {
     location.href = "/follow/" + obj.id;
 }
+
+var Article = function(aid) {
+    var s = document.createElement('style');
+    document.body.appendChild(s);
+    this.doArticle = function(type, obj) {
+        $.ajax({
+            type: 'post',
+            url: '/doarticle',
+            data: {
+                aid,
+                type,
+            },
+            success(data) {
+                if (data.result == 0) {
+                    var re = confirm("登录后才可以关注(#^.^#)");
+                    if (re) {
+                        location.href = "/login";
+                    }
+                } else if (data.result == 1) {
+                    obj.innerHTML = "<i class='iconfont icon-like_fill'></i>";
+                    obj.setAttribute('data-text', '取消喜欢');
+                    obj.setAttribute('onclick', 'new Article().undoArticle(1,this)');
+                    s.innerText = ".intoarticle .menu .like:after{left:-75px}";
+                } else if (data.result == 2) {
+                    obj.innerHTML = "<i class='iconfont icon-collection_fill'></i>";
+                    obj.setAttribute('data-text', '取消收藏');
+                    obj.setAttribute('onclick', 'new Article().undoArticle(0,this)');
+                    s.innerText = ".intoarticle .menu .collect:after{left:-75px}";
+                }
+            }
+        });
+    }
+    this.undoArticle = function(type, obj) {
+        $.ajax({
+            type: 'post',
+            url: '/undoarticle',
+            data: {
+                aid,
+                type,
+            },
+            success(data) {
+                if (data.result == 1) {
+                    obj.innerHTML = "<i class='iconfont icon-like'></i>";
+                    obj.setAttribute('data-text', '喜欢');
+                    obj.className = "like";
+                    obj.setAttribute('onclick', 'new Article().doArticle(1,this)');
+                    s.innerText = ".intoarticle .menu .like:after{left:-45px}";
+                } else if (data.result == 2) {
+                    obj.innerHTML = "<i class='iconfont icon-collection'></i>";
+                    obj.setAttribute('data-text', '收藏');
+                    obj.className = "collect";
+                    obj.setAttribute('onclick', 'new Article().doArticle(0,this)');
+                    s.innerText = ".intoarticle .menu .collect:after{left:-45px}";
+                }
+            }
+        });
+    }
+}

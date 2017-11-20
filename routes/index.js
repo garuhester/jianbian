@@ -139,8 +139,7 @@ module.exports = function(app) {
                         });
                     });
                 } else if (type == 'follow' || type == 'fans') {
-                    if (type == 'follow') title = '渐变-关注';
-                    else title = '渐变-粉丝';
+                    title = type == 'follow' ? '渐变-关注' : '渐变-粉丝';
                     personal.getPersonalFollowAndFans(id, sid, currentPage, type).then(function(data) {
                         res.render('personal-' + type, {
                             goto,
@@ -150,21 +149,16 @@ module.exports = function(app) {
                             isSelf,
                         });
                     });
-                } else if (type == 'collectarticle') {
-                    title = '渐变-收藏的文章';
-                    res.render('personal-collectarticle', {
-                        goto,
-                        title,
-                        user: req.session.user,
-                        isSelf,
-                    });
-                } else if (type == 'likearticle') {
-                    title = '渐变-喜欢的文章';
-                    res.render('personal-likearticle', {
-                        goto,
-                        title,
-                        user: req.session.user,
-                        isSelf,
+                } else if (type == 'collectarticle' || type == 'likearticle') {
+                    title = type == 'collectarticle' ? '渐变-收藏的文章' : '渐变-喜欢的文章';
+                    personal.getPersonalLikeAndCollect(id, sid, currentPage, type).then(function(data) {
+                        res.render('personal-' + type, {
+                            goto,
+                            title,
+                            user: req.session.user,
+                            data,
+                            isSelf,
+                        });
                     });
                 }
             } else {
@@ -227,6 +221,12 @@ module.exports = function(app) {
 
     //取消关注用户
     app.post('/unfollowperson', getIndexData.unFollowPerson);
+
+    //喜欢收藏文章
+    app.post('/doarticle', article.doArticle);
+
+    //取消喜欢收藏文章
+    app.post('/undoarticle', article.undoArticle);
 
     //退出登录
     app.post('/logout', function(req, res) {

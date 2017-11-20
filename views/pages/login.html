@@ -5,13 +5,14 @@
     <title>
         <%= title %>
     </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="/css/loginandregist.css">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="logo" onclick="location.href='/'">渐变</div>
     <div id="login">
+        <div class="logo" onclick="location.href='/'">渐变</div>
         <div class="title">登录</div>
         <div class="info"></div>
         <div class="form">
@@ -20,9 +21,9 @@
             <input type="submit" value="登录" onclick="submit()">
             <input type="button" value="去注册" onclick="location='/register'">
         </div>
-    </div>
-    <div class="footer">
-        copyright @ by hester
+        <div class="footer">
+            copyright @ by hester
+        </div>
     </div>
     <script>
         window.addEventListener('keypress', function(key) {
