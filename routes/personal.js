@@ -59,6 +59,7 @@ var getPersonalFollowAndFans = function(id, sid, currentPage, type) {
                     data.isFollow = false;
                 }
                 data.user = user;
+                // var followType = type == 'follow' ? 0 : 1;
                 Follow.find({ 'userId': id }).populate('followList.followId', 'name content headImage articleNum followNum fansNum').exec(function(err, follow) {
                     follow[0].followList = follow[0].followList.filter((item) => {
                         if (type == 'follow') return item.followType == 0;
@@ -98,7 +99,28 @@ var getPersonalLikeAndCollect = function(id, sid, currentPage, type) {
         data.currentPage = currentPage;
         User.findById(id, function(err, user) {
             data.user = user;
-            resolve(data);
+            // var collectType = type == 'collectarticle' ? 1 : 0;
+            Collect.find({ 'userId': id }).populate({
+                path: 'collectList.articleId',
+                select: '_id authorId title text tag lookNum msgNum likeNum collectNum createTime',
+                module: 'Article',
+                populate: {
+                    path: 'authorId',
+                    select: 'name headImage',
+                    module: 'User'
+                }
+            }).sort({ 'createTime': -1 }).exec(function(err, article) {
+                article[0].collectList = article[0].collectList.filter((item) => {
+                    if (type == 'collectarticle') return item.collectType == 0;
+                    else return item.collectType == 1;
+                });
+                var c = article[0].collectList;
+                var a = c.length;
+                data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                article[0].collectList = pagination(pageSize, skipNum, c);
+                data.article = article[0];
+                resolve(data);
+            });
         });
     })
 }

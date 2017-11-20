@@ -24,7 +24,7 @@
                                 <%= dateFormat(a.createTime) %>
                             </div>
                             <% if(isSelf){ %>
-                                <div class="delete" onclick="deleteArticle(this)" id="<%= a._id %>">
+                                <div class="delete" onclick="deleteArticle(this)" data-text="删除" id="<%= a._id %>">
                                     <i class="iconfont icon-close" style="font-weight:bold"></i>
                                 </div>
                                 <% } %>
@@ -47,10 +47,13 @@
                             <div class="num ">喜欢:
                                 <%= a.likeNum %>
                             </div>
+                            <div class="num">收藏:
+                                <%= a.collectNum %>
+                            </div>
                         </div>
                     </div>
                     <% }}else{ %>
-                        <div class="noperson">没有写文章哦~</div>
+                        <div class="noperson">没有写文章哦</div>
                         <% } %>
             </div>
             <div class="pages">

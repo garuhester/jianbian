@@ -7,38 +7,85 @@
                 <div class="box" onclick="location.href='/personal/collectarticle/<%= goto %>'"><i class="iconfont icon-shoucang"></i>收藏的文章</div>
             </div>
             <div class="list">
-                <div class="article">
-                    <div class="top">
-                        <img src="https://cdn.dribbble.com/users/642793/screenshots/3861995/abstract_1x.png" alt="" class="headimage">
-                        <div class="name">hester</div>
-                        <div class="time">2017-06-12</div>
+                <% 
+                    if(data.article.likeNum != 0){
+                        var article = data.article.collectList;
+                        for(var i=0;i < article.length;i++) { 
+                            var a = article[i].articleId;
+                %>
+                    <div class="article" id="<%= a._id %>">
+                        <div class="top">
+                            <img src="<%= a.authorId.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= a.authorId._id %>'">
+                            <div class="name">
+                                <%= a.authorId.name %>
+                            </div>
+                            <div class="time">
+                                <%= dateFormat(a.createTime) %>
+                            </div>
+                            <% if(isSelf){ %>
+                                <div class="delete" onclick="" data-text="取消喜欢" id="<%= a._id %>">
+                                    <i class="iconfont icon-close" style="font-weight:bold"></i>
+                                </div>
+                                <% } %>
+                        </div>
+                        <div class="middle">
+                            <a href="/article/<%= a.authorId._id %>/<%= a._id %>" class="title">
+                                <%= a.title %>
+                            </a>
+                            <div class="content">
+                                <%= a.text %>
+                            </div>
+                        </div>
+                        <div class="bottom ">
+                            <div class="num ">浏览:
+                                <%= a.lookNum %>
+                            </div>
+                            <div class="num ">评论:
+                                <%= a.msgNum %>
+                            </div>
+                            <div class="num ">喜欢:
+                                <%= a.likeNum %>
+                            </div>
+                            <div class="num">收藏:
+                                <%= a.collectNum %>
+                            </div>
+                        </div>
                     </div>
-                    <div class="middle">
-                        <a href="#" class="title">你见过最上进的人是怎样的？</a>
-                        <div class="content">1 不是每个人都天生拿到一副好牌的，也不是每个人选的路都一直正确，但我见过最上进人，他们没拿到好牌，甚至没有天赋，却能一直默默无声地坚持着。 这1 不是每个人都天生拿到一副好牌的，也不是每个人选的路都一直正确，但我见过最上进人，他们没拿到好牌，甚至没有天赋，却能一直默默无声地坚持着。 这</div>
-                    </div>
-                    <div class="bottom">
-                        <div class="num">浏览:123</div>
-                        <div class="num">评论:23</div>
-                        <div class="num">喜欢:57</div>
-                    </div>
-                </div>
-                <div class="article">
-                    <div class="top">
-                        <img src="https://cdn.dribbble.com/users/642793/screenshots/3861995/abstract_1x.png" alt="" class="headimage">
-                        <div class="name">hester</div>
-                        <div class="time">2017-06-12</div>
-                    </div>
-                    <div class="middle">
-                        <a href="#" class="title">你见过最上进的人是怎样的？</a>
-                        <div class="content">1 不是每个人都天生拿到一副好牌的，也不是每个人选的路都一直正确，但我见过最上进人，他们没拿到好牌，甚至没有天赋，却能一直默默无声地坚持着。 这1 不是每个人都天生拿到一副好牌的，也不是每个人选的路都一直正确，但我见过最上进人，他们没拿到好牌，甚至没有天赋，却能一直默默无声地坚持着。 这</div>
-                    </div>
-                    <div class="bottom">
-                        <div class="num">浏览:123</div>
-                        <div class="num">评论:23</div>
-                        <div class="num">喜欢:57</div>
-                    </div>
-                </div>
+                    <% }}else{ %>
+                        <div class="noperson">没有喜欢的文章哦</div>
+                        <% } %>
+            </div>
+            <div class="pages">
+                <ul>
+                    <% if(data.currentPage==1) {%>
+                        <li><a href="/personal/likearticle/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
+                        <% }else{ var lastPage = data.currentPage - 1;%>
+                            <li><a href="/personal/likearticle/<%= goto %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
+                            <% } %>
+
+                                <% 
+                            for(var i=1;i<=data.allPage;i++){ 
+                                if(data.currentPage == i){
+                        %>
+                                    <li class="active">
+                                        <a href="/personal/likearticle/<%= goto %>/?page=<%= i %>">
+                                            <%= i %>
+                                        </a>
+                                    </li>
+                                    <% }else{ %>
+                                        <li>
+                                            <a href="/personal/likearticle/<%= goto %>/?page=<%= i %>">
+                                                <%= i %>
+                                            </a>
+                                        </li>
+                                        <% }} %>
+
+                                            <% if(data.currentPage==data.allPage) {%>
+                                                <li><a href="/personal/likearticle/<%= goto %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                <% }else{ var nextPage = data.currentPage + 1;%>
+                                                    <li><a href="/personal/likearticle/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                    <% } %>
+                </ul>
             </div>
         </div>
         </div>

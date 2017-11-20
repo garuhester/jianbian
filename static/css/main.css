@@ -855,9 +855,9 @@ ul.personnav {
 
 .personal .left .list .article .top .delete:after {
     display: none;
-    content: '删除';
+    content: attr(data-text);
     position: absolute;
-    width: 50px;
+    width: 75px;
     right: 23px;
     text-align: center;
     top: -3px;

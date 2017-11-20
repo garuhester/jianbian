@@ -57,12 +57,16 @@ var doArticle = function(req, res) {
         if (type == 1) {
             //喜欢文章
             Collect.findOneAndUpdate({ 'userId': userid }, { '$push': { 'collectList': updateStr }, '$inc': { 'likeNum': 1 } }, function(err, collect) {
-                res.json({ result: 1 });
+                Article.findByIdAndUpdate(aid, { '$inc': { 'likeNum': 1 } }, function(err, result) {
+                    res.json({ result: 1 });
+                });
             });
         } else if (type == 0) {
             //收藏文章
             Collect.findOneAndUpdate({ 'userId': userid }, { '$push': { 'collectList': updateStr }, '$inc': { 'collectNum': 1 } }, function(err, collect) {
-                res.json({ result: 2 });
+                Article.findByIdAndUpdate(aid, { '$inc': { 'collectNum': 1 } }, function(err, result) {
+                    res.json({ result: 2 });
+                });
             });
         }
     } else {
@@ -81,12 +85,16 @@ var undoArticle = function(req, res) {
     if (type == 1) {
         //喜欢文章
         Collect.findOneAndUpdate({ 'userId': userid }, { '$pull': { 'collectList': updateStr }, '$inc': { 'likeNum': -1 } }, function(err, collect) {
-            res.json({ result: 1 });
+            Article.findByIdAndUpdate(aid, { '$inc': { 'likeNum': -1 } }, function(err, result) {
+                res.json({ result: 1 });
+            });
         });
     } else if (type == 0) {
         //收藏文章
         Collect.findOneAndUpdate({ 'userId': userid }, { '$pull': { 'collectList': updateStr }, '$inc': { 'collectNum': -1 } }, function(err, collect) {
-            res.json({ result: 2 });
+            Article.findByIdAndUpdate(aid, { '$inc': { 'collectNum': -1 } }, function(err, result) {
+                res.json({ result: 2 });
+            });
         });
     }
 }
