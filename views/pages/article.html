@@ -10,10 +10,15 @@
                 <div class="name" onclick="location.href='/personal/article/<%= data.user._id %>'">
                     <%= data.user.name %>
                 </div>
-                <div class="follow">+关注</div>
-                <div class="info">
-                    <%= dateFormat(data.article.createTime) %> |
-                        <b><%= data.article.lookNum %></b>阅读 | <b>0</b>评论 | <b>0</b>收藏 | <b>0</b>喜欢 | <b>0</b>分享</div>
+                <% if(data.isFollow){ %>
+                    <div class="follow" style="pointer-events:none">已关注</div>
+                    <% }else{ %>
+                        <div class="follow" id="<%= data.user._id %>" onclick="followPerson(this)">+关注</div>
+                        <% } %>
+                            <div class="info">
+                                <%= dateFormat(data.article.createTime) %> |
+                                    <b><%= data.article.lookNum %></b>浏览 | <b>0</b>评论 | <b>0</b>喜欢 | <b>0</b>收藏
+                            </div>
             </div>
         </div>
         <div class="content">
@@ -34,7 +39,11 @@
                                 <%= data.user.fansNum %>
                     </div>
                 </div>
-                <div class="btn1" id="<%= data.user._id %>" onclick="followPerson(this)"><span><i class="iconfont icon-add"></i>关注</span></div>
+                <% if(data.isFollow){ %>
+                    <div class="btn1" style="pointer-events:none"><span>已关注</span></div>
+                    <% }else{ %>
+                        <div class="btn1" id="<%= data.user._id %>" onclick="followPerson(this)"><span><i class="iconfont icon-add"></i>关注</span></div>
+                        <% } %>
             </div>
             <div class="split" style="clear:both;margin-top:20px"></div>
             <div class="content">

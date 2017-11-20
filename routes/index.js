@@ -193,28 +193,18 @@ module.exports = function(app) {
         }
     });
 
+    //文章浏览
     app.get('/article/:userid/:articleid', function(req, res) {
-        if (req.session.user) {
-            var userid = req.params.userid;
-            var articleid = req.params.articleid;
-            article.getArticle(userid, articleid).then(function(data) {
-                res.render('article', {
-                    title: '文章',
-                    user: req.session.user,
-                    data,
-                });
+        var userid = req.params.userid;
+        var articleid = req.params.articleid;
+        var sid = req.session.user ? req.session.user.id : 'no';
+        article.getArticle(userid, sid, articleid).then(function(data) {
+            res.render('article', {
+                title: '文章',
+                user: req.session.user || 'no',
+                data,
             });
-        } else {
-            var userid = req.params.userid;
-            var articleid = req.params.articleid;
-            article.getArticle(userid, articleid).then(function(data) {
-                res.render('article', {
-                    title: '文章',
-                    user: 'no',
-                    data,
-                });
-            });
-        }
+        });
     });
 
     //保存文章
