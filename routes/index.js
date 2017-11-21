@@ -240,4 +240,9 @@ module.exports = function(app) {
         req.session.destroy();
         res.json({});
     });
+
+    //404页面
+    app.get('*', function(req, res) {
+        res.render('404');
+    });
 }
