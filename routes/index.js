@@ -201,6 +201,13 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/about', function(req, res) {
+        res.render('about', {
+            title: '关于',
+            user: req.session.user || 'no'
+        })
+    });
+
     //保存文章
     app.post('/savearticle', write.saveArticle);
 

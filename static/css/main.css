@@ -444,6 +444,20 @@ ul.personnav {
     color: #6F6F6F;
 }
 
+.index .left .list .article .bottom .tag,
+.personal .left .list .article .bottom .tag,
+.followed .right .list .article .bottom .tag {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: rgb(110, 180, 255);
+    color: #fff;
+    padding: 0 5px 0 5px;
+    border-radius: 20px;
+    height: 20px;
+    line-height: 20px;
+}
+
 
 /* -------------------------------------------- */
 
@@ -1240,7 +1254,7 @@ ul.personnav {
 }
 
 .intoarticle .menu {
-    position: absolute;
+    position: fixed;
     top: 50%;
     right: 5%;
     transform: translate(0, -50%);

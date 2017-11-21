@@ -49,6 +49,7 @@
                     var article = data.article;
                     for(var i=0;i < article.length;i++) { 
                         var a = article[i];
+                        randomNum = ~~(Math.random()*5);
                 %>
                     <div class="article" id="<%= article[i]._id %>">
                         <div class="top">
@@ -69,6 +70,9 @@
                             </div>
                         </div>
                         <div class="bottom">
+                            <div class="num tag">
+                                <%= a.tag %>
+                            </div>
                             <div class="num">浏览:
                                 <%= a.lookNum %>
                             </div>
@@ -133,7 +137,6 @@
                 $('.searchInput').val(decodeURIComponent(arr.articlename));
             }
         }
-
 
         function searchArticle() {
             var searchText = $('.searchInput').val();

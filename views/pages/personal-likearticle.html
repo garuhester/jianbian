@@ -13,7 +13,7 @@
                         for(var i=0;i < article.length;i++) { 
                             var a = article[i].articleId;
                 %>
-                    <div class="article" id="<%= a._id %>">
+                    <div class="article">
                         <div class="top">
                             <img src="<%= a.authorId.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= a.authorId._id %>'">
                             <div class="name">
@@ -23,7 +23,7 @@
                                 <%= dateFormat(a.createTime) %>
                             </div>
                             <% if(isSelf){ %>
-                                <div class="delete" onclick="" data-text="取消喜欢" id="<%= a._id %>">
+                                <div class="delete" id="<%= a._id %>" onclick="article(1,this)" data-text="取消喜欢" id="<%= a._id %>">
                                     <i class="iconfont icon-close" style="font-weight:bold"></i>
                                 </div>
                                 <% } %>
@@ -37,6 +37,9 @@
                             </div>
                         </div>
                         <div class="bottom ">
+                            <div class="num tag">
+                                <%= a.tag %>
+                            </div>
                             <div class="num ">浏览:
                                 <%= a.lookNum %>
                             </div>
@@ -55,39 +58,60 @@
                         <div class="noperson">没有喜欢的文章哦</div>
                         <% } %>
             </div>
-            <div class="pages">
-                <ul>
-                    <% if(data.currentPage==1) {%>
-                        <li><a href="/personal/likearticle/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
-                        <% }else{ var lastPage = data.currentPage - 1;%>
-                            <li><a href="/personal/likearticle/<%= goto %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
-                            <% } %>
+            <% 
+                if(data.article.likeNum != 0){
+            %>
+                <div class="pages">
+                    <ul>
+                        <% if(data.currentPage==1) {%>
+                            <li><a href="/personal/likearticle/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
+                            <% }else{ var lastPage = data.currentPage - 1;%>
+                                <li><a href="/personal/likearticle/<%= goto %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
+                                <% } %>
 
-                                <% 
+                                    <% 
                             for(var i=1;i<=data.allPage;i++){ 
                                 if(data.currentPage == i){
                         %>
-                                    <li class="active">
-                                        <a href="/personal/likearticle/<%= goto %>/?page=<%= i %>">
-                                            <%= i %>
-                                        </a>
-                                    </li>
-                                    <% }else{ %>
-                                        <li>
+                                        <li class="active">
                                             <a href="/personal/likearticle/<%= goto %>/?page=<%= i %>">
                                                 <%= i %>
                                             </a>
                                         </li>
-                                        <% }} %>
+                                        <% }else{ %>
+                                            <li>
+                                                <a href="/personal/likearticle/<%= goto %>/?page=<%= i %>">
+                                                    <%= i %>
+                                                </a>
+                                            </li>
+                                            <% }} %>
 
-                                            <% if(data.currentPage==data.allPage) {%>
-                                                <li><a href="/personal/likearticle/<%= goto %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
-                                                <% }else{ var nextPage = data.currentPage + 1;%>
-                                                    <li><a href="/personal/likearticle/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
-                                                    <% } %>
-                </ul>
-            </div>
+                                                <% if(data.currentPage==data.allPage) {%>
+                                                    <li><a href="/personal/likearticle/<%= goto %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                    <% }else{ var nextPage = data.currentPage + 1;%>
+                                                        <li><a href="/personal/likearticle/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                        <% } %>
+                    </ul>
+                </div>
+                <% } %>
         </div>
         </div>
-
+        <script>
+            function article(type, obj) {
+                $.ajax({
+                    type: 'post',
+                    url: '/undoarticle',
+                    data: {
+                        aid: obj.id,
+                        type,
+                    },
+                    success(data) {
+                        if (data.result == 1) {
+                            alert("取消喜欢成功");
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        </script>
         <% include ../sharePages/footer.html %>

@@ -15,10 +15,14 @@ $(function() {
     } else if (url == 'message') {
         $('ul#nav li:eq(3) a').addClass('active');
     } else if (url == 'personal') {
-        $('ul#nav li:eq(5) a#per').addClass('active');
+        $('ul#nav li:eq(6) a#per').addClass('active');
     } else if (url == 'write') {
+        $('ul#nav li:eq(5) a').addClass('active');
+    } else if (url == 'article') {
+
+    } else if (url == 'about') {
         $('ul#nav li:eq(4) a').addClass('active');
-    } else if (url == 'article') {} else {
+    } else {
         $('ul#nav li:eq(1) a').addClass('active');
     }
 });
