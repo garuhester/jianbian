@@ -4,76 +4,86 @@
         <div class="title">
             <%= data.article.title %>
         </div>
-        <div class="tags">
-            <div class="tag">
-                <i class="iconfont icon-tag"></i>
-                <%= data.article.tag %>
-            </div>
-        </div>
-        <div class="userinfo">
-            <img class="headimage" src="<%= data.user.headImage %>" alt="" onclick="location.href='/personal/article/<%= data.user._id %>'">
-            <div class="sec">
-                <div class="name" onclick="location.href='/personal/article/<%= data.user._id %>'">
-                    <%= data.user.name %>
-                </div>
-                <% if(data.isFollow){ %>
-                    <div class="follow" style="pointer-events:none">已关注</div>
-                    <% }else{ %>
-                        <div class="follow" id="<%= data.user._id %>" onclick="followPerson(this)">+关注</div>
-                        <% } %>
-                            <div class="info">
-                                <%= dateFormat(data.article.createTime) %> |
-                                    <b><%= data.article.lookNum %></b>浏览 | <b><%= data.article.msgNum %></b>评论 | <b><%= data.article.likeNum %></b>喜欢 | <b><%= data.article.collectNum %></b>收藏
-                            </div>
-            </div>
-        </div>
-        <div class="split"></div>
-        <div class="content">
-            <%- data.article.content %>
-        </div>
-        <div class="copyright">© 著作权归作者所有</div>
-        <div class="card">
-            <div class="authorinfo">
-                <img class="headimage" src="<%= data.user.headImage %>" alt="" onclick="location.href='/personal/article/<%= data.user._id %>'">
-                <div class="sec">
-                    <div class="name" onclick="location.href='/personal/article/<%= data.user._id %>'">
-                        <%= data.user.name %>
+        <% 
+        if(data.article.tag != 'notag'){ %>
+            <div class="tags">
+                <% 
+                var t = data.article.tag.split(' ');
+                t.length = t.length<=5?t.length:5;
+                for(var i=0;i<t.length;i++){
+                    if(t[i]!=''){
+            %>
+                    <div class="tag">
+                        <i class="iconfont icon-tag"></i>
+                        <%= t[i] %>
                     </div>
-                    <div class="info">
-                        文章
-                        <%= data.user.articleNum %> | 关注
-                            <%= data.user.followNum %> | 粉丝
-                                <%= data.user.fansNum %>
-                    </div>
-                </div>
-                <% if(data.isFollow){ %>
-                    <div class="btn1" style="pointer-events:none"><span>已关注</span></div>
-                    <% }else{ %>
-                        <div class="btn1" id="<%= data.user._id %>" onclick="followPerson(this)"><span><i class="iconfont icon-add"></i>关注</span></div>
-                        <% } %>
+                    <% }} %>
             </div>
-            <div class="split" style="clear:both;margin-top:20px"></div>
-            <div class="content">
-                <% if(data.user.content) {%>
-                    <%= data.user.content %>
-                        <% }else{ %>
-                            暂无简介
-                            <% } %>
-            </div>
-        </div>
-        <div class="menu">
-            <% if(data.isLike){ %>
-                <div class="unlike" data-text="取消喜欢" onclick="article('undo',1,this)"><i class="iconfont icon-like_fill"></i></div>
-                <% }else{ %>
-                    <div class="like" data-text="喜欢" onclick="article('do',1,this)"><i class="iconfont icon-like"></i></div>
-                    <% } %>
-                        <% if(data.isCollect){ %>
-                            <div class="uncollect" data-text="取消收藏" onclick="article('undo',0,this)"><i class="iconfont icon-collection_fill"></i></div>
+            <% } %>
+                <div class="userinfo">
+                    <img class="headimage" src="<%= data.user.headImage %>" alt="" onclick="location.href='/personal/article/<%= data.user._id %>'">
+                    <div class="sec">
+                        <div class="name" onclick="location.href='/personal/article/<%= data.user._id %>'">
+                            <%= data.user.name %>
+                        </div>
+                        <% if(data.isFollow){ %>
+                            <div class="follow" style="pointer-events:none">已关注</div>
                             <% }else{ %>
-                                <div class="collect" data-text="收藏" onclick="article('do',0,this)"><i class="iconfont icon-collection"></i></div>
+                                <div class="follow" id="<%= data.user._id %>" onclick="followPerson(this)">+关注</div>
                                 <% } %>
-                                    <div class="share" data-text="分享"><i class="iconfont icon-share"></i></div>
-        </div>
+                                    <div class="info">
+                                        <%= dateFormat(data.article.createTime) %> |
+                                            <b><%= data.article.lookNum %></b>浏览 | <b><%= data.article.msgNum %></b>评论 | <b><%= data.article.likeNum %></b>喜欢 | <b><%= data.article.collectNum %></b>收藏
+                                    </div>
+                    </div>
+                </div>
+                <div class="split"></div>
+                <div class="content">
+                    <%- data.article.content %>
+                </div>
+                <div class="copyright">© 著作权归作者所有</div>
+                <div class="card">
+                    <div class="authorinfo">
+                        <img class="headimage" src="<%= data.user.headImage %>" alt="" onclick="location.href='/personal/article/<%= data.user._id %>'">
+                        <div class="sec">
+                            <div class="name" onclick="location.href='/personal/article/<%= data.user._id %>'">
+                                <%= data.user.name %>
+                            </div>
+                            <div class="info">
+                                文章
+                                <%= data.user.articleNum %> | 关注
+                                    <%= data.user.followNum %> | 粉丝
+                                        <%= data.user.fansNum %>
+                            </div>
+                        </div>
+                        <% if(data.isFollow){ %>
+                            <div class="btn1" style="pointer-events:none"><span>已关注</span></div>
+                            <% }else{ %>
+                                <div class="btn1" id="<%= data.user._id %>" onclick="followPerson(this)"><span><i class="iconfont icon-add"></i>关注</span></div>
+                                <% } %>
+                    </div>
+                    <div class="split" style="clear:both;margin-top:20px"></div>
+                    <div class="content">
+                        <% if(data.user.content) {%>
+                            <%= data.user.content %>
+                                <% }else{ %>
+                                    暂无简介
+                                    <% } %>
+                    </div>
+                </div>
+                <div class="menu">
+                    <% if(data.isLike){ %>
+                        <div class="unlike" data-text="取消喜欢" onclick="article('undo',1,this)"><i class="iconfont icon-like_fill"></i></div>
+                        <% }else{ %>
+                            <div class="like" data-text="喜欢" onclick="article('do',1,this)"><i class="iconfont icon-like"></i></div>
+                            <% } %>
+                                <% if(data.isCollect){ %>
+                                    <div class="uncollect" data-text="取消收藏" onclick="article('undo',0,this)"><i class="iconfont icon-collection_fill"></i></div>
+                                    <% }else{ %>
+                                        <div class="collect" data-text="收藏" onclick="article('do',0,this)"><i class="iconfont icon-collection"></i></div>
+                                        <% } %>
+                                            <div class="share" data-text="分享"><i class="iconfont icon-share"></i></div>
+                </div>
     </div>
 
     <script>

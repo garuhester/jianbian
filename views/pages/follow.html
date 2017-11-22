@@ -43,9 +43,9 @@
                             <% 
                             if(data!=null){
                                 if(data[0].followNum!=0){
-                                    for(var j=0;j<data.art.length;j++){
-                                        var a = data.art[j];
-                                        var u = data.art[j].authorId;
+                                    for(var i=0;i<data.art.length;i++){
+                                        var a = data.art[i];
+                                        var u = data.art[i].authorId;
                         %>
                                 <div class="article">
                                     <div class="top">
@@ -66,18 +66,27 @@
                                         </div>
                                     </div>
                                     <div class="bottom">
-                                        <div class="num tag">
-                                            <%= a.tag %>
-                                        </div>
-                                        <div class="num">浏览:
-                                            <%= a.lookNum %>
-                                        </div>
-                                        <div class="num">评论:
-                                            <%= a.msgNum %>
-                                        </div>
-                                        <div class="num">喜欢:
-                                            <%= a.likeNum %>
-                                        </div>
+                                        <% 
+                                            if(a.tag != 'notag'){
+                                                var t = a.tag.split(' ');
+                                                t.length = t.length<=3?t.length:3;
+                                                for(var j=0;j<t.length;j++){
+                                                    if(t[j]!=''){
+                                        %>
+                                            <div class="tag">
+                                                <i class="iconfont icon-tag"></i>
+                                                <%= t[j] %>
+                                            </div>
+                                            <% }}} %>
+                                                <div class="num">浏览:
+                                                    <%= a.lookNum %>
+                                                </div>
+                                                <div class="num">评论:
+                                                    <%= a.msgNum %>
+                                                </div>
+                                                <div class="num">喜欢:
+                                                    <%= a.likeNum %>
+                                                </div>
                                     </div>
                                 </div>
                                 <% }}else{ %>

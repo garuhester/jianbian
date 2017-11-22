@@ -65,6 +65,7 @@ var getPersonalFollowAndFans = function(id, sid, currentPage, type) {
                         if (type == 'follow') return item.followType == 0;
                         else return item.followType == 1;
                     });
+                    follow[0].followList.sort((a, b) => new Date(b.followTime) - new Date(a.followTime));
                     var f = follow[0].followList;
                     var a = f.length;
                     data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
@@ -109,11 +110,12 @@ var getPersonalLikeAndCollect = function(id, sid, currentPage, type) {
                     select: 'name headImage',
                     module: 'User'
                 }
-            }).sort({ 'createTime': -1 }).exec(function(err, article) {
+            }).exec(function(err, article) {
                 article[0].collectList = article[0].collectList.filter((item) => {
                     if (type == 'collectarticle') return item.collectType == 0;
                     else return item.collectType == 1;
                 });
+                article[0].collectList.sort((a, b) => new Date(b.collectTime) - new Date(a.collectTime));
                 var c = article[0].collectList;
                 var a = c.length;
                 data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);

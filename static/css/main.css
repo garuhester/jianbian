@@ -447,7 +447,9 @@ ul.personnav {
 .index .left .list .article .bottom .tag,
 .personal .left .list .article .bottom .tag,
 .followed .right .list .article .bottom .tag {
+    margin-right: 6px;
     position: relative;
+    float: left;
     top: 50%;
     transform: translate(0, -50%);
     background: rgb(110, 180, 255);
@@ -456,6 +458,7 @@ ul.personnav {
     border-radius: 20px;
     height: 20px;
     line-height: 20px;
+    font-size: 13px;
 }
 
 
@@ -1278,13 +1281,10 @@ ul.personnav {
 
 .intoarticle .menu div:after {
     content: attr(data-text);
-    /* width: 60px; */
     position: absolute;
     left: -45px;
     top: 50%;
     transform: translate(0, -50%);
-    /* background: rgb(245, 245, 245); */
-    /* padding: 6px; */
     display: none;
     text-align: center;
 }
@@ -1306,20 +1306,28 @@ ul.personnav {
 .intoarticle .tags {
     padding: 5px 10px 5px 10px;
     position: relative;
-    height: 20px;
 }
 
 .intoarticle .tags .tag {
     background: rgb(110, 180, 255);
     display: inline-block;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
     color: #fff;
     padding: 0 5px 0 5px;
     border-radius: 20px;
     height: 20px;
     line-height: 20px;
+    font-size: 13px;
+}
+
+.tag i {
+    font-size: 13px;
+}
+
+.tag {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 70px;
 }
 
 
