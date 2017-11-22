@@ -1303,6 +1303,25 @@ ul.personnav {
     font-size: 25px;
 }
 
+.intoarticle .tags {
+    padding: 5px 10px 5px 10px;
+    position: relative;
+    height: 20px;
+}
+
+.intoarticle .tags .tag {
+    background: rgb(110, 180, 255);
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    color: #fff;
+    padding: 0 5px 0 5px;
+    border-radius: 20px;
+    height: 20px;
+    line-height: 20px;
+}
+
 
 /* ---------------------- */
 

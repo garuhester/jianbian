@@ -4,6 +4,12 @@
         <div class="title">
             <%= data.article.title %>
         </div>
+        <div class="tags">
+            <div class="tag">
+                <i class="iconfont icon-tag"></i>
+                <%= data.article.tag %>
+            </div>
+        </div>
         <div class="userinfo">
             <img class="headimage" src="<%= data.user.headImage %>" alt="" onclick="location.href='/personal/article/<%= data.user._id %>'">
             <div class="sec">
@@ -21,6 +27,7 @@
                             </div>
             </div>
         </div>
+        <div class="split"></div>
         <div class="content">
             <%- data.article.content %>
         </div>
