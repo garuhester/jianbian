@@ -27,10 +27,17 @@ var getArticle = function(userid, sid, articleid) {
                             } else {
                                 data.isCollect = false;
                             }
-                            Article.findByIdAndUpdate(articleid, { '$inc': { 'lookNum': 1 } }, function(err, article) {
-                                data.article = article;
-                                resolve(data);
-                            });
+                            if (sid != userid) {
+                                Article.findByIdAndUpdate(articleid, { '$inc': { 'lookNum': 1 } }, function(err, article) {
+                                    data.article = article;
+                                    resolve(data);
+                                });
+                            } else {
+                                Article.findById(articleid, function(err, article) {
+                                    data.article = article;
+                                    resolve(data);
+                                });
+                            }
                         });
                     });
                 });

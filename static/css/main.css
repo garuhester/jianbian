@@ -1191,7 +1191,7 @@ ul.personnav {
     display: inline-block;
     margin-left: 10px;
     border-radius: 20px;
-    background: rgb(54, 118, 255);
+    background: rgb(110, 180, 255);
     color: #fff;
     font-size: 13px;
     padding: 2px;
@@ -1246,7 +1246,7 @@ ul.personnav {
     top: 50%;
     transform: translate(0, -50%);
     right: 20px;
-    background: rgb(54, 118, 255);
+    background: rgb(110, 180, 255);
     color: #fff;
     padding: 10px;
     border-radius: 50px;
