@@ -1347,3 +1347,9 @@ ul.personnav {
     text-align: center;
     font-size: 30px;
 }
+
+.tabsnum {
+    position: relative;
+    top: 1px;
+    left: 1px;
+}

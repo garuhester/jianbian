@@ -2,107 +2,104 @@
 
     <% include ../sharePages/personal.html %>
         <div class="left">
-            <div class="tabs">
-                <div class="box" onclick="location.href='/personal/likearticle/<%= goto %>'"><i class="iconfont icon-xihuan"></i>喜欢的文章</div>
-                <div class="box active" onclick="location.href='/personal/collectarticle/<%= goto %>'"><i class="iconfont icon-shoucang"></i>收藏的文章</div>
-            </div>
-            <div class="list">
-                <% 
+            <% include ../sharePages/personal-2tabs.html %>
+                <div class="list">
+                    <% 
                     if(data.article.collectNum != 0){
                         var article = data.article.collectList;
                         for(var i=0;i < article.length;i++) { 
                             var a = article[i].articleId;
                 %>
-                    <div class="article" id="<%= a._id %>">
-                        <div class="top">
-                            <img src="<%= a.authorId.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= a.authorId._id %>'">
-                            <div class="name">
-                                <%= a.authorId.name %>
-                            </div>
-                            <div class="time">
-                                <%= dateFormat(a.createTime) %>
-                            </div>
-                            <% if(isSelf){ %>
-                                <div class="delete" onclick="article(0,this)" data-text="取消收藏" id="<%= a._id %>">
-                                    <i class="iconfont icon-close" style="font-weight:bold"></i>
+                        <div class="article" id="<%= a._id %>">
+                            <div class="top">
+                                <img src="<%= a.authorId.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= a.authorId._id %>'">
+                                <div class="name">
+                                    <%= a.authorId.name %>
                                 </div>
-                                <% } %>
-                        </div>
-                        <div class="middle">
-                            <a href="/article/<%= a.authorId._id %>/<%= a._id %>" class="title">
-                                <%= a.title %>
-                            </a>
-                            <div class="content">
-                                <%= a.text %>
+                                <div class="time">
+                                    <%= dateFormat(a.createTime) %>
+                                </div>
+                                <% if(isSelf){ %>
+                                    <div class="delete" onclick="article(0,this)" data-text="取消收藏" id="<%= a._id %>">
+                                        <i class="iconfont icon-close" style="font-weight:bold"></i>
+                                    </div>
+                                    <% } %>
                             </div>
-                        </div>
-                        <div class="bottom ">
-                            <% 
+                            <div class="middle">
+                                <a href="/article/<%= a.authorId._id %>/<%= a._id %>" class="title">
+                                    <%= a.title %>
+                                </a>
+                                <div class="content">
+                                    <%= a.text %>
+                                </div>
+                            </div>
+                            <div class="bottom ">
+                                <% 
                                 if(a.tag != 'notag'){
                                     var t = a.tag.split(' ');
                                     t.length = t.length<=3?t.length:3;
                                     for(var j=0;j<t.length;j++){
                                         if(t[j]!=''){
                             %>
-                                <div class="tag">
-                                    <i class="iconfont icon-tag"></i>
-                                    <%= t[j] %>
-                                </div>
-                                <% }}} %>
-                                    <div class="num ">浏览:
-                                        <%= a.lookNum %>
+                                    <div class="tag">
+                                        <i class="iconfont icon-tag"></i>
+                                        <%= t[j] %>
                                     </div>
-                                    <div class="num ">评论:
-                                        <%= a.msgNum %>
-                                    </div>
-                                    <div class="num ">喜欢:
-                                        <%= a.likeNum %>
-                                    </div>
-                                    <div class="num">收藏:
-                                        <%= a.collectNum %>
-                                    </div>
+                                    <% }}} %>
+                                        <div class="num ">浏览:
+                                            <%= a.lookNum %>
+                                        </div>
+                                        <div class="num ">评论:
+                                            <%= a.msgNum %>
+                                        </div>
+                                        <div class="num ">喜欢:
+                                            <%= a.likeNum %>
+                                        </div>
+                                        <div class="num">收藏:
+                                            <%= a.collectNum %>
+                                        </div>
+                            </div>
                         </div>
-                    </div>
-                    <% }}else{ %>
-                        <div class="noperson">没有收藏的文章哦</div>
-                        <% } %>
-            </div>
-            <% 
+                        <% }}else{ %>
+                            <div class="noperson">没有收藏的文章哦</div>
+                            <% } %>
+                </div>
+                <% 
                 if(data.article.likeNum != 0){
             %>
-                <div class="pages">
-                    <ul>
-                        <% if(data.currentPage==1) {%>
-                            <li><a href="/personal/collectarticle/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
-                            <% }else{ var lastPage = data.currentPage - 1;%>
-                                <li><a href="/personal/collectarticle/<%= goto %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
-                                <% } %>
+                    <div class="pages">
+                        <ul>
+                            <% if(data.currentPage==1) {%>
+                                <li><a href="/personal/collectarticle/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
+                                <% }else{ var lastPage = data.currentPage - 1;%>
+                                    <li><a href="/personal/collectarticle/<%= goto %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
+                                    <% } %>
 
-                                    <% 
+                                        <% 
                             for(var i=1;i<=data.allPage;i++){ 
                                 if(data.currentPage == i){
                         %>
-                                        <li class="active">
-                                            <a href="/personal/collectarticle/<%= goto %>/?page=<%= i %>">
-                                                <%= i %>
-                                            </a>
-                                        </li>
-                                        <% }else{ %>
-                                            <li>
+                                            <li class="active">
                                                 <a href="/personal/collectarticle/<%= goto %>/?page=<%= i %>">
                                                     <%= i %>
                                                 </a>
                                             </li>
-                                            <% }} %>
+                                            <% }else{ %>
+                                                <li>
+                                                    <a href="/personal/collectarticle/<%= goto %>/?page=<%= i %>">
+                                                        <%= i %>
+                                                    </a>
+                                                </li>
+                                                <% }} %>
 
-                                                <% if(data.currentPage==data.allPage) {%>
-                                                    <li><a href="/personal/collectarticle/<%= goto %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
-                                                    <% }else{ var nextPage = data.currentPage + 1;%>
-                                                        <li><a href="/personal/collectarticle/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
-                                                        <% } %>
-                    </ul>
-                </div>
-                <% } %>
+                                                    <% if(data.currentPage==data.allPage) {%>
+                                                        <li><a href="/personal/collectarticle/<%= goto %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                        <% }else{ var nextPage = data.currentPage + 1;%>
+                                                            <li><a href="/personal/collectarticle/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                            <% } %>
+                        </ul>
+                    </div>
+                    <% } %>
         </div>
         </div>
         <script>

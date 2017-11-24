@@ -2,13 +2,9 @@
 
     <% include ../sharePages/personal.html %>
         <div class="left">
-            <div class="tabs">
-                <div class="box" onclick="location.href='/personal/article/<%= goto %>'"><i class="iconfont icon-wenzhang"></i>文章</div>
-                <div class="box" onclick="location.href='/personal/follow/<%= goto %>'"><i class="iconfont icon-guanzhu1"></i>关注</div>
-                <div class="box active" onclick="location.href='/personal/fans/<%= goto %>'"><i class="iconfont icon-fensi"></i>粉丝</div>
-            </div>
-            <div class="list">
-                <% 
+            <% include ../sharePages/personal-3tabs.html %>
+                <div class="list">
+                    <% 
                     if(data!=null){
                         if(data.user.fansNum != 0){
                             for(var i=0;i<data.follow[0][0].followList.length;i++){
@@ -16,69 +12,69 @@
                                     var f = data.follow[0][0].followList[i].followId;
                                     var is = data.follow[0][0].followList[i];
                 %>
-                    <div class="followperson">
-                        <img src="<%= f.headImage %>" alt="" onclick="location.href='/personal/article/<%= f._id %>'">
-                        <div class="info">
-                            <div class="name" onclick="location.href='/personal/article/<%= f._id %>'">
-                                <%= f.name %>
+                        <div class="followperson">
+                            <img src="<%= f.headImage %>" alt="" onclick="location.href='/personal/article/<%= f._id %>'">
+                            <div class="info">
+                                <div class="name" onclick="location.href='/personal/article/<%= f._id %>'">
+                                    <%= f.name %>
+                                </div>
+                                <div class="content">
+                                    <% if(f.content){ %>
+                                        <%= f.content %>
+                                            <% }else { %>
+                                                暂无简介~
+                                                <% } %>
+                                </div>
+                                <span class="articlen">文章 <%= f.articleNum %></span> |
+                                <span class="follown">关注 <%= f.followNum %></span> |
+                                <span class="fansn">粉丝 <%= f.fansNum %></span>
                             </div>
-                            <div class="content">
-                                <% if(f.content){ %>
-                                    <%= f.content %>
-                                        <% }else { %>
-                                            暂无简介~
-                                            <% } %>
-                            </div>
-                            <span class="articlen">文章 <%= f.articleNum %></span> |
-                            <span class="follown">关注 <%= f.followNum %></span> |
-                            <span class="fansn">粉丝 <%= f.fansNum %></span>
-                        </div>
-                        <% if(isSelf){ %>
-                            <% if(is.isFollow){ %>
-                                <div class="btn" id="<%= f._id %>" onclick="unfollow(this)"><span>√ 已关注</span><span>× 取消关注</span> </div>
-                                <% }else{ %>
-                                    <div class="btn1" id="<%= f._id %>" onclick="followPerson(this)"><i class="iconfont icon-add" style="font-weight:bold"></i><span>关注</span></div>
-                                    <% } %>
+                            <% if(isSelf){ %>
+                                <% if(is.isFollow){ %>
+                                    <div class="btn" id="<%= f._id %>" onclick="unfollow(this)"><span>√ 已关注</span><span>× 取消关注</span> </div>
+                                    <% }else{ %>
+                                        <div class="btn1" id="<%= f._id %>" onclick="followPerson(this)"><i class="iconfont icon-add" style="font-weight:bold"></i><span>关注</span></div>
                                         <% } %>
-                    </div>
-                    <% }}}else{ %>
-                        <div class="noperson">没有粉丝哦~</div>
-                        <% }} %>
-            </div>
-            <% if(data.user.fansNum != 0){ %>
-                <div class="pages">
-                    <ul>
-                        <% if(data.currentPage==1) {%>
-                            <li><a href="/personal/fans/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
-                            <% }else{ var lastPage = data.currentPage - 1;%>
-                                <li><a href="/personal/fans/<%= goto %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
-                                <% } %>
+                                            <% } %>
+                        </div>
+                        <% }}}else{ %>
+                            <div class="noperson">没有粉丝哦~</div>
+                            <% }} %>
+                </div>
+                <% if(data.user.fansNum != 0){ %>
+                    <div class="pages">
+                        <ul>
+                            <% if(data.currentPage==1) {%>
+                                <li><a href="/personal/fans/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
+                                <% }else{ var lastPage = data.currentPage - 1;%>
+                                    <li><a href="/personal/fans/<%= goto %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
+                                    <% } %>
 
-                                    <% 
+                                        <% 
                                 for(var i=1;i<=data.allPage;i++){ 
                                     if(data.currentPage == i){
                             %>
-                                        <li class="active">
-                                            <a href="/personal/fans/<%= goto %>/?page=<%= i %>">
-                                                <%= i %>
-                                            </a>
-                                        </li>
-                                        <% }else{ %>
-                                            <li>
+                                            <li class="active">
                                                 <a href="/personal/fans/<%= goto %>/?page=<%= i %>">
                                                     <%= i %>
                                                 </a>
                                             </li>
-                                            <% }} %>
+                                            <% }else{ %>
+                                                <li>
+                                                    <a href="/personal/fans/<%= goto %>/?page=<%= i %>">
+                                                        <%= i %>
+                                                    </a>
+                                                </li>
+                                                <% }} %>
 
-                                                <% if(data.currentPage==data.allPage) {%>
-                                                    <li><a href="/personal/fans/<%= goto %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
-                                                    <% }else{ var nextPage = data.currentPage + 1;%>
-                                                        <li><a href="/personal/fans/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
-                                                        <% } %>
-                    </ul>
-                </div>
-                <% } %>
+                                                    <% if(data.currentPage==data.allPage) {%>
+                                                        <li><a href="/personal/fans/<%= goto %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                        <% }else{ var nextPage = data.currentPage + 1;%>
+                                                            <li><a href="/personal/fans/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                                            <% } %>
+                        </ul>
+                    </div>
+                    <% } %>
         </div>
         </div>
 
