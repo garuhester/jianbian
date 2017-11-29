@@ -153,7 +153,7 @@ ul.personnav {
 .pages .progress {
     position: absolute;
     top: 50%;
-    right: -90px;
+    right: -100px;
     transform: translate(-50%, -50%);
 }
 
@@ -186,19 +186,60 @@ ul.personnav {
     margin-bottom: 200px;
     float: right;
     padding: 10px;
-    display: inline-block;
 }
 
 .index .right .author {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .2); */
     /* border: 1px solid #ddd; */
-    padding: 10px;
-    background: #fff;
+    padding: 0 10px 0 10px;
+    /* background: #ddd; */
 }
 
 .index .right .author .title {
-    padding: 5px;
     color: #848484;
+    position: relative;
+}
+
+.index .right .author .title::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: #ddd;
+    width: 100%;
+    left: 0;
+    bottom: -15px;
+    z-index: 2;
+}
+
+.index .right .author .title span:nth-child(1) {
+    position: relative;
+}
+
+.index .right .author .title span:nth-child(1)::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: #000;
+    width: 100%;
+    bottom: -15px;
+    left: 0;
+    z-index: 5;
+}
+
+.copyright {
+    text-align: center;
+    padding: 20px;
+    color: #ddd;
+}
+
+.index .right .author .title a {
+    text-decoration: none;
+    color: #848484;
+    float: right;
+}
+
+.index .right .author .title a:hover {
+    color: #2c93e7;
 }
 
 .index .right .author .more {
@@ -219,6 +260,7 @@ ul.personnav {
 }
 
 .index .right .author .list {
+    margin-top: 30px;
     max-height: 330px;
     overflow: hidden;
 }
@@ -259,12 +301,12 @@ ul.personnav {
 
 .index .right .author .list .person .follow {
     position: absolute;
-    line-height: 30px;
     padding-left: 12px;
     padding-right: 12px;
     height: 30px;
+    line-height: 30px;
+    transform: translate(0, -50%);
     top: 50%;
-    margin-top: -15px;
     right: 10px;
     background: rgb(230, 230, 230);
     display: inline;
@@ -1464,4 +1506,19 @@ ul.personnav {
     position: relative;
     top: 1px;
     left: 1px;
+}
+
+.icon-rilijiantouyoushuang,
+.icon-rilijiantouyoushuang1 {
+    font-size: 14px;
+}
+
+.icon-rilijiantouyoushuang1 {
+    position: relative;
+    top: -1px;
+}
+
+.icon-rilijiantouyoushuang {
+    position: relative;
+    top: -2px;
 }

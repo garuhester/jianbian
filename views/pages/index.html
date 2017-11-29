@@ -3,7 +3,11 @@
     <div class="index">
         <div class="right">
             <div class="author">
-                <div class="title">推荐作者</div>
+                <div class="title">
+                    <span>推荐作者</span>
+                    <span><a href="/follow/add">更多作者 ></a></span>
+                    <div style="clear:both"></div>
+                </div>
                 <div class="list">
                     <%
                         var user = data.user[0];
@@ -29,10 +33,7 @@
                         </div>
                         <% } %>
                 </div>
-                <div class="more" onclick="location.href='/follow/add'">
-                    更多作者
-                    <i class="iconfont icon-enter" style="font-weight:bold"></i>
-                </div>
+                <% include ../sharePages/copyright.html %>
             </div>
         </div>
         <div class=" left">
@@ -103,7 +104,7 @@
                 <ul>
                     <li>
                         <a href="/?page=1">
-                            <<</a>
+                            <i class="iconfont icon-rilijiantouyoushuang1"></i></a>
                     </li>
                     <% if(parseInt(data.currentPage)==1) { %>
                         <li><a href="/?page=1"><i class="iconfont icon-return"></i></a></li>
@@ -139,12 +140,12 @@
 
                                                         <li>
                                                             <a href="/?page=<%= data.allPage %>">
-                                                                >></a>
+                                                                <i class="iconfont icon-rilijiantouyoushuang"></i></a>
                                                         </li>
 
                                                         <div class="progress">
-                                                            <%= parseInt(data.currentPage) %> /
-                                                                <%= data.allPage %>
+                                                            共
+                                                            <%= data.allPage %> 页
                                                         </div>
 
                 </ul>

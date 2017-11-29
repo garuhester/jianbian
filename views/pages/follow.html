@@ -27,6 +27,7 @@
                             <div style="text-align:center;padding:5px">没有关注的人</div>
                             <% } %>
             </div>
+            <% include ../sharePages/copyright.html %>
         </div>
         <div class="right">
             <% if(data.id == 'all'){ %>
@@ -96,16 +97,23 @@
                         <% if(data[0].followNum!=0){ %>
                             <div class="pages">
                                 <ul>
-                                    <% if(data.currentPage==1) {%>
+                                    <li>
+                                        <a href="/follow/<%= data.id %>/?page=1">
+                                            <i class="iconfont icon-rilijiantouyoushuang1"></i></a>
+                                    </li>
+                                    <% if(parseInt(data.currentPage)==1) { %>
                                         <li><a href="/follow/<%= data.id %>/?page=1"><i class="iconfont icon-return"></i></a></li>
-                                        <% }else{ var lastPage = data.currentPage - 1;%>
+                                        <% }else{ var lastPage = parseInt(data.currentPage) - 1;%>
                                             <li><a href="/follow/<%= data.id %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
                                             <% } %>
 
                                                 <% 
-                                                    for(var i=1;i<=data.allPage;i++){ 
-                                                        if(data.currentPage == i){
-                                                %>
+                                                        var allPage = data.allPage <= 5?data.allPage:5;
+                                                        var start = parseInt(data.currentPage)<=5?1:parseInt(data.currentPage)-4;
+                                                        var end = parseInt(data.currentPage)<=5?allPage:parseInt(data.currentPage);
+                                                        for(var i=start;i<=end;i++){
+                                                            if(parseInt(data.currentPage) == i){
+                                                    %>
                                                     <li class="active">
                                                         <a href="/follow/<%= data.id %>/?page=<%= i %>">
                                                             <%= i %>
@@ -119,11 +127,22 @@
                                                         </li>
                                                         <% }} %>
 
-                                                            <% if(data.currentPage==data.allPage) {%>
+                                                            <% if(parseInt(data.currentPage)==parseInt(data.allPage)) {%>
                                                                 <li><a href="/follow/<%= data.id %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
-                                                                <% }else{ var nextPage = data.currentPage + 1;%>
+                                                                <% }else{ var nextPage = parseInt(data.currentPage) + 1;%>
                                                                     <li><a href="/follow/<%= data.id %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
                                                                     <% } %>
+
+                                                                        <li>
+                                                                            <a href="/follow/<%= data.id %>/?page=<%= data.allPage %>">
+                                                                                <i class="iconfont icon-rilijiantouyoushuang"></i></a>
+                                                                        </li>
+
+                                                                        <div class="progress">
+                                                                            共
+                                                                            <%= data.allPage %> 页
+                                                                        </div>
+
                                 </ul>
                             </div>
                             <% } %>
