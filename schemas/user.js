@@ -17,6 +17,10 @@ var UserSchema = new Schema({
     articleList: [{
         articleId: { type: String, ref: 'Article' }
     }],
+    categoryList: [{
+        categoryName: String, //分类名称
+        categoryNum: { type: Number, default: 0 }
+    }],
     createTime: { type: Date, default: Date.now } //创建时间
 });
 

@@ -5,11 +5,39 @@
     </script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js">
     </script>
+    <style>
+        .main {
+            margin-top: 60px;
+        }
+    </style>
+    <div class="category left">
+        <div class="title">
+            <span>文章分类</span>
+            <span onclick=""><i class="iconfont icon-add" style="font-weight:bold"></i>新建分类</span>
+        </div>
+        <div class="split"></div>
+        <div class="list">
+            <div class="cate" onclick="">
+                <span>Web</span>
+                <span onclick="">设置</span>
+            </div>
+        </div>
+    </div>
+    <div class="category middle">
+        <div class="title">
+            <span>文章列表</span>
+            <span onclick=""><i class="iconfont icon-add" style="font-weight:bold"></i>新建文章</span>
+        </div>
+        <div class="split"></div>
+    </div>
     <div class="write">
         <input id="title" type="text" placeholder="请输入标题">
         <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多5个">
         <script id="editor" type="text/plain" style="height:1000px;width:100%;"></script>
-        <div class="savearticle" onclick="savearticle()">保存</div>
+        <div class="tools">
+            <div class="savearticle" onclick="">发布</div>
+            <div class="savearticle" onclick="savearticle()">保存</div>
+        </div>
     </div>
 
     <script>
@@ -30,7 +58,7 @@
                     } else if (dv.css('position') != 'fixed') dv.css({
                         'position': 'fixed',
                         top: 60 + 'px',
-                        width: 60 + '%'
+                        width: 59 + '%'
                     });
                 } else if (dv.css('position') != 'static') dv.css({
                     'position': 'static',
@@ -66,6 +94,5 @@
             }
         }
     </script>
-
 
     <% include ../sharePages/footer.html %>

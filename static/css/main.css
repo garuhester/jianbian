@@ -76,10 +76,11 @@ ul.personnav {
     width: 100%;
     text-align: center;
     padding: 5px 0px 5px 0px;
-    background: #fff;
+    background: #eee;
     position: fixed;
     bottom: 0;
     overflow: hidden;
+    z-index: 999;
 }
 
 .totop {
@@ -94,6 +95,7 @@ ul.personnav {
     border-radius: 50%;
     cursor: pointer;
     text-align: center;
+    z-index: 1500;
 }
 
 .totop i {
@@ -142,15 +144,24 @@ ul.personnav {
 .pages ul li a {
     color: #000;
     display: inline-block;
-    padding: 7px 10px 7px 10px;
+    width: 20px;
+    text-align: center;
+    padding: 4px;
     text-decoration: none;
+}
+
+.pages .progress {
+    position: absolute;
+    top: 50%;
+    right: -90px;
+    transform: translate(-50%, -50%);
 }
 
 
 /* ------------------------------------ */
 
 .main {
-    margin-top: 70px;
+    margin-top: 80px;
 }
 
 
@@ -1098,16 +1109,15 @@ ul.personnav {
 /* write*/
 
 .write {
-    width: 60%;
-    margin: 0 auto;
-    /* background: lightblue; */
-    padding: 10px;
-    margin-bottom: 100px;
+    float: right;
+    width: 59%;
+    padding: 5px;
+    margin-bottom: 50px;
+    margin-top: 5px;
+    border-left: 1px solid #ddd;
 }
 
 .write input {
-    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
-    height: 60px;
     display: block;
     font-size: 17px;
     margin-bottom: 10px;
@@ -1116,23 +1126,125 @@ ul.personnav {
     border: none;
     outline: none;
     padding: 10px;
-    padding-bottom: 0px;
     border-bottom: 1px solid #ddd;
 }
 
-.savearticle {
+.write .tools {
     position: fixed;
-    right: -3px;
-    width: 60px;
-    top: 50%;
-    transform: translate(0px, -50%);
+    right: 30%;
+    top: 10px;
+    height: 40px;
     background: #fff;
     text-align: center;
-    padding: 15px;
     font-size: 20px;
     cursor: pointer;
-    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
-    border: 1px solid #ddd;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    background: rgb(127, 189, 255);
+    font-weight: bold;
+    z-index: 1600;
+}
+
+.savearticle {
+    padding: 0 20px 0 20px;
+    height: 40px;
+    line-height: 40px;
+    width: 60px;
+    display: inline-block;
+    color: #fff;
+    font-size: 17px;
+}
+
+.savearticle:hover {
+    background: rgb(99, 174, 255);
+}
+
+.category {
+    position: fixed;
+    height: 100%;
+    width: 20%;
+}
+
+.category.left {
+    float: left;
+    width: 20%;
+}
+
+.category.left .title {
+    font-size: 20px;
+    padding: 15px;
+    position: relative;
+    border-left: 5px solid rgb(110, 180, 255);
+}
+
+.category.middle .title {
+    font-size: 20px;
+    padding: 15px;
+    position: relative;
+}
+
+.category.left .title i,
+.category.middle .title i {
+    font-size: 15px;
+}
+
+.category.left .title span:nth-child(1),
+.category.middle .title span:nth-child(1) {
+    font-weight: bold;
+}
+
+.category.left .title span:nth-child(2),
+.category.middle .title span:nth-child(2) {
+    top: 50%;
+    transform: translate(0, -50%);
+    position: absolute;
+    font-size: 15px;
+    right: 15px;
+}
+
+.category.left .title span:nth-child(2):hover,
+.category.middle .title span:nth-child(2):hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.category.left .cate {
+    position: relative;
+    cursor: pointer;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.category.left .cate:hover {
+    background: rgb(247, 247, 247);
+}
+
+.category.left .cate span:nth-child(2) {
+    position: absolute;
+    right: 10px;
+}
+
+.category.left .cate span:nth-child(2):hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.category.left .list {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.category.middle {
+    left: 20%;
+    border-left: 1px solid #ddd;
+}
+
+.category.middle .title {
+    padding: 15px;
+    font-size: 20px;
+}
+
+.category.middle i {
+    font-size: 20px;
 }
 
 
