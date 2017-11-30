@@ -16,7 +16,7 @@
                     <img class="headimage" src="<%= data.headImage %>" alt="">
                     <div class="changeimage" onclick="changeHeadImage()">更换头像</div>
                     <form id="uploadform" action="/saveHeadImage" method="post" enctype="multipart/form-data">
-                        <input id="imgchoose" name="headimage" type="file" accept="image/*" hidden onchange="uploadImage()">
+                        <input id="imgchoose" name="headimage" type="file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" hidden onchange="uploadImage()">
                     </form>
                 </div>
                 <div class="row">
