@@ -189,10 +189,7 @@ ul.personnav {
 }
 
 .index .right .author {
-    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .2); */
-    /* border: 1px solid #ddd; */
     padding: 0 10px 0 10px;
-    /* background: #ddd; */
 }
 
 .index .right .author .title {
@@ -290,12 +287,11 @@ ul.personnav {
 
 .index .right .author .list .person .content {
     margin-left: 65px;
-    padding-right: 80px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    white-space:nowrap;
+    text-overflow: ellipsis;
     overflow: hidden;
     font-size: 15px;
+    margin-right: 40%;
     color: rgb(94, 94, 94);
 }
 
@@ -303,13 +299,11 @@ ul.personnav {
     position: absolute;
     padding-left: 12px;
     padding-right: 12px;
-    height: 30px;
     line-height: 30px;
     transform: translate(0, -50%);
     top: 50%;
     right: 10px;
     background: rgb(230, 230, 230);
-    display: inline;
     border-radius: 7%;
     cursor: pointer;
 }
@@ -578,6 +572,7 @@ ul.personnav {
     top: 50%;
     margin-top: -50px;
     float: left;
+    border:2px solid #ddd;
 }
 
 .setting .right #editprofile .row1 .changeimage {
@@ -1333,6 +1328,7 @@ ul.personnav {
     float: left;
     margin-left: 10px;
     cursor: pointer;
+    border:1px solid #ddd;
 }
 
 .intoarticle .userinfo .name,
@@ -1361,6 +1357,7 @@ ul.personnav {
 }
 
 .intoarticle .content {
+    margin-top: 20px;
     padding: 5px;
 }
 

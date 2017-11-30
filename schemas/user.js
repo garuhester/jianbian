@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     name: String, //姓名
     password: String, //密码
-    headImage: String, //头像
+    headImage: { type: String, default: '/headimage/no.png' }, //头像
     gender: String, //性别
     age: Number, //年龄
     tel: String, //电话

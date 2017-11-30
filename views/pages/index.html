@@ -11,6 +11,7 @@
                 <div class="list">
                     <%
                         var user = data.user[0];
+                        if(user){
                         for(var i=0;i < user.length;i++) { 
                     %>
                         <div class="person">
@@ -31,6 +32,10 @@
                                     <div class="follow" id="<%= user[i]._id %>" onclick="followPerson(this)"><i class="iconfont icon-add" style="font-weight:bold"></i>关注</div>
                                     <% } %>
                         </div>
+                        <% }}else{%>
+                            <div class="person">
+                                无作者
+                            </div>
                         <% } %>
                 </div>
                 <% include ../sharePages/copyright.html %>
@@ -48,6 +53,7 @@
             <div class="list">
                 <% 
                     var article = data.article;
+                    if(data.article.length != 0){
                     for(var i=0;i < article.length;i++) { 
                         var a = article[i];
                         randomNum = ~~(Math.random()*5);
@@ -97,9 +103,11 @@
                                     </div>
                         </div>
                     </div>
-                    <% } %>
+                    <% }}else{ %>
+                        <div class="article">无文章</div>
+                        <% } %>
             </div>
-
+            <% if(data.article.length!=0){ %>
             <div class="pages">
                 <ul>
                     <li>
@@ -150,6 +158,7 @@
 
                 </ul>
             </div>
+            <% } %>
         </div>
     </div>
     <script>

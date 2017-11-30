@@ -31,14 +31,30 @@
         </div>
         <div class="right">
             <% if(data.id == 'all'){ %>
-                <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
-                    全部文章
-                </div>
+                <% if(data[0].followNum!=0){ %>
+                    <% if(data.art.length != 0){ %>
+                        <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                            全部文章
+                        </div>
+                        <% }else{ %>
+                            <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                                没有文章
+                            </div>
+                <% }}else{ %>
+                    <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                        没有文章
+                    </div>
+                    <% } %>
                 <% }else{ %>
+                    <% if(data.art[0]){ %>
                     <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
                         <%= data.art[0].authorId.name %>的文章
                     </div>
-                    <% } %>
+                    <% }else{ %>
+                        <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                            TA没有文章
+                        </div>
+                    <%  }} %>
 
                         <div class="list ">
                             <% 
@@ -50,7 +66,7 @@
                         %>
                                 <div class="article">
                                     <div class="top">
-                                        <img src="<%= u.headImage %>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= u._id %>'">
+                                        <img src="<%= u.headImage%>" alt=" " class="headimage" onclick="location.href='/personal/article/<%= u._id %>'">
                                         <div class="name">
                                             <%= u.name %>
                                         </div>
@@ -90,11 +106,12 @@
                                                 </div>
                                     </div>
                                 </div>
-                                <% }}else{ %>
-                                    <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">没有文章</div>
-                                    <% }} %>
+                                <% }}} %>
                         </div>
-                        <% if(data[0].followNum!=0){ %>
+                        <% 
+                            if(data[0].followNum!=0){
+                                if(data.art.length != 0){
+                        %>
                             <div class="pages">
                                 <ul>
                                     <li>
@@ -145,7 +162,7 @@
 
                                 </ul>
                             </div>
-                            <% } %>
+                            <% }} %>
         </div>
     </div>
     <script>

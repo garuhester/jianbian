@@ -64,6 +64,7 @@
                             <div class="noperson">没有写文章哦</div>
                             <% } %>
                 </div>
+                <% if(data.user.articleNum != 0){ %>
                 <div class="pages">
                     <ul>
                         <% if(data.currentPage==1) {%>
@@ -96,6 +97,7 @@
                                                         <% } %>
                     </ul>
                 </div>
+                <% } %>
         </div>
         </div>
         <script>
