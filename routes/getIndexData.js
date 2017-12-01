@@ -11,6 +11,7 @@ var getData = function(id, currentPage, articleName) {
         var pageSize = 20;
         var skipNum = (currentPage - 1) * pageSize;
         var data = {};
+        data.page = '';
         data.currentPage = currentPage;
         User.find({}).limit(5).sort({ 'fansNum': -1 }).exec(function(err, user) {
             ep.after('next', user.length, function(user) {

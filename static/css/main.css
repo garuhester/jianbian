@@ -1493,11 +1493,27 @@ ul.personnav {
 }
 
 .about .title {
-    background: rgb(245, 245, 245);
+    /* background: rgb(245, 245, 245); */
+    border-bottom: 1px solid #ddd;
     padding: 20px;
     text-align: center;
     font-size: 30px;
 }
+
+.about .content{
+    padding:20px;
+    margin-top: 20px;
+}
+.about .content .info{
+    border-left: 3px solid #ddd;
+}
+.about .content .info div{
+    padding:15px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+/* ------------------------------- */
 
 .tabsnum {
     position: relative;

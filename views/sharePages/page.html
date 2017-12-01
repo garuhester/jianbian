@@ -1,0 +1,50 @@
+<div class="pages">
+    <ul>
+        <li>
+            <a href="<%= data.page %>/?page=1">
+                <i class="iconfont icon-rilijiantouyoushuang1"></i></a>
+        </li>
+        <% if(parseInt(data.currentPage)==1) { %>
+            <li><a href="<%= data.page %>/?page=1"><i class="iconfont icon-return"></i></a></li>
+            <% }else{ var lastPage = parseInt(data.currentPage) - 1;%>
+                <li><a href="<%= data.page %>/?page=<%= lastPage %>"><i class="iconfont icon-return"></i></a></li>
+                <% } %>
+
+                    <% 
+                        var allPage = data.allPage <= 5?data.allPage:5;
+                        var start = parseInt(data.currentPage)<=5?1:parseInt(data.currentPage)-4;
+                        var end = parseInt(data.currentPage)<=5?allPage:parseInt(data.currentPage);
+                        for(var i=start;i<=end;i++){
+                            if(parseInt(data.currentPage) == i){
+                    %>
+                        <li class="active">
+                            <a href="<%= data.page %>/?page=<%= i %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% }else{ %>
+                            <li>
+                                <a href="<%= data.page %>/?page=<%= i %>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                            <% }} %>
+
+                                <% if(parseInt(data.currentPage)==parseInt(data.allPage)) {%>
+                                    <li><a href="<%= data.page %>/?page=<%= data.allPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                    <% }else{ var nextPage = parseInt(data.currentPage) + 1;%>
+                                        <li><a href="<%= data.page %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
+                                        <% } %>
+
+                                            <li>
+                                                <a href="<%= data.page %>/?page=<%= data.allPage %>">
+                                                    <i class="iconfont icon-rilijiantouyoushuang"></i></a>
+                                            </li>
+
+                                            <div class="progress">
+                                                共
+                                                <%= data.allPage %> 页
+                                            </div>
+
+    </ul>
+</div>

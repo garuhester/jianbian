@@ -10,6 +10,7 @@ var getPersonalArticle = function(id, sid, currentPage) {
         var pageSize = 20;
         var skipNum = (currentPage - 1) * pageSize;
         var data = {};
+        data.page = '/personal/article/'+id;
         data.currentPage = currentPage;
         User.findById(id, function(err, user) {
             Follow.find({ 'userId': sid, 'followList': { '$elemMatch': { 'followId': id, 'followType': 0 } } }, function(err, result) {
@@ -62,8 +63,13 @@ var getPersonalFollowAndFans = function(id, sid, currentPage, type) {
                 // var followType = type == 'follow' ? 0 : 1;
                 Follow.find({ 'userId': id }).populate('followList.followId', 'name content headImage articleNum followNum fansNum').exec(function(err, follow) {
                     follow[0].followList = follow[0].followList.filter((item) => {
-                        if (type == 'follow') return item.followType == 0;
-                        else return item.followType == 1;
+                        if (type == 'follow'){
+                            data.page = '/personal/follow/'+id;
+                            return item.followType == 0;
+                        }else{
+                            data.page = '/personal/fans/'+id;
+                            return item.followType == 1;
+                        } 
                     });
                     follow[0].followList.sort((a, b) => new Date(b.followTime) - new Date(a.followTime));
                     var f = follow[0].followList;
@@ -112,8 +118,14 @@ var getPersonalLikeAndCollect = function(id, sid, currentPage, type) {
                 }
             }).exec(function(err, article) {
                 article[0].collectList = article[0].collectList.filter((item) => {
-                    if (type == 'collectarticle') return item.collectType == 0;
-                    else return item.collectType == 1;
+                    if (type == 'collectarticle'){
+                        data.page = '/personal/collectarticle/'+id;
+                        return item.collectType == 0;
+                    } 
+                    else{
+                        data.page = '/personal/likearticle/'+id;
+                        return item.collectType == 1;
+                    } 
                 });
                 article[0].collectList.sort((a, b) => new Date(b.collectTime) - new Date(a.collectTime));
                 var c = article[0].collectList;

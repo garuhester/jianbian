@@ -37,7 +37,7 @@
                             <% }} %>
                 </div>
                 <% if(data.user.followNum != 0){ %>
-                    <div class="pages">
+                    <!-- <div class="pages">
                         <ul>
                             <% if(data.currentPage==1) {%>
                                 <li><a href="/personal/follow/<%= goto %>/?page=1"><i class="iconfont icon-return"></i></a></li>
@@ -68,8 +68,8 @@
                                                             <li><a href="/personal/follow/<%= goto %>/?page=<%= nextPage %>"><i class="iconfont icon-enter"></i></a></li>
                                                             <% } %>
                         </ul>
-                    </div>
-
+                    </div> -->
+                    <% include ../sharePages/page.html %>
                     <% } %>
         </div>
         </div>

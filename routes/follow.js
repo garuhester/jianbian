@@ -14,6 +14,7 @@ var getFollowAllData = function(selfid, id, currentPage) {
         }).exec(function(err, follow) {
             follow.currentPage = currentPage;
             follow.id = id;
+            follow.page = '/follow/'+follow.id;
             //所有关注人的文章
             if (id == 'all') {
                 var arr = [];
