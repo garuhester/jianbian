@@ -33,25 +33,25 @@
             <% if(data.id == 'all'){ %>
                 <% if(data[0].followNum!=0){ %>
                     <% if(data.art.length != 0){ %>
-                        <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                        <div class="innertitle">
                             全部文章
                         </div>
                         <% }else{ %>
-                            <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                            <div class="innertitle">
                                 没有文章
                             </div>
                 <% }}else{ %>
-                    <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                    <div class="innertitle">
                         没有文章
                     </div>
                     <% } %>
                 <% }else{ %>
                     <% if(data.art[0]){ %>
-                    <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                    <div class="innertitle">
                         <%= data.art[0].authorId.name %>的文章
                     </div>
                     <% }else{ %>
-                        <div style="text-align:center;font-size:1.5rem;background:rgb(247, 247, 247);padding:20px">
+                        <div class="innertitle">
                             TA没有文章
                         </div>
                     <%  }} %>

@@ -2,6 +2,13 @@
 
     <div class="index">
         <div class="right">
+            <div class="search">
+                <input type="text" class="searchInput " placeholder="搜索文章">
+                <span class="clear" onclick="$(this).prev('input').val('')">x</span>
+                <div class="searchButton" onclick="searchArticle()">
+                    <i class="iconfont icon-search"></i>
+                </div>
+            </div>
             <div class="author">
                 <div class="title">
                     <span>推荐作者</span>
@@ -36,19 +43,19 @@
                             <div class="person">
                                 无作者
                             </div>
-                        <% } %>
+                            <% } %>
                 </div>
                 <% include ../sharePages/copyright.html %>
             </div>
         </div>
         <div class=" left">
-            <div class="search">
+            <!-- <div class="search">
                 <input type="text" class="searchInput " placeholder="搜索文章">
                 <span class="clear" onclick="$(this).prev('input').val('')">x</span>
                 <div class="searchButton" onclick="searchArticle()">
                     <i class="iconfont icon-search" style="font-weight:bold;margin-right:5px"></i> 搜索
                 </div>
-            </div>
+            </div> -->
 
             <div class="list">
                 <% 
@@ -79,7 +86,7 @@
                         <div class="bottom">
                             <% 
                                 if(a.tag != 'notag'){
-                                    var t = a.tag.split(' ');
+                                    var t = a.tag.split(/[ ]+/);
                                     t.length = t.length<=3?t.length:3;
                                     for(var j=0;j<t.length;j++){
                                         if(t[j]!=''){
@@ -108,7 +115,7 @@
                         <% } %>
             </div>
             <% if(data.article.length!=0){ %>
-            <!-- <div class="pages">
+                <!-- <div class="pages">
                 <ul>
                     <li>
                         <a href="/?page=1">
@@ -158,8 +165,8 @@
 
                 </ul>
             </div> -->
-            <% include ../sharePages/page.html %>
-            <% } %>
+                <% include ../sharePages/page.html %>
+                    <% } %>
         </div>
     </div>
     <script>

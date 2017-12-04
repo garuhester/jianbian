@@ -11,7 +11,7 @@ var getData = function(id, currentPage, articleName) {
         var pageSize = 20;
         var skipNum = (currentPage - 1) * pageSize;
         var data = {};
-        data.page = '';
+        articleName != 'nosearch' ? data.page = '/?articlename='+articleName+'&':data.page = '/?';
         data.currentPage = currentPage;
         User.find({}).limit(5).sort({ 'fansNum': -1 }).exec(function(err, user) {
             ep.after('next', user.length, function(user) {
@@ -24,7 +24,7 @@ var getData = function(id, currentPage, articleName) {
                     updateStr = { 'title': { '$regex': re } };
                 }
                 Article.find(updateStr).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function(err, article) {
-                    Article.count({}, function(err, a) {
+                    Article.count(updateStr, function(err, a) {
                         data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                         data.article = article;
                         resolve(data);

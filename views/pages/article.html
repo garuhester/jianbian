@@ -8,8 +8,8 @@
         if(data.article.tag != 'notag'){ %>
             <div class="tags">
                 <% 
-                var t = data.article.tag.split(' ');
-                t.length = t.length<=5?t.length:5;
+                var t = data.article.tag.split(/[ ]+/);
+                t.length = t.length<=6?t.length:6;
                 for(var i=0;i<t.length;i++){
                     if(t[i]!=''){
             %>

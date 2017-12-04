@@ -10,7 +10,7 @@ var getPersonalArticle = function(id, sid, currentPage) {
         var pageSize = 20;
         var skipNum = (currentPage - 1) * pageSize;
         var data = {};
-        data.page = '/personal/article/'+id;
+        data.page = '/personal/article/'+id+'/?';
         data.currentPage = currentPage;
         User.findById(id, function(err, user) {
             Follow.find({ 'userId': sid, 'followList': { '$elemMatch': { 'followId': id, 'followType': 0 } } }, function(err, result) {
@@ -64,10 +64,10 @@ var getPersonalFollowAndFans = function(id, sid, currentPage, type) {
                 Follow.find({ 'userId': id }).populate('followList.followId', 'name content headImage articleNum followNum fansNum').exec(function(err, follow) {
                     follow[0].followList = follow[0].followList.filter((item) => {
                         if (type == 'follow'){
-                            data.page = '/personal/follow/'+id;
+                            data.page = '/personal/follow/'+id+'/?';
                             return item.followType == 0;
                         }else{
-                            data.page = '/personal/fans/'+id;
+                            data.page = '/personal/fans/'+id+'/?';
                             return item.followType == 1;
                         } 
                     });
@@ -119,11 +119,11 @@ var getPersonalLikeAndCollect = function(id, sid, currentPage, type) {
             }).exec(function(err, article) {
                 article[0].collectList = article[0].collectList.filter((item) => {
                     if (type == 'collectarticle'){
-                        data.page = '/personal/collectarticle/'+id;
+                        data.page = '/personal/collectarticle/'+id+'/?';
                         return item.collectType == 0;
                     } 
                     else{
-                        data.page = '/personal/likearticle/'+id;
+                        data.page = '/personal/likearticle/'+id+'/?';
                         return item.collectType == 1;
                     } 
                 });
