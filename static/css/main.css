@@ -157,6 +157,12 @@ ul.personnav {
     background: rgb(245, 245, 245);
 }
 
+.copyright {
+    text-align: center;
+    padding: 20px;
+    color: #ddd;
+}
+
 /* index */
 
 .index {
@@ -269,12 +275,6 @@ ul.personnav {
     bottom: -15px;
     left: 0;
     z-index: 5;
-}
-
-.copyright {
-    text-align: center;
-    padding: 20px;
-    color: #ddd;
 }
 
 .index .right .author .title a {
