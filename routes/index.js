@@ -178,9 +178,27 @@ module.exports = function(app) {
     //写文章
     app.get('/write', function(req, res) {
         if (req.session.user) {
-            res.render('write', {
-                title: '写文章',
-                user: req.session.user
+            write.getArticle(req.session.user.id).then(function(data){
+                res.render('write', {
+                    title: '写文章',
+                    user: req.session.user,
+                    data
+                });
+            });
+        } else {
+            res.redirect('/login');
+        }
+    });
+
+    app.get('/write/:articleid', function(req, res) {
+        if (req.session.user) {
+            var articleid = req.params.articleid;
+            write.getArticle(req.session.user.id, articleid).then(function(data){
+                res.render('write', {
+                    title: '写文章',
+                    user: req.session.user,
+                    data
+                });
             });
         } else {
             res.redirect('/login');

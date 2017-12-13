@@ -2,6 +2,7 @@ body,
 html {
     margin: 0;
     padding: 0;
+    background: #f1f1f1;
 }
 
 ul#nav {
@@ -166,7 +167,7 @@ ul.personnav {
 /* index */
 
 .index {
-    margin: 80px auto;
+    margin: 0 auto;
     width: 90%;
 }
 
@@ -186,18 +187,16 @@ ul.personnav {
 
 .index .right .search {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .index .right .search .searchInput {
-    border-radius: 5px;
     width: 100%;
     overflow: hidden;
     font-size: 16px;
     border: none;
     outline: none;
     padding: 10px;
-    border: 1px solid #ddd;
     box-sizing: border-box;
 }
 
@@ -242,8 +241,7 @@ ul.personnav {
 
 .index .right .author {
     padding: 10px 10px 0 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background: #fff;
 }
 
 .index .right .author .title {
@@ -419,11 +417,6 @@ ul.personnav {
 .index .left .search .clear:hover {
     background: rgb(224, 224, 224);
 }
-
-.index .left .list {
-    /* margin-top: 10px; */
-}
-
 .index .left .list .article,
 .personal .left .list .article,
 .followed .right .list .article {
@@ -571,8 +564,6 @@ ul.personnav {
     width: 230px;
     background: #fff;
     float: left;
-    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
-    border: 1px solid #ddd;
 }
 
 .setting .right {
@@ -704,7 +695,7 @@ ul.personnav {
 .personal {
     margin: 0 auto;
     width: 90%;
-    padding-top: 10px;
+    padding-top:10px;
 }
 
 .personal .left {
@@ -717,15 +708,12 @@ ul.personnav {
     float: right;
     width: 300px;
     margin-bottom: 100px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
     padding: 10px;
-    border-radius: 5px;
+    background: #fff;
 }
 
 .personal .right .one {
     background: #fff;
-    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
-    /* border: 1px solid #ddd; */
 }
 
 .personal .right .row1 {
@@ -844,10 +832,6 @@ ul.personnav {
     background: rgb(224, 224, 224);
 }
 
-.personal .right .row3 .clear:hover::before {
-    /* display: block; */
-}
-
 .personal .right .row3 .clear::before {
     display: none;
     content: '清除';
@@ -911,8 +895,6 @@ ul.personnav {
 .personal .left .tabs {
     background: #fff;
     display: flex;
-    /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
-    border-bottom: 1px solid #ddd;
 }
 
 .personal .left .tabs i {
@@ -1097,11 +1079,8 @@ ul.personnav {
 .followed .left,
 .message .left {
     width: 300px;
-    /* height: 100%; */
     float: left;
     background: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
-    /* border: 1px solid #ddd; */
     display: block;
     position: fixed;
 }
@@ -1149,7 +1128,8 @@ ul.personnav {
 
 .followed .left .userlist .user:hover {
     cursor: pointer;
-    background: rgb(240, 240, 240);
+    background: rgb(247, 247, 247);
+    border-left:3px solid skyblue;
 }
 
 .followed .left .userlist .user img {
@@ -1195,27 +1175,115 @@ ul.personnav {
 
 /* write*/
 
-.write {
-    float: right;
-    width: 59%;
-    padding: 5px;
-    margin-bottom: 50px;
-    margin-top: 5px;
-    border-left: 1px solid #ddd;
+.write-main{
+    width: 90%;
+    margin: 0 auto;
+    padding-top:30px;
 }
 
-.write input {
-    display: block;
+.write-list{
+    height: 500px;
+    width: 30%;
+    float: left;
+    padding:0px 20px 20px 20px;
+    box-sizing: border-box;
+}
+.write-list .list-title{
+    background:#fff;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding:20px;
+}
+.write-list .list-title .a1{
+    display: inline-block;
+    font-weight: bold;
+}
+.write-list .list-title .a2{
     font-size: 17px;
+    line-height: 26px;
+    float: right;
+    cursor: pointer;
+}
+.write-list .list-title .a2:hover{
+    border-bottom: 1px solid rgb(139, 139, 139);
+}
+.list-main{
+    overflow: auto;
+    height: 500px;
+}
+.list-main .article,
+.list-main .noarticle{
+    background: #fff;
+    padding:10px;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.list-main .noarticle{
+    text-align: center;
+    font-size: 20px;
+}
+.list-main .article.active{
+    border-left: 5px solid rgb(127, 189, 255);
+}
+.list-main .article:hover{
+    border-left: 5px solid rgb(127, 189, 255);
+}
+.list-main .article .title{
+    float: left;
+    width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.list-main .article .statu{
+    text-align: center;
+    border-left: 1px solid #ddd;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.write {
+    display: inline-block;
+    padding: 0px 10px 10px 10px;
+    width: 70%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.write input,
+.write select {
+    display: block;
+    font-size: 16px;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
     border: none;
     outline: none;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    height: 40px;
 }
-
+.write select:invalid { color: gray; }
+.write select{
+    height: 40px;
+    float: left;
+    width: 68%;
+}
+.write .add{
+    background:#fff;
+    text-align: center;
+    height: 40px;
+     width: 30%;
+     float: right;
+    line-height: 40px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.write .add:hover{
+    background:rgb(138, 202, 255);
+    color:#fff;
+}
 .write .tools {
     position: fixed;
     right: 30%;
@@ -1236,103 +1304,15 @@ ul.personnav {
     height: 40px;
     line-height: 40px;
     width: 60px;
-    display: inline-block;
     color: #fff;
     font-size: 17px;
+    display: inline-block;
 }
 
 .savearticle:hover {
     background: rgb(99, 174, 255);
 }
 
-.category {
-    position: fixed;
-    height: 100%;
-    width: 20%;
-}
-
-.category.left {
-    float: left;
-    width: 20%;
-}
-
-.category.left .title {
-    font-size: 20px;
-    padding: 15px;
-    position: relative;
-    border-left: 5px solid rgb(110, 180, 255);
-}
-
-.category.middle .title {
-    font-size: 20px;
-    padding: 15px;
-    position: relative;
-}
-
-.category.left .title i,
-.category.middle .title i {
-    font-size: 15px;
-}
-
-.category.left .title span:nth-child(1),
-.category.middle .title span:nth-child(1) {
-    font-weight: bold;
-}
-
-.category.left .title span:nth-child(2),
-.category.middle .title span:nth-child(2) {
-    top: 50%;
-    transform: translate(0, -50%);
-    position: absolute;
-    font-size: 15px;
-    right: 15px;
-}
-
-.category.left .title span:nth-child(2):hover,
-.category.middle .title span:nth-child(2):hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.category.left .cate {
-    position: relative;
-    cursor: pointer;
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.category.left .cate:hover {
-    background: rgb(247, 247, 247);
-}
-
-.category.left .cate span:nth-child(2) {
-    position: absolute;
-    right: 10px;
-}
-
-.category.left .cate span:nth-child(2):hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.category.left .list {
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.category.middle {
-    left: 20%;
-    border-left: 1px solid #ddd;
-}
-
-.category.middle .title {
-    padding: 15px;
-    font-size: 20px;
-}
-
-.category.middle i {
-    font-size: 20px;
-}
 
 
 /* ---------------------------------------- */
@@ -1341,11 +1321,11 @@ ul.personnav {
 /* intoarticle */
 
 .intoarticle {
-    margin: 0 auto;
+    margin: 0px auto;
     width: 50%;
     background: #fff;
+    margin-top:90px;
     padding: 20px;
-    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); */
     margin-bottom: 100px;
     overflow: hidden;
 }
@@ -1538,13 +1518,15 @@ ul.personnav {
 /* about */
 
 .about {
-    margin: 0 auto;
+    margin:0 auto;
     width: 70%;
+    padding-top: 10px;
 }
 
 .about .content {
     padding: 20px;
     margin-top: 20px;
+    background:#fff;
 }
 
 .about .content .info {
@@ -1584,6 +1566,6 @@ ul.personnav {
 .innertitle {
     text-align: center;
     font-size: 1.5rem;
-    border-bottom: 1px solid #ddd;
+    background: #fff;
     padding: 20px;
 }

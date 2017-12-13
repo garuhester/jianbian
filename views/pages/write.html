@@ -10,38 +10,84 @@
             margin-top: 60px;
         }
     </style>
-    <div class="category left">
-        <div class="title">
-            <span>文章分类</span>
-            <span onclick=""><i class="iconfont icon-add" style="font-weight:bold"></i>新建分类</span>
+    <div class="write-main">
+        <div class="write-list">
+            <div class="list-title">
+                <div class="a1">文章列表</div>
+                <div class="a2" onclick="location.href='/write'">+新建文章</div>
+            </div>
+            <div class="list-main">
+                <% 
+                if(data.article.length != 0){
+                    for(var i=0;i<data.article.length;i++){ 
+                        if(data.article[i].status == 0){
+                %>
+                        <div class="article" id="<%= data.article[i]._id %>" onclick="location.href='/write/<%= data.article[i]._id %>'">
+                            <div class="title"><%= data.article[i].title %></div>
+                            <div class="statu">未发布</div>
+                        </div>
+                <% }else{ %>
+                        <div class="article" id="<%= data.article[i]._id %>" onclick="location.href='/write/<%= data.article[i]._id %>'">
+                            <div class="title">
+                                <%= data.article[i].title %>
+                            </div>
+                            <div class="statu">已发布</div>
+                        </div>
+                    <% }}}else{ %>
+                        <div class="noarticle">
+                            没有写文章
+                        </div>
+                        <% } %>
+            </div>
         </div>
-        <div class="split"></div>
-        <div class="list">
-            <div class="cate" onclick="">
-                <span>Web</span>
-                <span onclick="">设置</span>
+        <div class="write">
+            <% if(data.singlearticle){ %>
+                <input id="title" type="text" placeholder="请输入标题" value="<%= data.singlearticle.title %>">
+                <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个" value="<%= data.singlearticle.tag %>">
+                <% }else{ %>
+                    <input id="title" type="text" placeholder="请输入标题">
+                    <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个">
+                    <% } %>
+            <div style="overflow:hidden">
+                <select required>
+                    <option value="" disabled selected hidden>请选择文章分类</option>
+                    <% 
+                    if(data.user.categoryList.length != 0){
+                        for(var i=0;i<data.user.categoryList.length;i++){ 
+                    %>
+                    <option value="<%= i %>"><%= data.user.categoryList[i] %></option>
+                    <% }}else{ %>
+                        <option value="0" disabled>
+                            没有文章分类，请先添加
+                        </option>
+                        <% } %>
+                </select>
+                <div class="add">添加文章分类</div>
+            </div>
+            <script id="editor" type="text/plain" style="height:1000px;width:100%;"></script>
+            <div class="tools">
+                <div class="savearticle" onclick="">发布</div>
+                <div class="savearticle" onclick="savearticle()">保存</div>
+                <div class="savearticle" onclick="showArticle()">预览</div>
             </div>
         </div>
     </div>
-    <div class="category middle">
-        <div class="title">
-            <span>文章列表</span>
-            <span onclick=""><i class="iconfont icon-add" style="font-weight:bold"></i>新建文章</span>
-        </div>
-        <div class="split"></div>
-    </div>
-    <div class="write">
-        <input id="title" type="text" placeholder="请输入标题">
-        <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个">
-        <script id="editor" type="text/plain" style="height:1000px;width:100%;"></script>
-        <div class="tools">
-            <div class="savearticle" onclick="">发布</div>
-            <div class="savearticle" onclick="savearticle()">保存</div>
-        </div>
-    </div>
-
     <script>
-        var ue = UE.getEditor('editor');
+
+        var url = location.href.split('/')[4];
+        $('#'+url).addClass('active');
+
+        function showArticle(){
+            window.open("/article" + "/" + "<%= user.id %>" + "/" + url);
+        }
+
+        $(document).ready(function () {
+            var ue = UE.getEditor('editor');
+            ue.ready(function () {  //编辑器初始化完成再赋值
+                ue.setContent('<%- data.singlearticle.content %>'); //赋值给UEditor
+            });
+        });  
+
         $(function() {
             var ie6 = document.all;
             var dv = $('#edui1_toolbarbox'),
@@ -58,7 +104,7 @@
                     } else if (dv.css('position') != 'fixed') dv.css({
                         'position': 'fixed',
                         top: 60 + 'px',
-                        width: 59 + '%'
+                        width: 61 + '%'
                     });
                 } else if (dv.css('position') != 'static') dv.css({
                     'position': 'static',
@@ -92,6 +138,13 @@
             } else {
                 alert('请完善内容');
             }
+        }
+
+        var addNewCategory = function () {
+            $('.add-category').toggleClass('add-show');
+        }
+        function sure() {
+
         }
     </script>
 

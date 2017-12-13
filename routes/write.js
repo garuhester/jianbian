@@ -23,10 +23,38 @@ var saveArticle = function(req, res) {
     a.save(function(err, a) {
         User.findByIdAndUpdate(id, { '$push': { 'articleList': { 'articleId': a._id } } }, function(err, art) {
             res.json({ result: 'ok' });
-        })
+        });
+    });
+}
+
+var getArticle = function (userid, articleid){
+    return new Promise(function(resolve,reject){
+        var data = [];
+        if (articleid){
+            User.findById(userid, function (err, user) {
+                data.user = user;
+                Article.find({ "authorId": userid }).sort({ "createTime": -1 }).exec(function (err, arti) {
+                    data.article = arti;
+                    Article.findById(articleid,function(err,singlearticle){
+                        data.singlearticle = singlearticle;
+                        resolve(data);
+                    });
+                });
+            });
+        }else{
+            User.findById(userid, function (err, user) {
+                data.user = user;
+                Article.find({ "authorId": userid }).sort({"createTime":-1}).exec(function (err, arti) {
+                    data.article = arti;
+                    data.singlearticle = "";
+                    resolve(data);
+                });
+            });
+        }
     });
 }
 
 module.exports = {
     saveArticle,
+    getArticle,
 }
