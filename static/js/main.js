@@ -30,14 +30,14 @@ $(function() {
 // person-setting
 function setting() {
     $('#editprofile').css({ 'display': 'block' });
-    $('.editprofile').css({ 'background': 'rgb(247, 247, 247)', 'border-left': '0.3rem solid rgb(116, 181, 255)' });
+    $('.editprofile').css({ 'background': 'rgb(247, 247, 247)', 'box-shadow': 'inset 5px 0px 0 0 rgb(116, 181, 255)' });
 }
 
 function change(first, second) {
     $('#' + first).css({ 'display': 'block' });
-    $('.' + first).css({ 'background': 'rgb(247, 247, 247)', 'border-left': '0.3rem solid rgb(116, 181, 255)' });
+    $('.' + first).css({ 'background': 'rgb(247, 247, 247)', 'box-shadow': 'inset 5px 0px 0 0 rgb(116, 181, 255)'});
     $('#' + second).css({ 'display': 'none' });
-    $('.' + second).css({ 'background': '#fff', 'border-left': 'none' });
+    $('.' + second).css({ 'background': '#fff', 'box-shadow': 'none' });
 }
 
 function saveProfile() {

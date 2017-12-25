@@ -6,3 +6,17 @@
         <span class="tabsnum"><%= data.article.collectNum %></span>
     </div>
 </div>
+
+<div class="tip">
+    如果喜欢或收藏的文章不见了，可能被作者删除了哟= =
+    <span onclick="unshow()">x</span>
+</div>
+
+<script>
+    setTimeout(() => {
+        $('.tip').show(500);
+    }, 3000);
+    var unshow = () => {
+        $('.tip').hide(500);
+    }
+</script>

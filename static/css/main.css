@@ -895,6 +895,7 @@ ul.personnav {
 .personal .left .tabs {
     background: #fff;
     display: flex;
+    align-items: center;
 }
 
 .personal .left .tabs i {
@@ -924,6 +925,25 @@ ul.personnav {
     background: rgb(100, 100, 100);
     bottom: 0;
     left: 0;
+}
+
+.personal .left .tip{
+    color: rgb(163, 163, 163);
+    margin-top: 10px;
+    padding:10px;
+    background: #fff;
+    position: relative;
+    display: none;
+}
+
+.personal .left .tip span{
+    cursor: pointer;
+    color:#000;
+    font-size: 18px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translate(0,-53%);
 }
 
 .personal .left .list {
@@ -1225,10 +1245,10 @@ ul.personnav {
     font-size: 20px;
 }
 .list-main .article.active{
-    border-left: 5px solid rgb(127, 189, 255);
+    box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255);
 }
 .list-main .article:hover{
-    border-left: 5px solid rgb(127, 189, 255);
+    box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255);
 }
 .list-main .article .title{
     float: left;
@@ -1270,17 +1290,20 @@ ul.personnav {
     float: left;
     width: 68%;
 }
+.write select option{
+    font-size: 25px;
+}
 .write .add{
     background:#fff;
     text-align: center;
     height: 40px;
-     width: 30%;
-     float: right;
+    width: 30%;
+    float: right;
     line-height: 40px;
-    cursor: pointer;
     overflow: hidden;
 }
 .write .add:hover{
+    cursor: pointer;
     background:rgb(138, 202, 255);
     color:#fff;
 }
@@ -1297,6 +1320,21 @@ ul.personnav {
     background: rgb(127, 189, 255);
     font-weight: bold;
     z-index: 1600;
+}
+
+
+.write .addNewInput{
+    overflow: hidden;
+    display: none;
+}
+
+.write .addNewInput #tag{
+    width: 78%;
+    float: left;
+}
+
+.write .addNewInput .add{
+    width: 20%;
 }
 
 .savearticle {
@@ -1389,6 +1427,10 @@ ul.personnav {
 .intoarticle .content {
     margin-top: 20px;
     padding: 5px;
+}
+.intoarticle .content *{
+    white-space: pre-wrap;  
+    word-wrap: break-word;  
 }
 
 .intoarticle .content img {

@@ -229,6 +229,9 @@ module.exports = function(app) {
     //保存文章
     app.post('/savearticle', write.saveArticle);
 
+    //添加文章分类
+    app.post('/addcategory', write.addCategory);
+
     //删除文章
     app.post('/deletearticle', personal.deleteArticle);
 
@@ -252,6 +255,7 @@ module.exports = function(app) {
 
     //取消喜欢收藏文章
     app.post('/undoarticle', article.undoArticle);
+
 
     //退出登录
     app.post('/logout', function(req, res) {

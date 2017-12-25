@@ -9,6 +9,7 @@
                         var article = data.article.collectList;
                         for(var i=0;i < article.length;i++) { 
                             var a = article[i].articleId;
+                            if(a != null){
                 %>
                         <div class="article">
                             <div class="top">
@@ -60,7 +61,7 @@
                                         </div>
                             </div>
                         </div>
-                        <% }}else{ %>
+                        <% }}}else{ %>
                             <div class="noperson">没有喜欢的文章哦</div>
                             <% } %>
                 </div>

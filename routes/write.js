@@ -54,7 +54,21 @@ var getArticle = function (userid, articleid){
     });
 }
 
+var addCategory = function(req,res){
+    var newCategoryName = req.body.newCategoryName;
+    var userid = req.session.user.id;
+    User.findByIdAndUpdate(userid, { '$push': { 'categoryList': { 'categoryName': newCategoryName}}},function(err,user){
+        console.log(user)
+        if(err){
+            console.log(err);
+            return err;
+        }
+        res.json({result:'ok'});
+    });
+}
+
 module.exports = {
     saveArticle,
     getArticle,
+    addCategory,
 }
