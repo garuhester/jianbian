@@ -43,15 +43,15 @@
             </div>
         </div>
         <div class="write">
-            <% if(data.singlearticle){ %>
-                <input id="title" type="text" placeholder="请输入标题" value="<%= data.singlearticle.title %>">
-                <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个" value="<%= data.singlearticle.tag %>">
+            <% if(data.singlearticle.length != 0){ %>
+                <input id="title" type="text" placeholder="请输入标题" value="<%= data.singlearticle[0].title %>">
+                <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个" value="<%= data.singlearticle[0].tag %>">
                 <% }else{ %>
                     <input id="title" type="text" placeholder="请输入标题">
                     <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个">
                     <% } %>
                         <div style="overflow:hidden">
-                            <select required>
+                            <select id="categorySelect" required>
                                 <option value="" disabled selected hidden>请选择文章分类</option>
                                 <% 
                                     if(data.user.categoryList.length != 0){
@@ -74,9 +74,9 @@
                         </div>
                         <script id="editor" type="text/plain" style="height:1000px;width:100%;"></script>
                         <div class="tools">
-                            <div class="savearticle" onclick="">发布</div>
-                            <div class="savearticle" onclick="savearticle()">保存</div>
-                            <div class="savearticle" onclick="showArticle()">预览</div>
+                            <div class="savearticle" onclick="publishArticle()">发布/更新</div>
+                            <div class="savearticle" onclick="">保存</div>
+                            <!-- <div class="savearticle" onclick="showArticle()">预览</div> -->
                         </div>
         </div>
     </div>
@@ -84,13 +84,27 @@
         var url = location.href.split('/')[4];
         $('#' + url).addClass('active');
 
+        var optionStr = $("#categorySelect option").map(function () {
+            return $(this).val()
+        }).get().join(", ");
+        var len = optionStr.split(",").length - 1;
+        var text;
+        for (var i = 1; i <= len; i++) {
+            text = $('#categorySelect option:eq(' + i + ')').text().trim();
+            if (text == '<%= data.singlearticle[0].category %>') {
+                $('#categorySelect option:eq(' + i + ')').attr('selected', 'selected');
+                break;
+            }
+        }
+
         //编辑器初始化
         var ue = UE.getEditor('editor');
-        ue.ready(function () {  //编辑器初始化完成再赋值
-            ue.setContent('<%- data.singlearticle.content %>'); //赋值给UEditor
+        ue.ready(function () { //编辑器初始化完成再赋值
+            ue.setContent('<%- data.singlearticle[0].content %>'); //赋值给UEditor
         });
 
-        $(function(){
+        //吸附顶部
+        $(function () {
             var ie6 = document.all;
             var dv = $('#edui1_toolbarbox'),
                 st;
@@ -115,30 +129,45 @@
             });
         })
 
+        //预览文章
         function showArticle() {
-            window.open("/article" + "/" + "<%= user.id %>" + "/" + url);
+            if (!url) {
+                window.open("/article" + "/" + "<%= user.id %>" + "/" + url);
+            } else {
+
+            }
         }
 
-        function savearticle() {
+        //发布文章
+        function publishArticle() {
             var title = $('#title').val();
             var tag = $('#tag').val() || "notag";
+            var category = $('#categorySelect option:selected').text().trim();
+            if (category == '请选择文章分类') {
+                category = 'nocate';
+            }
             var content = UE.getEditor('editor').getContent();
             var text = UE.getEditor('editor').getContentTxt();
+
             if (title != '' && content != '') {
                 $.ajax({
                     type: 'post',
-                    url: '/savearticle',
+                    url: '/publisharticle',
                     data: {
+                        art_id: url,
                         title,
                         tag,
+                        category,
                         content,
                         text,
                     },
                     success(data) {
                         if (data.result == 'ok') {
-                            alert('保存成功');
-                            location.href = '/personal/article/<%= user.id %>';
+                            alert('发布成功');
+                        } else if (data.result == 'publish') {
+                            alert('更新成功');
                         }
+                        location.href = '/personal/article/<%= user.id %>';
                     }
                 });
             } else {
@@ -146,27 +175,34 @@
             }
         }
 
+        //显示添加文章分类
         function show() {
             $('.addNewInput').toggle('500');
         }
 
-        function sureAdd(){
+        //添加文章分类
+        function sureAdd() {
             var newCategoryName = $('.categoryinput').val();
-            if(newCategoryName){
+            if (newCategoryName) {
                 $.ajax({
-                    type:'post',
-                    url:'/addcategory',
-                    data:{
+                    type: 'post',
+                    url: '/addcategory',
+                    data: {
                         newCategoryName,
                     },
-                    success(data){
-                        if(data.result == 'ok'){
+                    success(data) {
+                        if (data.result == 'ok') {
                             alert("添加成功");
-                            location.reload();
+                            var str = $("#categorySelect option").map(function () {
+                                return $(this).val()
+                            }).get().join(", ");
+                            var nextValue = str.split(",").length - 1;
+                            var item = `<option value="${nextValue}">${newCategoryName}</option>`;
+                            $('#categorySelect').append(item);
                         }
                     }
                 })
-            }else{
+            } else {
                 alert("请输入新分类名称");
                 $('.categoryinput').select();
             }

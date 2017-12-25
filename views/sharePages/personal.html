@@ -47,10 +47,16 @@
             <div class="split"></div>
             <div class="row4">
                 <span>文章分类</span>
-                <!-- <div class="article">无</div> -->
+                <% if(data.user.categoryList.length == 0){ %>
+                    <div class="article">无</div>
+                <% } %>
                 <ul>
-                    <li><a href="" class="article">css&nbsp;&nbsp;(2)</a></li>
-                    <li><a href="" class="article">java&nbsp;&nbsp;(3)</a></li>
+                    <% 
+                        for(var i =0;i<data.user.categoryList.length;i++){ 
+                            var cl = data.user.categoryList[i];
+                    %>
+                        <li><a href="" class="article"><%= cl.categoryName %>&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
+                    <% } %>
                 </ul>
             </div>
             <div class="split"></div>
