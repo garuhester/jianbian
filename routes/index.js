@@ -178,13 +178,17 @@ module.exports = function (app) {
                         });
                 }
             } else {
-                setting.getProfile(id).then(function (data) {
-                    res.render("personal-setting", {
-                        title: "渐变-设置",
-                        user: req.session.user,
-                        data
+                if (isSelf) {
+                    setting.getProfile(id).then(function (data) {
+                        res.render("personal-setting", {
+                            title: "渐变-设置",
+                            user: req.session.user,
+                            data
+                        });
                     });
-                });
+                } else {
+                    res.redirect("/is-not-your-setting");
+                }
             }
         } else {
             res.redirect("/login");

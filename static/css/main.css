@@ -1259,10 +1259,10 @@ ul.personnav {
 }
 .list-main .article .statu{
     text-align: center;
-    border-left: 1px solid #ddd;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    color:#fff;
 }
 .write {
     display: inline-block;

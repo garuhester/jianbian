@@ -17,7 +17,7 @@
             </div>
             <div class="row2">
                 <div class="box" onclick="location.href='/personal/article/<%= goto %>'">
-                    <span><%= data.user.articleNum %></span> 文章
+                    <span><%= data.an %></span> 文章
                 </div>
                 <div class="box" onclick="location.href='/personal/follow/<%= goto %>'">
                     <span><%= data.user.followNum %></span> 关注
@@ -47,16 +47,19 @@
             <div class="split"></div>
             <div class="row4">
                 <span>文章分类</span>
-                <% if(data.user.categoryList.length == 0){ %>
-                    <div class="article">无</div>
-                <% } %>
+                <!-- <div class="article">无</div> -->
                 <ul>
                     <% 
                         for(var i =0;i<data.user.categoryList.length;i++){ 
                             var cl = data.user.categoryList[i];
+                            if(cl.categoryNum != 0){
+                                if(cl.categoryName == 'nocate'){
                     %>
-                        <li><a href="" class="article"><%= cl.categoryName %>&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
-                    <% } %>
+                                    <li><a href="" class="article">无分类&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
+                                <% }else{%>
+                            <li><a href="" class="article"><%= cl.categoryName %>&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
+
+                        <% }}} %>
                 </ul>
             </div>
             <div class="split"></div>

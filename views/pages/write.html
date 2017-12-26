@@ -26,14 +26,14 @@
                         <div class="title">
                             <%= data.article[i].title %>
                         </div>
-                        <div class="statu">未发布</div>
+                        <div class="statu" style="background:rgb(255, 130, 130);">未发布</div>
                     </div>
                     <% }else{ %>
                         <div class="article" id="<%= data.article[i]._id %>" onclick="location.href='/write/<%= data.article[i]._id %>'">
                             <div class="title">
                                 <%= data.article[i].title %>
                             </div>
-                            <div class="statu">已发布</div>
+                            <div class="statu" style="background:rgb(130, 199, 255);">已发布</div>
                         </div>
                         <% }}}else{ %>
                             <div class="noarticle">
@@ -54,13 +54,14 @@
                             <select id="categorySelect" required>
                                 <option value="" disabled selected hidden>请选择文章分类</option>
                                 <% 
-                                    if(data.user.categoryList.length != 0){
+                                    if(data.user.categoryList.length != 1){
                                         for(var i=0;i<data.user.categoryList.length;i++){ 
+                                            if(data.user.categoryList[i].categoryName != 'nocate'){
                                 %>
                                     <option value="<%= i %>">
                                         <%= data.user.categoryList[i].categoryName %>
                                     </option>
-                                    <% }}else{ %>
+                                    <% }}}else{ %>
                                         <option value="0" disabled>
                                             没有文章分类，请先添加
                                         </option>
@@ -74,8 +75,8 @@
                         </div>
                         <script id="editor" type="text/plain" style="height:1000px;width:100%;"></script>
                         <div class="tools">
-                            <div class="savearticle" onclick="publishArticle()">发布/更新</div>
-                            <div class="savearticle" onclick="">保存</div>
+                            <div class="savearticle" onclick="publishArticle(1)">发布/更新</div>
+                            <div class="savearticle" onclick="publishArticle(0)">保存</div>
                             <!-- <div class="savearticle" onclick="showArticle()">预览</div> -->
                         </div>
         </div>
@@ -139,7 +140,7 @@
         }
 
         //发布文章
-        function publishArticle() {
+        function publishArticle(type) {
             var title = $('#title').val();
             var tag = $('#tag').val() || "notag";
             var category = $('#categorySelect option:selected').text().trim();
@@ -160,12 +161,13 @@
                         category,
                         content,
                         text,
+                        type,
                     },
                     success(data) {
-                        if (data.result == 'ok') {
-                            alert('发布成功');
+                        if (data.result == 'save') {
+                            alert('保存成功');
                         } else if (data.result == 'publish') {
-                            alert('更新成功');
+                            alert('发布/更新成功');
                         }
                         location.href = '/personal/article/<%= user.id %>';
                     }
