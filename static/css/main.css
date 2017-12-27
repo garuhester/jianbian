@@ -1192,88 +1192,99 @@ ul.personnav {
 
 /* ---------------------------------------- */
 
-
 /* write*/
 
 .write-main{
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
-    padding-top:30px;
 }
 
-.write-list{
-    height: 500px;
-    width: 30%;
-    float: left;
-    padding:0px 20px 20px 20px;
-    box-sizing: border-box;
+.write-main .write-list{
+    width:320px;
+    height:100%;
+    position:fixed;
+    top:60px;
+    overflow-y:auto;
+    background: #fff;
 }
-.write-list .list-title{
-    background:#fff;
-    font-size: 20px;
-    margin-bottom: 10px;
-    padding:20px;
+.write-main .write-list .list-main{
+    margin:10px;
+    margin-top:70px;
+    margin-bottom:100px;
 }
-.write-list .list-title .a1{
-    display: inline-block;
+.write-main .write{
+    padding-left:320px;
+    margin-top: -20px;
+}
+.write-main .write .content{
+    padding:10px;
+}
+.write-main .write-list .list-title{
+    width:320px;
+    height:60px;
+    position:fixed;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+.write-main .write-list .list-title .a1{
     font-weight: bold;
+    line-height: 60px;
+    margin-left: 1rem;
+    font-size: 20px;
+    float: left;
 }
-.write-list .list-title .a2{
+.write-main .write-list .list-title .a2{
     font-size: 17px;
-    line-height: 26px;
-    float: right;
     cursor: pointer;
+    position: relative;
+    top: 50%;
+    transform: translate(0,-50%);
+    overflow: hidden;
+    display: inline-block;
+    margin-left: 1rem;
 }
-.write-list .list-title .a2:hover{
-    border-bottom: 1px solid rgb(139, 139, 139);
+.write-main .write-list .list-title .a2:hover{
+    box-shadow: 0px 2px 0 0 rgb(75, 75, 75);
 }
-.list-main{
-    overflow: auto;
-    height: 500px;
-}
-.list-main .article,
-.list-main .noarticle{
+.write-main .write-list .list-main .article,
+.write-main .write-list .list-main .noarticle{
     background: #fff;
     padding:10px;
     height: 50px;
     line-height: 50px;
     cursor: pointer;
     margin-bottom: 10px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .2);
 }
-.list-main .noarticle{
+.write-main .write-list .list-main .noarticle{
     text-align: center;
     font-size: 20px;
 }
-.list-main .article.active{
-    box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255);
+.write-main .write-list .list-main .article.active{
+    box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255),
+                0px 1px 5px rgba(0, 0, 0, .2);
 }
-.list-main .article:hover{
-    box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255);
+.write-main .write-list .list-main .article:hover{
+    box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255),
+                0px 1px 5px rgba(0, 0, 0, .2);
 }
-.list-main .article .title{
+.write-main .write-list .list-main .article .title{
     float: left;
     width: 80%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.list-main .article .statu{
+.write-main .write-list .list-main .article .statu{
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     color:#fff;
 }
-.write {
-    display: inline-block;
-    padding: 0px 10px 10px 10px;
-    width: 70%;
-    box-sizing: border-box;
-    overflow: hidden;
-}
 
-.write input,
-.write select {
+.write-main .write input,
+.write-main .write select {
     display: block;
     font-size: 16px;
     margin-bottom: 10px;
@@ -1284,16 +1295,16 @@ ul.personnav {
     padding: 10px;
     height: 40px;
 }
-.write select:invalid { color: gray; }
-.write select{
+.write-main .write select:invalid { color: gray; }
+.write-main .write select{
     height: 40px;
     float: left;
     width: 68%;
 }
-.write select option{
+.write-main .write select option{
     font-size: 25px;
 }
-.write .add{
+.write-main .write .add{
     background:#fff;
     text-align: center;
     height: 40px;
@@ -1302,12 +1313,12 @@ ul.personnav {
     line-height: 40px;
     overflow: hidden;
 }
-.write .add:hover{
+.write-main .write .add:hover{
     cursor: pointer;
     background:rgb(138, 202, 255);
     color:#fff;
 }
-.write .tools {
+.write-main .write .tools {
     position: fixed;
     right: 30%;
     top: 10px;
@@ -1322,18 +1333,17 @@ ul.personnav {
     z-index: 1600;
 }
 
-
-.write .addNewInput{
+.write-main .write .addNewInput{
     overflow: hidden;
     display: none;
 }
 
-.write .addNewInput #tag{
+.write-main .write .addNewInput #tag{
     width: 78%;
     float: left;
 }
 
-.write .addNewInput .add{
+.write-main .write .addNewInput .add{
     width: 20%;
 }
 
@@ -1349,8 +1359,6 @@ ul.personnav {
 .savearticle:hover {
     background: rgb(99, 174, 255);
 }
-
-
 
 /* ---------------------------------------- */
 

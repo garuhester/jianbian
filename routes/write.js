@@ -31,33 +31,11 @@ var publishArticle = function (req, res) {
                 //发布
                 if (type == 1) {
                     //分类个数+1
-                    User.findByIdAndUpdate(id, {
-                        $pull: {
-                            categoryList: {
-                                categoryName: data.category
-                            }
-                        }
-                    }, function (err, art) {
-                        var newNum;
-                        var cl = art.categoryList.find((cl) => cl.categoryName == data.category);
-                        newNum = cl.categoryNum + 1;
-                        User.findByIdAndUpdate(id, {
-                            $push: {
-                                categoryList: {
-                                    categoryName: data.category,
-                                    categoryNum: newNum
-                                }
-                            }
-                        }, function (err, art2) {
-                            res.json({
-                                result: type == 0 ? 'save' : 'publish'
-                            });
-                        });
+                    categoryNumAdd(id, data.category, function () {
+                        resJson(res, type);
                     });
                 } else {//保存
-                    res.json({
-                        result: type == 0 ? 'save' : 'publish'
-                    });
+                    resJson(res, type);
                 }
             });
         });
@@ -69,69 +47,14 @@ var publishArticle = function (req, res) {
                 }
                 if (type == 1) {
                     if (findart.status != 1) {//保存-发布
-                        //分类个数+1
-                        User.findByIdAndUpdate(id, {
-                            $pull: {
-                                categoryList: {
-                                    categoryName: data.category
-                                }
-                            }
-                        }, function (err, art) {
-                            var newNum;
-                            var cl = art.categoryList.find((cl) => cl.categoryName == data.category);
-                            newNum = cl.categoryNum + 1;
-                            User.findByIdAndUpdate(id, {
-                                $push: {
-                                    categoryList: {
-                                        categoryName: data.category,
-                                        categoryNum: newNum
-                                    }
-                                }
-                            }, function (err, art2) {
-                                Article.findByIdAndUpdate(data.art_id, {
-                                    title: data.title,
-                                    tag: data.tag,
-                                    category: data.category,
-                                    content: data.content,
-                                    text: data.text,
-                                    status: type
-                                }, function (err, art) {
-                                    res.json({
-                                        result: type == 0 ? 'save' : 'publish',
-                                        aid: data.art_id
-                                    });
-                                });
-                            });
+                        categoryNumAdd(id, data.category, function () {
+                            articleUpdate2(data, type, res);
                         });
                     } else {//发布-发布
-                        Article.findByIdAndUpdate(data.art_id, {
-                            title: data.title,
-                            tag: data.tag,
-                            category: data.category,
-                            content: data.content,
-                            text: data.text,
-                            status: type
-                        }, function (err, art) {
-                            res.json({
-                                result: type == 0 ? 'save' : 'publish',
-                                aid: data.art_id
-                            });
-                        });
+                        articleUpdate(data, type, res);
                     }
                 } else {//保存-保存
-                    Article.findByIdAndUpdate(data.art_id, {
-                        title: data.title,
-                        tag: data.tag,
-                        category: data.category,
-                        content: data.content,
-                        text: data.text,
-                        status: type
-                    }, function (err, art) {
-                        res.json({
-                            result: type == 0 ? 'save' : 'publish',
-                            aid: data.art_id
-                        });
-                    });
+                    articleUpdate(data, type, res);
                 }
             } else {//分类改变
                 if (findart.status == 1) {
@@ -139,116 +62,108 @@ var publishArticle = function (req, res) {
                 }
                 if (type == 1) {
                     if (findart.status != 1) {//保存-发布
-                        //分类个数+1
-                        User.findByIdAndUpdate(id, {
-                            $pull: {
-                                categoryList: {
-                                    categoryName: data.category
-                                }
-                            }
-                        }, function (err, art) {
-                            var newNum;
-                            var cl = art.categoryList.find((cl) => cl.categoryName == data.category);
-                            newNum = cl.categoryNum + 1;
-                            User.findByIdAndUpdate(id, {
-                                $push: {
-                                    categoryList: {
-                                        categoryName: data.category,
-                                        categoryNum: newNum
-                                    }
-                                }
-                            }, function (err, art2) {
-                                Article.findByIdAndUpdate(data.art_id, {
-                                    title: data.title,
-                                    tag: data.tag,
-                                    category: data.category,
-                                    content: data.content,
-                                    text: data.text,
-                                    status: type
-                                }, function (err, art) {
-                                    res.json({
-                                        result: type == 0 ? 'save' : 'publish',
-                                        aid: data.art_id
-                                    });
-                                });
-                            });
+                        categoryNumAdd(id, data.category, function () {
+                            articleUpdate2(data, type, res);
                         });
                     } else {//发布-发布
-                        //原有的分类数量-1
-                        User.findByIdAndUpdate(id, {
-                            $pull: {
-                                categoryList: {
-                                    categoryName: findart.category
-                                }
-                            }
-                        }, function (err, art) {
-                            var newNum;
-                            var cl = art.categoryList.find((cl) => cl.categoryName == findart.category);
-                            newNum = cl.categoryNum - 1;
-                            User.findByIdAndUpdate(id, {
-                                $push: {
-                                    categoryList: {
-                                        categoryName: findart.category,
-                                        categoryNum: newNum
-                                    }
-                                }
-                            }, function (err, art2) {
-                                //新的分类数量+1
-                                User.findByIdAndUpdate(id, {
-                                    $pull: {
-                                        categoryList: {
-                                            categoryName: data.category
-                                        }
-                                    }
-                                }, function (err, art3) {
-                                    var newNum;
-                                    var cl = art.categoryList.find((cl) => cl.categoryName == data.category);
-                                    newNum = cl.categoryNum + 1;
-                                    User.findByIdAndUpdate(id, {
-                                        $push: {
-                                            categoryList: {
-                                                categoryName: data.category,
-                                                categoryNum: newNum
-                                            }
-                                        }
-                                    }, function (err, art4) {
-                                        Article.findByIdAndUpdate(data.art_id, {
-                                            title: data.title,
-                                            tag: data.tag,
-                                            category: data.category,
-                                            content: data.content,
-                                            text: data.text,
-                                            status: type
-                                        }, function (err, art) {
-                                            res.json({
-                                                result: type == 0 ? 'save' : 'publish',
-                                                aid: data.art_id
-                                            });
-                                        });
-                                    });
-                                });
+                        categoryNumReduce(id, findart.category, function () {
+                            categoryNumAdd(id, data.category, function () {
+                                articleUpdate(data, type, res);
                             });
                         });
                     }
                 } else {//保存-保存
-                    Article.findByIdAndUpdate(data.art_id, {
-                        title: data.title,
-                        tag: data.tag,
-                        category: data.category,
-                        content: data.content,
-                        text: data.text,
-                        status: type
-                    }, function (err, art) {
-                        res.json({
-                            result: type == 0 ? 'save' : 'publish',
-                            aid: data.art_id
-                        });
-                    });
+                    articleUpdate(data, type, res);
                 }
             }
         });
     }
 };
+
+//分类个数+1
+var categoryNumAdd = function (id, categoryName, callback) {
+    User.findByIdAndUpdate(id, {
+        $pull: {
+            categoryList: {
+                categoryName,
+            }
+        }
+    }, function (err, art) {
+        var newNum;
+        var cl = art.categoryList.find((cl) => cl.categoryName == categoryName);
+        newNum = cl.categoryNum + 1;
+        User.findByIdAndUpdate(id, {
+            $push: {
+                categoryList: {
+                    categoryName,
+                    categoryNum: newNum
+                }
+            }
+        }, function (err, art2) {
+            callback();
+        });
+    });
+}
+
+//分类个数-1
+var categoryNumReduce = function (id, categoryName, callback) {
+    User.findByIdAndUpdate(id, {
+        $pull: {
+            categoryList: {
+                categoryName,
+            }
+        }
+    }, function (err, art) {
+        var newNum;
+        var cl = art.categoryList.find((cl) => cl.categoryName == categoryName);
+        newNum = cl.categoryNum - 1;
+        User.findByIdAndUpdate(id, {
+            $push: {
+                categoryList: {
+                    categoryName,
+                    categoryNum: newNum
+                }
+            }
+        }, function (err, art2) {
+            callback();
+        });
+    });
+}
+
+//文章更新
+var articleUpdate = function (data, type, res) {
+    Article.findByIdAndUpdate(data.art_id, {
+        title: data.title,
+        tag: data.tag,
+        category: data.category,
+        content: data.content,
+        text: data.text,
+        status: type
+    }, function (err, art) {
+        resJson(res, type);
+    });
+}
+//文章更新（日期）
+var articleUpdate2 = function (data, type, res) {
+    Article.findByIdAndUpdate(data.art_id, {
+        title: data.title,
+        tag: data.tag,
+        category: data.category,
+        content: data.content,
+        text: data.text,
+        status: type,
+        createTime: new Date()
+    }, function (err, art) {
+        resJson(res, type);
+    });
+}
+
+//返回结果
+var resJson = function (res, type) {
+    res.json({
+        result: type == 0 ? 'save' : 'publish'
+    });
+}
 
 var getArticle = function (userid, articleid) {
     return new Promise(function (resolve, reject) {
