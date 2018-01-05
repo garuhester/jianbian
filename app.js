@@ -43,7 +43,7 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'static'), {
         bucket: 'blog',
         origin: 'http://oyoi2e46i.bkt.clouddn.com'
     }
-}, function(req, res, next) {
+}, function (req, res, next) {
     //客户端上传文件设置  
     var ActionType = req.query.action;
     if (ActionType === 'uploadimage' || ActionType === 'uploadfile' || ActionType === 'uploadvideo') {
@@ -74,7 +74,7 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'static'), {
 //连接数据库
 mongodb.connect();
 
-app.listen(8080, function(err) {
+app.listen(8080, function (err) {
     if (err) return err;
     console.log("http://localhost:8080");
 });
