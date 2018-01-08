@@ -1361,6 +1361,54 @@ ul.personnav {
     background: rgb(99, 174, 255);
 }
 
+#showArea{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 70%;
+    height: 100%;
+    z-index: 2000;
+    box-sizing: border-box;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+}
+#showArea::-webkit-scrollbar  
+{  
+    width: 0;
+    height: 0;
+}  
+#showArea #ifr{
+    width: 100%;
+    padding:30px;
+    box-sizing: border-box;
+    background: #fff;
+}
+#showArea #ifr *{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.write-main .mask{
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1999;
+    top: 0;
+    left: 0;
+    background:rgba(0, 0, 0, .5);
+}
+.write-main .mask i{
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    color:#fff;
+    font-size: 35px;
+    cursor: pointer;
+}
+
 /* ---------------------------------------- */
 
 

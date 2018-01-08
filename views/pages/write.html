@@ -78,6 +78,12 @@
                             </div>
             </div>
         </div>
+        <div id="showArea">
+            <div id="ifr"></div>
+        </div>
+        <div class="mask">
+            <i onclick="closeArticle()" class="iconfont icon-close" title="关闭"></i>
+        </div>
     </div>
 
     <script>
@@ -107,7 +113,7 @@
         $(function () {
             var ie6 = document.all;
             var dv = $('#edui1_toolbarbox'),
-                st,w;
+                st, w;
             w = $('#edui1_iframeholder').width();
             dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离
             $(window).scroll(function () {
@@ -133,11 +139,24 @@
 
         //预览文章
         function showArticle() {
-            if (!url) {
-                window.open("/article" + "/" + "<%= user.id %>" + "/" + url);
+            if (url) {
+                $('.mask').toggle(300);
+                $('#showArea').toggle(300);
+                var content = UE.getEditor('editor').getContent();
+                var o = document.getElementById("ifr");
+                o.innerHTML = content;
+                // ed = document.all ? o.contentWindow.document : o.contentDocument;
+                // ed.open();
+                // ed.write(content);
+                // ed.close();
             } else {
-
+                alert("请先保存或发布文章");
             }
+        }
+
+        function closeArticle() {
+            $('.mask').toggle(300);
+            $('#showArea').toggle(300);
         }
 
         //发布文章
