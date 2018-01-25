@@ -26,7 +26,10 @@ var getPersonalArticle = function (id, sid, currentPage) {
                         data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                         data.article = article;
                         data.an = a;
-                        resolve(data);
+                        Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
+                            data.iscom = iscom;
+                            resolve(data);
+                        });
                     });
                 });
             });
@@ -109,7 +112,10 @@ var getPersonalFollowAndFans = function (id, sid, currentPage, type) {
                         //用户文章数
                         Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
                             data.an = a;
-                            resolve(data);
+                            Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
+                                data.iscom = iscom;
+                                resolve(data);
+                            });
                         });
                     })
                     f.forEach(function (item) {
@@ -167,7 +173,10 @@ var getPersonalLikeAndCollect = function (id, sid, currentPage, type) {
                 //用户文章数
                 Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
                     data.an = a;
-                    resolve(data);
+                    Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
+                        data.iscom = iscom;
+                        resolve(data);
+                    });
                 });
             });
         });

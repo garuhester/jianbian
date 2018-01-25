@@ -9,7 +9,7 @@
  * 当升级编辑器时，可直接使用旧版配置文件替换新版配置文件,不用担心旧版配置文件中因缺少新功能所需的参数而导致脚本报错。
  **************************提示********************************/
 
-(function() {
+(function () {
 
     /**
      * 编辑器资源文件根路径。它所表示的含义是：以编辑器实例化页面为当前路径，指向编辑器资源文件（即dialog等文件夹）的路径。
@@ -37,12 +37,12 @@
 
         ,
         toolbars: [
-                ["source", "fontfamily", "fontsize", "paragraph", "justifyleft", "justifycenter", "justifyright", "justifyjustify", "bold", "italic", "fontborder", "strikethrough", "underline", "forecolor", "undo", "redo", "insertunorderedlist", "insertorderedlist", "link", "unlink", "help", "simpleupload", "insertimage", "emotion", "pagebreak", "date", "rowspacingbottom", "rowspacingtop", "lineheight"]
-            ]
-            //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
-            //,labelMap:{
-            //    'anchor':'', 'undo':''
-            //}
+            ["source", "fontfamily", "fontsize", "paragraph", "justifyleft", "justifycenter", "justifyright", "justifyjustify", "bold", "italic", "fontborder", "strikethrough", "underline", "forecolor", "undo", "redo", "insertunorderedlist", "insertorderedlist", "link", "unlink", "help", "simpleupload", "insertimage", "emotion", "pagebreak", "date", "rowspacingbottom", "rowspacingtop", "lineheight"]
+        ]
+        //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
+        //,labelMap:{
+        //    'anchor':'', 'undo':''
+        //}
 
         //语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
         //lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage ||navigator.userLanguage).toLowerCase()

@@ -16,22 +16,28 @@
                 <% 
                     if(data.article.length != 0){
                         for(var i=0;i<data.article.length;i++){ 
-                            if(data.article[i].status == 0){
                 %>
                     <div class="article" id="<%= data.article[i]._id %>" onclick="location.href='/write/<%= data.article[i]._id %>'">
+
+                        <% if(data.article[i].isRecommend == 0){ %>
+                            <div class="recom">
+                                <i onclick="recommend(1,this)" class="coll_empty iconfont icon-collection"></i>
+                            </div>
+                            <% }else{ %>
+                                <div class="recom">
+                                    <i onclick="recommend(0,this)" class="coll_fill iconfont icon-collection_fill"></i>
+                                </div>
+                                <% } %>
+                        <% if(data.article[i].status == 0){ %>
+                            <div class="statu" style="background:rgb(255, 130, 130);">未发布</div>
+                        <% }else{ %>
+                            <div class="statu" style="background:rgb(130, 199, 255);">已发布</div>
+                            <% } %>
                         <div class="title">
                             <%= data.article[i].title %>
                         </div>
-                        <div class="statu" style="background:rgb(255, 130, 130);">未发布</div>
                     </div>
-                    <% }else{ %>
-                        <div class="article" id="<%= data.article[i]._id %>" onclick="location.href='/write/<%= data.article[i]._id %>'">
-                            <div class="title">
-                                <%= data.article[i].title %>
-                            </div>
-                            <div class="statu" style="background:rgb(130, 199, 255);">已发布</div>
-                        </div>
-                        <% }}}else{ %>
+                    <% }}else{ %>
                             <div class="noarticle">
                                 没有写文章
                             </div>
@@ -51,10 +57,10 @@
                                 <select id="categorySelect" required>
                                     <option value="" disabled selected hidden>请选择文章分类</option>
                                     <% 
-                                                    if(data.user.categoryList.length != 1){
-                                                        for(var i=0;i<data.user.categoryList.length;i++){ 
-                                                            if(data.user.categoryList[i].categoryName != 'nocate'){
-                                                %>
+                                        if(data.user.categoryList.length != 1){
+                                            for(var i=0;i<data.user.categoryList.length;i++){ 
+                                                if(data.user.categoryList[i].categoryName != 'nocate'){
+                                    %>
                                         <option value="<%= i %>">
                                             <%= data.user.categoryList[i].categoryName %>
                                         </option>
@@ -87,27 +93,65 @@
     </div>
 
     <script>
-        var url = location.href.split('/')[4];
-        $('#' + url).addClass('active');
 
-        var optionStr = $("#categorySelect option").map(function () {
-            return $(this).val()
-        }).get().join(", ");
-        var len = optionStr.split(",").length - 1;
-        var text;
-        for (var i = 1; i <= len; i++) {
-            text = $('#categorySelect option:eq(' + i + ')').text().trim();
-            if (text == '<%= data.singlearticle[0].category %>') {
-                $('#categorySelect option:eq(' + i + ')').attr('selected', 'selected');
-                break;
+        function recommend(type,obj){
+            window.event.stopPropagation();
+            $.ajax({
+                type:'post',
+                url:"/recommend",
+                data:{
+                    aid: obj.parentNode.parentNode.id,
+                    type,
+                },
+                success:function(data){
+                    if(data.result == 1){
+                        if(type == 0){
+                            obj.parentNode.innerHTML = "<i onclick='recommend(1, this)' class='coll_empty iconfont icon-collection'></i>";
+                        }else if(type == 1){
+                            obj.parentNode.innerHTML = "<i onclick='recommend(0, this)' class='coll_fill iconfont icon-collection_fill'></i>";
+                        }
+                    }
+                }
+            });
+        }
+
+        init();
+
+        function init(){
+            itemActive();
+            addCategory();
+            editorInit();
+        }
+        
+        var url;
+        function itemActive(){
+            url = location.href.split('/')[4];
+            $('#' + url).addClass('active');
+        }
+
+        function addCategory(){
+            var optionStr = $("#categorySelect option").map(function () {
+                return $(this).val()
+            }).get().join(", ");
+            var len = optionStr.split(",").length - 1;
+            var text;
+            for (var i = 1; i <= len; i++) {
+                text = $('#categorySelect option:eq(' + i + ')').text().trim();
+                if (text == '<%= data.singlearticle[0].category %>') {
+                    $('#categorySelect option:eq(' + i + ')').attr('selected', 'selected');
+                    break;
+                }
             }
         }
 
-        //编辑器初始化
-        var ue = UE.getEditor('editor');
-        ue.ready(function () { //编辑器初始化完成再赋值
-            ue.setContent('<%- data.singlearticle[0].content %>'); //赋值给UEditor
-        });
+        function editorInit(){
+            //编辑器初始化
+            var ue = UE.getEditor('editor');
+
+            ue.ready(function () { //编辑器初始化完成再赋值
+                ue.setContent('<%- data.singlearticle[0].content %>'); //赋值给UEditor
+            });
+        }
 
         //吸附顶部
         $(function () {
@@ -145,10 +189,6 @@
                 var content = UE.getEditor('editor').getContent();
                 var o = document.getElementById("ifr");
                 o.innerHTML = content;
-                // ed = document.all ? o.contentWindow.document : o.contentDocument;
-                // ed.open();
-                // ed.write(content);
-                // ed.close();
             } else {
                 alert("请先保存或发布文章");
             }

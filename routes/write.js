@@ -82,22 +82,12 @@ var publishArticle = function (req, res) {
 
 //分类个数+1
 var categoryNumAdd = function (id, categoryName, callback) {
-    User.findByIdAndUpdate(id, {
-        $pull: {
-            categoryList: {
-                categoryName,
-            }
-        }
-    }, function (err, art) {
-        var newNum;
+    User.findById(id, function (err, art) {
         var cl = art.categoryList.find((cl) => cl.categoryName == categoryName);
-        newNum = cl.categoryNum + 1;
-        User.findByIdAndUpdate(id, {
-            $push: {
-                categoryList: {
-                    categoryName,
-                    categoryNum: newNum
-                }
+        var newNum = cl.categoryNum + 1;
+        User.update({ '_id': id, 'categoryList.categoryName': categoryName }, {
+            '$set': {
+                'categoryList.$.categoryNum': newNum
             }
         }, function (err, art2) {
             callback();
@@ -107,22 +97,12 @@ var categoryNumAdd = function (id, categoryName, callback) {
 
 //分类个数-1
 var categoryNumReduce = function (id, categoryName, callback) {
-    User.findByIdAndUpdate(id, {
-        $pull: {
-            categoryList: {
-                categoryName,
-            }
-        }
-    }, function (err, art) {
-        var newNum;
+    User.findById(id, function (err, art) {
         var cl = art.categoryList.find((cl) => cl.categoryName == categoryName);
-        newNum = cl.categoryNum - 1;
-        User.findByIdAndUpdate(id, {
-            $push: {
-                categoryList: {
-                    categoryName,
-                    categoryNum: newNum
-                }
+        var newNum = cl.categoryNum - 1;
+        User.update({ '_id': id, 'categoryList.categoryName': categoryName }, {
+            '$set': {
+                'categoryList.$.categoryNum': newNum
             }
         }, function (err, art2) {
             callback();
@@ -221,8 +201,28 @@ var addCategory = function (req, res) {
     });
 };
 
+var recommend = function (req, res) {
+    var uid = req.session.user.id;
+    var aid = req.body.aid;
+    var type = req.body.type;
+    if (type == 0) {
+        Article.findByIdAndUpdate(aid, { 'isRecommend': 0 }, function (err, art) {
+            if (art != null) {
+                res.json({ result: 1 });
+            }
+        });
+    } else if (type == 1) {
+        Article.findByIdAndUpdate(aid, { 'isRecommend': 1 }, function (err, art) {
+            if (art != null) {
+                res.json({ result: 1 });
+            }
+        });
+    }
+};
+
 module.exports = {
     publishArticle,
     getArticle,
-    addCategory
+    addCategory,
+    recommend,
 };

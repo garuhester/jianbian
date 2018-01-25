@@ -18,7 +18,7 @@ ul#nav {
     position: fixed;
     top: 0;
     z-index: 1000;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, .1);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 ul#nav li.left {
@@ -57,7 +57,7 @@ ul#nav li a:hover {
     background: rgb(240, 240, 240);
 }
 
-li#person:hover>.personnav {
+li#person:hover > .personnav {
     display: block;
 }
 
@@ -68,7 +68,7 @@ ul.personnav {
     padding-left: 0px;
     background: #fff;
     z-index: 1000;
-    box-shadow: 0px 1px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     width: 150px;
 }
 
@@ -123,7 +123,7 @@ ul.personnav {
     font-weight: bold;
 }
 
-.pages ul li.active>a {
+.pages ul li.active > a {
     background: rgb(116, 181, 255);
     color: #fff;
 }
@@ -143,7 +143,6 @@ ul.personnav {
     right: -90px;
     transform: translate(-50%, -50%);
 }
-
 
 /* ------------------------------------ */
 
@@ -175,7 +174,6 @@ ul.personnav {
     overflow: hidden;
     padding: 10px;
 }
-
 
 /* right */
 
@@ -250,7 +248,7 @@ ul.personnav {
 }
 
 .index .right .author .title::after {
-    content: '';
+    content: "";
     position: absolute;
     height: 1px;
     background: #ddd;
@@ -265,7 +263,7 @@ ul.personnav {
 }
 
 .index .right .author .title span:nth-child(1)::after {
-    content: '';
+    content: "";
     position: absolute;
     height: 1px;
     background: #000;
@@ -359,7 +357,6 @@ ul.personnav {
     color: #fff;
 }
 
-
 /* left */
 
 .index .left .search {
@@ -425,7 +422,7 @@ ul.personnav {
     padding-left: 20px;
     width: 100%;
     background: #fff;
-    border-bottom: 1px solid #ECECEC;
+    border-bottom: 1px solid #ececec;
     /* box-shadow: 0 1px 3px rgba(0, 0, 0, .1); */
     overflow: hidden;
 }
@@ -458,7 +455,7 @@ ul.personnav {
 .personal .left .list .article .top .time,
 .followed .right .list .article .top .name,
 .followed .right .list .article .top .time {
-    color: #6F6F6F;
+    color: #6f6f6f;
     line-height: 45px;
     float: left;
 }
@@ -488,7 +485,7 @@ ul.personnav {
     display: inline-block;
     font-size: 20px;
     font-weight: bold;
-    color: #4D4D4D;
+    color: #4d4d4d;
     text-decoration: none;
 }
 
@@ -504,7 +501,7 @@ ul.personnav {
     display: inline-block;
     margin-top: 7px;
     font-size: 16px;
-    color: #4D4D4D;
+    color: #4d4d4d;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -528,7 +525,7 @@ ul.personnav {
     line-height: 30px;
     font-size: 13px;
     font-weight: bold;
-    color: #6F6F6F;
+    color: #6f6f6f;
 }
 
 .index .left .list .article .bottom .tag,
@@ -548,9 +545,7 @@ ul.personnav {
     font-size: 13px;
 }
 
-
 /* -------------------------------------------- */
-
 
 /* person-setting */
 
@@ -647,7 +642,7 @@ ul.personnav {
     height: 45px;
     width: 50%;
     box-sizing: border-box;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
     border: 1px solid #ccc;
 }
 
@@ -659,7 +654,7 @@ ul.personnav {
 }
 
 .setting .right #editprofile .row textarea {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
     border: 1px solid #ccc;
     display: block;
     width: 100%;
@@ -668,7 +663,7 @@ ul.personnav {
     outline: none;
     font-size: 20px;
     padding: 10px;
-    font-family: '微软雅黑';
+    font-family: "微软雅黑";
 }
 
 .edit,
@@ -686,16 +681,14 @@ ul.personnav {
     cursor: pointer;
 }
 
-
 /* -------------------------------------- */
-
 
 /* personal */
 
 .personal {
     margin: 0 auto;
     width: 90%;
-    padding-top:10px;
+    padding-top: 10px;
 }
 
 .personal .left {
@@ -834,7 +827,7 @@ ul.personnav {
 
 .personal .right .row3 .clear::before {
     display: none;
-    content: '清除';
+    content: "清除";
     position: absolute;
     width: 25px;
     right: 13px;
@@ -918,7 +911,7 @@ ul.personnav {
 }
 
 .personal .left .tabs .box.active:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 4px;
@@ -927,23 +920,23 @@ ul.personnav {
     left: 0;
 }
 
-.personal .left .tip{
+.personal .left .tip {
     color: rgb(163, 163, 163);
     margin-top: 10px;
-    padding:10px;
+    padding: 10px;
     background: #fff;
     position: relative;
     display: none;
 }
 
-.personal .left .tip span{
+.personal .left .tip span {
     cursor: pointer;
-    color:#000;
+    color: #000;
     font-size: 18px;
     position: absolute;
     right: 15px;
     top: 50%;
-    transform: translate(0,-53%);
+    transform: translate(0, -53%);
 }
 
 .personal .left .list {
@@ -989,7 +982,7 @@ ul.personnav {
 
 .personal .left .list .article .top .delete:before {
     display: none;
-    content: '';
+    content: "";
     position: absolute;
     right: 16px;
     width: 0;
@@ -1082,9 +1075,7 @@ ul.personnav {
     display: none;
 }
 
-
 /* ----------------------------------------- */
-
 
 /* follow */
 
@@ -1149,7 +1140,7 @@ ul.personnav {
 .followed .left .userlist .user:hover {
     cursor: pointer;
     background: rgb(247, 247, 247);
-    border-left:3px solid skyblue;
+    border-left: 3px solid skyblue;
 }
 
 .followed .left .userlist .user img {
@@ -1189,99 +1180,155 @@ ul.personnav {
     background: rgb(233, 233, 233);
 }
 
-
 /* ---------------------------------------- */
 
 /* write*/
 
-.write-main{
+.write-main {
     width: 80%;
     margin: 0 auto;
 }
 
-.write-main .write-list{
-    width:320px;
-    height:100%;
-    position:fixed;
-    top:60px;
-    overflow-y:auto;
+.write-main .write-list {
+    width: 320px;
+    height: calc(100% - 60px);
+    position: fixed;
+    top: 60px;
+    overflow-y: auto;
     background: #fff;
-    overscroll-behavior:contain;
+    overscroll-behavior: contain;
 }
-.write-main .write-list .list-main{
-    margin:10px;
-    margin-top:70px;
-    margin-bottom:100px;
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    width: 10px; /*滚动条宽度*/
+    height: 10px; /*滚动条高度*/
 }
-.write-main .write{
-    padding-left:320px;
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+    /*滚动条的背景区域的内阴影*/
+    /* box-shadow:0px 1px 3px rgba(0,0,0,0.3) inset; */
+    /*滚动条的背景区域的圆角*/
+    border-radius: 10px;
+    /*滚动条的背景颜色*/
+    background-color: #ddd;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    /*滚动条的内阴影*/
+    /* box-shadow:0px 1px 3px rgba(0,0,0,0.3) inset; */
+    /*滚动条的圆角*/
+    border-radius: 10px;
+    /*滚动条的背景颜色*/
+    background-color: #aaa;
+}
+.write-main .write-list .list-main {
+    margin: 10px;
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+.write-main .write {
+    padding-left: 320px;
     margin-top: -20px;
+    /* overflow-y: auto; */
+    height: calc(100vh - 70px);
 }
-.write-main .write .content{
-    padding:10px;
+.write-main .write .content {
+    padding: 10px;
 }
-.write-main .write-list .list-title{
-    width:320px;
-    height:60px;
-    position:fixed;
+.write-main .write-list .list-title {
+    width: 320px;
+    height: 60px;
+    position: fixed;
     background: #fff;
     border-bottom: 1px solid #ddd;
 }
-.write-main .write-list .list-title .a1{
+.write-main .write-list .list-title .a1 {
     font-weight: bold;
     line-height: 60px;
     margin-left: 1rem;
     font-size: 20px;
     float: left;
 }
-.write-main .write-list .list-title .a2{
+.write-main .write-list .list-title .a2 {
     font-size: 17px;
     cursor: pointer;
     position: relative;
     top: 50%;
-    transform: translate(0,-50%);
+    transform: translate(0, -50%);
     overflow: hidden;
     display: inline-block;
     margin-left: 1rem;
 }
-.write-main .write-list .list-title .a2:hover{
+.write-main .write-list .list-title .a2:hover {
     box-shadow: 0px 2px 0 0 rgb(75, 75, 75);
 }
 .write-main .write-list .list-main .article,
-.write-main .write-list .list-main .noarticle{
+.write-main .write-list .list-main .noarticle {
     background: #fff;
-    padding:10px;
+    padding: 10px;
     height: 50px;
     line-height: 50px;
     cursor: pointer;
     margin-bottom: 10px;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, .2);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
 }
-.write-main .write-list .list-main .noarticle{
+.write-main .write-list .list-main .noarticle {
     text-align: center;
     font-size: 20px;
 }
-.write-main .write-list .list-main .article.active{
+.write-main .write-list .list-main .article.active {
     box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255),
-                0px 1px 5px rgba(0, 0, 0, .2);
+        0px 1px 5px rgba(0, 0, 0, 0.2);
 }
-.write-main .write-list .list-main .article:hover{
+.write-main .write-list .list-main .article:hover {
     box-shadow: inset 5px 0px 0 0 rgb(127, 189, 255),
-                0px 1px 5px rgba(0, 0, 0, .2);
+        0px 1px 5px rgba(0, 0, 0, 0.2);
 }
-.write-main .write-list .list-main .article .title{
+.write-main .write-list .list-main .article .recom{
+    display: inline-block;
     float: left;
-    width: 80%;
+    width: 20px;
+}
+.write-main .write-list .list-main .article .recom i{
+    font-size: 23px;
+    color: #fd4c4c;
+    position: relative;
+}
+.write-main .write-list .list-main .article .recom .coll_empty:hover:after{
+    display: inline-block;
+    content: "推荐该文章";
+    color:#fd4c4c;
+    width: 100px;
+    position: absolute;
+    font-size: 15px;
+    top: 10px;
+}
+.write-main .write-list .list-main .article .recom .coll_fill:hover:after{
+    display: inline-block;
+    content: "取消推荐该文章";
+    color:#fd4c4c;
+    width: 120px;
+    position: absolute;
+    font-size: 15px;
+    top: 10px;
+}
+.write-main .write-list .list-main .article .title {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.write-main .write-list .list-main .article .statu{
+.write-main .write-list .list-main .article .statu {
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color:#fff;
+    color: #fff;
+    width: 60px;
+    float: right;   
 }
 
 .write-main .write input,
@@ -1296,17 +1343,19 @@ ul.personnav {
     padding: 10px;
     height: 40px;
 }
-.write-main .write select:invalid { color: gray; }
-.write-main .write select{
+.write-main .write select:invalid {
+    color: gray;
+}
+.write-main .write select {
     height: 40px;
     float: left;
     width: 68%;
 }
-.write-main .write select option{
+.write-main .write select option {
     font-size: 25px;
 }
-.write-main .write .add{
-    background:#fff;
+.write-main .write .add {
+    background: #fff;
     text-align: center;
     height: 40px;
     width: 30%;
@@ -1314,10 +1363,10 @@ ul.personnav {
     line-height: 40px;
     overflow: hidden;
 }
-.write-main .write .add:hover{
+.write-main .write .add:hover {
     cursor: pointer;
-    background:rgb(138, 202, 255);
-    color:#fff;
+    background: rgb(138, 202, 255);
+    color: #fff;
 }
 .write-main .write .tools {
     position: fixed;
@@ -1334,17 +1383,17 @@ ul.personnav {
     z-index: 1600;
 }
 
-.write-main .write .addNewInput{
+.write-main .write .addNewInput {
     overflow: hidden;
     display: none;
 }
 
-.write-main .write .addNewInput #tag{
+.write-main .write .addNewInput #tag {
     width: 78%;
     float: left;
 }
 
-.write-main .write .addNewInput .add{
+.write-main .write .addNewInput .add {
     width: 20%;
 }
 
@@ -1361,36 +1410,36 @@ ul.personnav {
     background: rgb(99, 174, 255);
 }
 
-#showArea{
+#showArea {
     display: none;
     position: fixed;
     top: 0;
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
     width: 70%;
     height: 100%;
     z-index: 2000;
     box-sizing: border-box;
-    overflow-y:auto;
-    overscroll-behavior:contain;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
-#showArea::-webkit-scrollbar  
-{  
+#showArea::-webkit-scrollbar {
     width: 0;
     height: 0;
-}  
-#showArea #ifr{
+}
+#showArea #ifr {
     width: 100%;
-    padding:30px;
+    padding: 30px;
+    min-height: 100%;
     box-sizing: border-box;
     background: #fff;
 }
-#showArea #ifr *{
+#showArea #ifr * {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
-.write-main .mask{
+.write-main .mask {
     display: none;
     position: fixed;
     height: 100%;
@@ -1398,19 +1447,18 @@ ul.personnav {
     z-index: 1999;
     top: 0;
     left: 0;
-    background:rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, 0.5);
 }
-.write-main .mask i{
+.write-main .mask i {
     position: absolute;
     right: 10%;
     top: 10%;
-    color:#fff;
+    color: #fff;
     font-size: 35px;
     cursor: pointer;
 }
 
 /* ---------------------------------------- */
-
 
 /* intoarticle */
 
@@ -1418,7 +1466,7 @@ ul.personnav {
     margin: 0px auto;
     width: 50%;
     background: #fff;
-    margin-top:90px;
+    margin-top: 90px;
     padding: 20px;
     margin-bottom: 100px;
     overflow: hidden;
@@ -1484,9 +1532,9 @@ ul.personnav {
     margin-top: 20px;
     padding: 5px;
 }
-.intoarticle .content *{
-    white-space: pre-wrap;  
-    word-wrap: break-word;  
+.intoarticle .content * {
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .intoarticle .content img {
@@ -1548,7 +1596,7 @@ ul.personnav {
     border-radius: 50%;
     background: #fff;
     cursor: pointer;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, .2);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
     position: relative;
     margin-bottom: 10px;
     padding: 6px;
@@ -1609,14 +1657,12 @@ ul.personnav {
     max-width: 70px;
 }
 
-
 /* ---------------------- */
-
 
 /* about */
 
 .about {
-    margin:0 auto;
+    margin: 0 auto;
     width: 70%;
     padding-top: 10px;
 }
@@ -1624,7 +1670,7 @@ ul.personnav {
 .about .content {
     padding: 20px;
     margin-top: 20px;
-    background:#fff;
+    background: #fff;
 }
 
 .about .content .info {
@@ -1636,7 +1682,6 @@ ul.personnav {
     padding-left: 20px;
     font-size: 20px;
 }
-
 
 /* ------------------------------- */
 

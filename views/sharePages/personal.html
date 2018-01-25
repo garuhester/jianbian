@@ -40,14 +40,22 @@
             <div class="row4">
                 <span>文章推荐</span>
                 <ul>
-                    <li><a href="" class="article">html、css、javascript系列教程</a></li>
-                    <li><a href="" class="article">Handlebars 和 angularjs 之间的区别</a></li>
+                    <% if(data.iscom.length != 0){ %>
+                    <% for(var i=0;i<data.iscom.length;i++){ %>
+                    <li><a href="/article/<%= data.iscom[i].authorId %>/<%= data.iscom[i]._id %>" class="article" target="_blank"><%= data.iscom[i].title %></a></li>
+                    <% }}else{ %>
+                        <li>
+                           无
+                        </li>
+                        <% } %>
                 </ul>
             </div>
             <div class="split"></div>
             <div class="row4">
                 <span>文章分类</span>
-                <!-- <div class="article">无</div> -->
+                <%  if(data.user.categoryList.length == 1 && data.user.categoryList[0].categoryNum == 0){ %>
+                    <div class="article">无</div>
+                <% } %>
                 <ul>
                     <% 
                         for(var i =0;i<data.user.categoryList.length;i++){ 

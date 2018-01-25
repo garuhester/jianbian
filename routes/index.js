@@ -253,6 +253,9 @@ module.exports = function (app) {
     });
 
     //发布文章
+    app.post("/recommend", write.recommend);
+
+    //发布文章
     app.post("/publisharticle", write.publishArticle);
 
     //添加文章分类
