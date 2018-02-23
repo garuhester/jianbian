@@ -48,7 +48,11 @@
             <div class="content">
                 <% if(data.singlearticle.length != 0){ %>
                     <input id="title" type="text" placeholder="请输入标题" value="<%= data.singlearticle[0].title %>">
-                    <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个" value="<%= data.singlearticle[0].tag %>">
+                        <% if(data.singlearticle[0].tag != "notag"){ %>
+                        <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个" value="<%= data.singlearticle[0].tag %>">
+                        <% }else { %>
+                            <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个">
+                            <% } %>
                     <% }else{ %>
                         <input id="title" type="text" placeholder="请输入标题">
                         <input id="tag" type="text" placeholder="请输入标签，空格隔开，最多6个">

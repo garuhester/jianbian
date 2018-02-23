@@ -132,19 +132,21 @@ module.exports = function (app) {
             } else {
                 isSelf = false;
             }
-            var currentPage = req.query.page || 1;
+            var currentPage = req.query.page || 1;// 当前页面页数
+            var category = req.query.category || "none";//当前分类
             if (type != "setting") {
                 if (type == "article") {
                     title = "渐变-文章";
                     personal
-                        .getPersonalArticle(id, sid, currentPage)
+                        .getPersonalArticle(id, sid, currentPage, category)
                         .then(function (data) {
                             res.render("personal-article", {
                                 goto,
                                 title,
                                 user: req.session.user,
                                 data,
-                                isSelf
+                                isSelf,
+                                category,
                             });
                         });
                 } else if (type == "follow" || type == "fans") {
@@ -176,6 +178,8 @@ module.exports = function (app) {
                                 isSelf
                             });
                         });
+                } else {
+                    res.redirect("/nopage");
                 }
             } else {
                 if (isSelf) {

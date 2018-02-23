@@ -44,7 +44,7 @@
                     <% for(var i=0;i<data.iscom.length;i++){ %>
                     <li><a href="/article/<%= data.iscom[i].authorId %>/<%= data.iscom[i]._id %>" class="article" target="_blank"><%= data.iscom[i].title %></a></li>
                     <% }}else{ %>
-                        <li>
+                        <li style="font-weight: bold;color: rgb(94, 94, 94);">
                            无
                         </li>
                         <% } %>
@@ -54,7 +54,7 @@
             <div class="row4">
                 <span>文章分类</span>
                 <%  if(data.user.categoryList.length == 1 && data.user.categoryList[0].categoryNum == 0){ %>
-                    <div class="article">无</div>
+                    <div class="article" style="font-weight: bold;">无</div>
                 <% } %>
                 <ul>
                     <% 
@@ -63,10 +63,9 @@
                             if(cl.categoryNum != 0){
                                 if(cl.categoryName == 'nocate'){
                     %>
-                                    <li><a href="" class="article">无分类&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
+                                    <li><a onclick="gotoCategory('<%= cl.categoryName %>')"  class="article">无分类&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
                                 <% }else{%>
-                            <li><a href="" class="article"><%= cl.categoryName %>&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
-
+                            <li><a onclick="gotoCategory('<%= cl.categoryName %>')" class="article"><%= cl.categoryName %>&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
                         <% }}} %>
                 </ul>
             </div>
@@ -81,3 +80,10 @@
         </div>
         <% include ../sharePages/copyright.html %>
     </div>
+    <script>
+        function gotoCategory(id){
+            window.event.preventDefault();
+            var uid = "<%= data.user._id %>";
+            window.location.href = "/personal/article/" + uid + "/?category=" + id;
+        }
+    </script>

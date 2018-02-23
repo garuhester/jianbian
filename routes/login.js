@@ -1,10 +1,10 @@
 var User = require('../schemas/user')
 
-var doLogin = function(req, res) {
+var doLogin = function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var whereStr = { 'name': username };
-    User.find(whereStr, function(err, user) {
+    User.find(whereStr, function (err, user) {
         if (err) {
             console.log(err);
             return err;

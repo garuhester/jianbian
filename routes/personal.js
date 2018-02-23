@@ -5,12 +5,16 @@ var Collect = require('../schemas/collect');
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 
-var getPersonalArticle = function (id, sid, currentPage) {
+var getPersonalArticle = function (id, sid, currentPage, category) {
     return new Promise(function (resolve, reject) {
         var pageSize = 20;
         var skipNum = (currentPage - 1) * pageSize;
         var data = {};
-        data.page = '/personal/article/' + id + '/?';
+        if (category == "none") {
+            data.page = '/personal/article/' + id + '/?';
+        } else {
+            data.page = '/personal/article/' + id + '/?category=' + category + "&";
+        }
         data.currentPage = currentPage;
         User.findById(id, function (err, user) {
             Follow.find({ 'userId': sid, 'followList': { '$elemMatch': { 'followId': id, 'followType': 0 } } }, function (err, result) {
@@ -20,18 +24,33 @@ var getPersonalArticle = function (id, sid, currentPage) {
                     data.isFollow = false;
                 }
                 data.user = user;
-                Article.find({ 'authorId': id, 'status': 1 }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
-                    //用户文章数
-                    Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
-                        data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
-                        data.article = article;
-                        data.an = a;
-                        Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
-                            data.iscom = iscom;
-                            resolve(data);
+                if (category == "none") {
+                    Article.find({ 'authorId': id, 'status': 1 }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
+                        //用户文章数
+                        Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
+                            data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                            data.article = article;
+                            data.an = a;
+                            Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
+                                data.iscom = iscom;
+                                resolve(data);
+                            });
                         });
                     });
-                });
+                } else {
+                    Article.find({ 'authorId': id, 'status': 1, 'category': category }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
+                        //用户文章数
+                        Article.count({ 'authorId': id, 'status': 1, 'category': category }, function (err, a) {
+                            data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                            data.article = article;
+                            data.an = a;
+                            Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
+                                data.iscom = iscom;
+                                resolve(data);
+                            });
+                        });
+                    });
+                }
             });
         });
     });

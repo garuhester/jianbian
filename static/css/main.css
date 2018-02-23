@@ -874,6 +874,10 @@ ul.personnav {
     margin-top: 10px;
 }
 
+.personal .right .row4 li a{
+    cursor: pointer;
+}
+
 .personal .right .row4 .article {
     margin-top: 10px;
     font-weight: bold;
@@ -908,6 +912,10 @@ ul.personnav {
     position: relative;
     cursor: pointer;
     overflow: hidden;
+}
+.personal .left .tabs .box.box2 {
+    width: 100%;
+    cursor: default;
 }
 
 .personal .left .tabs .box.active:after {
