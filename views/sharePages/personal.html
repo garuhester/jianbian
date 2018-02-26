@@ -32,9 +32,9 @@
             </div>
             <div class="split"></div>
             <div class="row3">
-                <input type="text" placeholder="文章搜索">
+                <input class="searchInput" type="text" placeholder="文章搜索">
                 <span class="clear" onclick="$(this).prev('input').val('')">x</span>
-                <i class="iconfont icon-search" style="font-weight:bold;"></i>
+                <i class="iconfont icon-search" style="font-weight:bold;" onclick="search($(this).prev('span').prev('input').val())"></i>
             </div>
             <div class="split"></div>
             <div class="row4">
@@ -81,9 +81,28 @@
         <% include ../sharePages/copyright.html %>
     </div>
     <script>
+
+        var sea = window.location.search;
+        var arr = {};
+        if (sea.indexOf('?') != -1) {
+            var str = sea.slice(sea.indexOf('?') + 1);
+            var strs = str.split('&');
+            for (var i = 0; i < strs.length; i++) {
+                arr[strs[i].split('=')[0]] = strs[i].split('=')[1];
+            }
+            if (arr.search) {
+                $('.searchInput').val(decodeURIComponent(arr.search));
+            }
+        }
+
         function gotoCategory(id){
             window.event.preventDefault();
             var uid = "<%= data.user._id %>";
             window.location.href = "/personal/article/" + uid + "/?category=" + id;
+        }
+
+        function search(text){
+            var uid = "<%= data.user._id %>";
+            window.location.href = "/personal/article/" + uid + "/?search=" + text;
         }
     </script>

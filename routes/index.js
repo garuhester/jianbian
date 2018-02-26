@@ -134,11 +134,12 @@ module.exports = function (app) {
             }
             var currentPage = req.query.page || 1;// 当前页面页数
             var category = req.query.category || "none";//当前分类
+            var search = req.query.search || "none";//搜索内容
             if (type != "setting") {
                 if (type == "article") {
                     title = "渐变-文章";
                     personal
-                        .getPersonalArticle(id, sid, currentPage, category)
+                        .getPersonalArticle(id, sid, currentPage, category, search)
                         .then(function (data) {
                             res.render("personal-article", {
                                 goto,
