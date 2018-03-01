@@ -2,24 +2,29 @@
 
     <% include ../sharePages/personal.html %>
         <div class="left">
-            <% if(category == "none"){ %>
+            <% if(category == "none" && search == "none"){ %>
                 <% include ../sharePages/personal-3tabs.html %>
-                    <% }else{ %>
-                        <div class="tabs">
-                            <% if(category == "nocate"){ %>
-                                <div class="box box2">文章分类：
-                                    无分类
-                                </div>
-                                <% }else{ %>
-                                    <div class="box box2">文章分类：
-                                        <%= category %>
-                                    </div>
-                                    <% } %>
-
+            <% }else if(category != "none" && search == "none"){ %>
+                <div class="tabs">
+                    <% if(category == "nocate"){ %>
+                        <div class="box box2">文章分类：
+                            无分类
                         </div>
-                        <% } %>
-                            <div class="list">
-                                <% 
+                        <% }else{ %>
+                            <div class="box box2">文章分类：
+                    <%= category %>
+                            </div>
+                    <% } %>
+                </div>
+            <% }else if(category == "none" && search != "none"){ %>
+                <div class="tabs">
+                    <div class="box box2">文章搜索：
+                        <%= search %>
+                    </div>
+                </div>
+            <% } %>
+            <div class="list">
+                <% 
                     if(data.user.articleNum != 0){
                         var article = data.article;
                         for(var i=0;i < article.length;i++) { 

@@ -73,8 +73,12 @@
             <div class="row4">
                 <span>文章存档</span>
                 <ul>
-                    <li><a href="" class="article">2016-08-10&nbsp;&nbsp;(3)</a></li>
-                    <li><a href="" class="article">2016-08-11&nbsp;&nbsp;(3)</a></li>
+                    <% 
+                        for(var i=0;i<data.showArr.length;i++){ 
+                            var sarr = data.showArr[i];
+                    %>
+                    <li><a href="" class="article"><%= sarr.date %> &nbsp;(<%= sarr.count %>)</a></li>
+                    <% } %>
                 </ul>
             </div>
         </div>

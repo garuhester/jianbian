@@ -29,6 +29,10 @@ module.exports = function (app) {
         return moment(date).format("YYYY-MM-DD HH:mm:ss");
     };
 
+    app.locals.dateFormat2 = function (date) {
+        return moment(date).format("YYYY-MM-DD");
+    };
+
     app.use(upload.array("headimage"));
 
     //登录
@@ -148,6 +152,7 @@ module.exports = function (app) {
                                 data,
                                 isSelf,
                                 category,
+                                search,
                             });
                         });
                 } else if (type == "follow" || type == "fans") {

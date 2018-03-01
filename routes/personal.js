@@ -4,7 +4,41 @@ var Follow = require('../schemas/follow');
 var Collect = require('../schemas/collect');
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
+var moment = require("moment");
 
+//获取文章推荐和文章存档列表
+function getMain(data, id, callback) {
+    Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
+        data.iscom = iscom;
+        Article.find({ 'authorId': id, 'status': 1 }).sort({ 'createTime': -1 }).exec(function (err, allart) {
+            var showArr = [];
+            for (var i = 0; i < allart.length; i++) {
+                var art = allart[i];
+                var d = moment(art.createTime).format("YYYY-MM-DD");
+                if (sameObj(showArr, d)) {
+                    showArr.push({
+                        date: d
+                    });
+                }
+            }
+            for (var i = 0; i < showArr.length; i++) {
+                var ele1 = showArr[i].date;
+                var count = 0;
+                for (var j = 0; j < allart.length; j++) {
+                    var ele2 = moment(allart[j].createTime).format("YYYY-MM-DD").toString();
+                    if (ele2.indexOf(ele1) != -1) {
+                        count++;
+                    }
+                }
+                showArr[i].count = count;
+            }
+            data.showArr = showArr;
+            callback(data);
+        });
+    });
+}
+
+//获取个人中心文章页数据
 var getPersonalArticle = function (id, sid, currentPage, category, search) {
     return new Promise(function (resolve, reject) {
         var pageSize = 20;
@@ -27,8 +61,7 @@ var getPersonalArticle = function (id, sid, currentPage, category, search) {
                             data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                             data.article = article;
                             data.an = a;
-                            Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
-                                data.iscom = iscom;
+                            getMain(data, id, function (data) {
                                 resolve(data);
                             });
                         });
@@ -41,8 +74,7 @@ var getPersonalArticle = function (id, sid, currentPage, category, search) {
                             data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                             data.article = article;
                             data.an = a;
-                            Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
-                                data.iscom = iscom;
+                            getMain(data, id, function (data) {
                                 resolve(data);
                             });
                         });
@@ -59,8 +91,7 @@ var getPersonalArticle = function (id, sid, currentPage, category, search) {
                             data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                             data.article = article;
                             data.an = a;
-                            Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
-                                data.iscom = iscom;
+                            getMain(data, id, function (data) {
                                 resolve(data);
                             });
                         });
@@ -71,6 +102,16 @@ var getPersonalArticle = function (id, sid, currentPage, category, search) {
     });
 }
 
+//判断数组中的对象的字段是否重复
+function sameObj(arr, obj) {
+    arr = arr.filter(function (item) {
+        return item.date.indexOf(obj) != -1
+    });
+
+    return arr.length == 0 ? true : false;
+}
+
+//删除文章
 var deleteArticle = function (req, res) {
     var aid = req.body.aid;
     var id = req.session.user.id;
@@ -110,6 +151,7 @@ var deleteArticle = function (req, res) {
     });
 }
 
+//获取个人中心关注和粉丝页数据
 var getPersonalFollowAndFans = function (id, sid, currentPage, type) {
     return new Promise(function (resolve, reject) {
         var pageSize = 20;
@@ -146,8 +188,7 @@ var getPersonalFollowAndFans = function (id, sid, currentPage, type) {
                         //用户文章数
                         Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
                             data.an = a;
-                            Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
-                                data.iscom = iscom;
+                            getMain(data, id, function (data) {
                                 resolve(data);
                             });
                         });
@@ -169,6 +210,7 @@ var getPersonalFollowAndFans = function (id, sid, currentPage, type) {
     });
 }
 
+//获取个人中心喜欢和收藏页数据
 var getPersonalLikeAndCollect = function (id, sid, currentPage, type) {
     return new Promise(function (resolve, reject) {
         var pageSize = 20;
@@ -207,8 +249,7 @@ var getPersonalLikeAndCollect = function (id, sid, currentPage, type) {
                 //用户文章数
                 Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
                     data.an = a;
-                    Article.find({ 'authorId': id, 'status': 1, 'isRecommend': 1 }, function (err, iscom) {
-                        data.iscom = iscom;
+                    getMain(data, id, function (data) {
                         resolve(data);
                     });
                 });
@@ -217,6 +258,7 @@ var getPersonalLikeAndCollect = function (id, sid, currentPage, type) {
     })
 }
 
+//数组分页
 var pagination = function (pageSize, skipNum, arr) {
     return (skipNum + pageSize >= arr.length) ? arr.slice(skipNum, arr.length) : arr.slice(skipNum, skipNum + pageSize);
 }
