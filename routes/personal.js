@@ -39,7 +39,7 @@ function getMain(data, id, callback) {
 }
 
 //获取个人中心文章页数据
-var getPersonalArticle = function (id, sid, currentPage, category, search) {
+var getPersonalArticle = function (id, sid, currentPage, category, search, timeline) {
     return new Promise(function (resolve, reject) {
         var pageSize = 20;
         var skipNum = (currentPage - 1) * pageSize;
@@ -53,49 +53,89 @@ var getPersonalArticle = function (id, sid, currentPage, category, search) {
                     data.isFollow = false;
                 }
                 data.user = user;
-                if (category == "none" && search == "none") {
-                    data.page = '/personal/article/' + id + '/?';
-                    Article.find({ 'authorId': id, 'status': 1 }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
-                        //用户文章数
-                        Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
-                            data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
-                            data.article = article;
-                            data.an = a;
-                            getMain(data, id, function (data) {
-                                resolve(data);
+                if (timeline == "none") {
+                    if (category == "none" && search == "none") {
+                        data.page = '/personal/article/' + id + '/?';
+                        Article.find({ 'authorId': id, 'status': 1 }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
+                            //用户文章数
+                            Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
+                                data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                                data.article = article;
+                                data.an = a;
+                                getMain(data, id, function (data) {
+                                    resolve(data);
+                                });
                             });
                         });
-                    });
-                } else if (category != "none" && search == "none") {
-                    data.page = '/personal/article/' + id + '/?category=' + category + "&";
-                    Article.find({ 'authorId': id, 'status': 1, 'category': category }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
-                        //用户文章数
-                        Article.count({ 'authorId': id, 'status': 1, 'category': category }, function (err, a) {
-                            data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
-                            data.article = article;
-                            data.an = a;
-                            getMain(data, id, function (data) {
-                                resolve(data);
+                    } else if (category != "none" && search == "none") {
+                        data.page = '/personal/article/' + id + '/?category=' + category + "&";
+                        Article.find({ 'authorId': id, 'status': 1, 'category': category }).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
+                            //用户文章数
+                            Article.count({ 'authorId': id, 'status': 1, 'category': category }, function (err, a) {
+                                data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                                data.article = article;
+                                data.an = a;
+                                getMain(data, id, function (data) {
+                                    resolve(data);
+                                });
                             });
                         });
-                    });
-                } else if (category == "none" && search != "none") {
-                    data.page = '/personal/article/' + id + '/?search=' + search + "&";
+                    } else if (category == "none" && search != "none") {
+                        data.page = '/personal/article/' + id + '/?search=' + search + "&";
 
-                    var re = new RegExp(search, "i");
-                    updateStr = { 'authorId': id, 'status': 1, 'title': { '$regex': re } };
+                        var re = new RegExp(search, "i");
+                        var updateStr = { 'authorId': id, 'status': 1, 'title': { '$regex': re } };
 
-                    Article.find(updateStr).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
-                        //用户文章数
-                        Article.count(updateStr, function (err, a) {
+                        Article.find(updateStr).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article) {
+                            //用户文章数
+                            Article.count(updateStr, function (err, a) {
+                                data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                                data.article = article;
+                                data.an = a;
+                                getMain(data, id, function (data) {
+                                    resolve(data);
+                                });
+                            });
+                        });
+                    } else {
+                        resolve("error");
+                    }
+                } else if (timeline != "none" && category == "none" && search == "none") {
+                    data.page = '/personal/article/' + id + '/?timeline=' + timeline + "&";
+
+                    var updateStr = { 'authorId': id, 'status': 1 };
+
+                    Article.find(updateStr, function (err, article) {
+                        var sArr = [];
+                        for (var i = 0; i < article.length; i++) {
+                            var art = article[i];
+                            sArr.push({
+                                id: art._id,
+                                date: moment(art.createTime).format("YYYY-MM-DD").toString()
+                            });
+                        }
+                        var rArr = [];
+                        for (var i = 0; i < sArr.length; i++) {
+                            if (sArr[i].date.indexOf(timeline) != -1) {
+                                rArr.push(sArr[i].id);
+                            }
+                        }
+
+                        updateStr = { '_id': { "$in": rArr } };
+
+                        Article.find(updateStr).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).sort({ 'createTime': -1 }).exec(function (err, article2) {
+                            //用户文章数
+                            var a = rArr.length;
                             data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
-                            data.article = article;
+                            data.article = article2;
                             data.an = a;
                             getMain(data, id, function (data) {
                                 resolve(data);
                             });
                         });
                     });
+                } else {
+                    resolve("error");
                 }
             });
         });

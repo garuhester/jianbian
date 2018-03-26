@@ -139,21 +139,27 @@ module.exports = function (app) {
             var currentPage = req.query.page || 1;// 当前页面页数
             var category = req.query.category || "none";//当前分类
             var search = req.query.search || "none";//搜索内容
+            var timeline = req.query.timeline || "none";//当前存档
             if (type != "setting") {
                 if (type == "article") {
                     title = "渐变-文章";
                     personal
-                        .getPersonalArticle(id, sid, currentPage, category, search)
+                        .getPersonalArticle(id, sid, currentPage, category, search, timeline)
                         .then(function (data) {
-                            res.render("personal-article", {
-                                goto,
-                                title,
-                                user: req.session.user,
-                                data,
-                                isSelf,
-                                category,
-                                search,
-                            });
+                            if (data == "error") {
+                                res.redirect("/nopage");
+                            } else {
+                                res.render("personal-article", {
+                                    goto,
+                                    title,
+                                    user: req.session.user,
+                                    data,
+                                    isSelf,
+                                    category,
+                                    search,
+                                    timeline,
+                                });
+                            }
                         });
                 } else if (type == "follow" || type == "fans") {
                     title = type == "follow" ? "渐变-关注" : "渐变-粉丝";

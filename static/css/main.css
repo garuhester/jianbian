@@ -691,6 +691,15 @@ ul.personnav {
     padding-top: 10px;
 }
 
+.personal .moreCom {
+    text-decoration:none;
+    color: #999;
+}
+
+.personal .moreCom:hover {
+    text-decoration:underline;
+}
+
 .personal .left {
     overflow: hidden;
     margin-bottom: 100px;
@@ -1251,6 +1260,7 @@ ul.personnav {
     position: fixed;
     background: #fff;
     border-bottom: 1px solid #ddd;
+    z-index: 1000;
 }
 .write-main .write-list .list-title .a1 {
     font-weight: bold;

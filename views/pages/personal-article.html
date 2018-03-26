@@ -2,7 +2,7 @@
 
     <% include ../sharePages/personal.html %>
         <div class="left">
-            <% if(category == "none" && search == "none"){ %>
+            <% if(timeline == "none" && category == "none" && search == "none"){ %>
                 <% include ../sharePages/personal-3tabs.html %>
             <% }else if(category != "none" && search == "none"){ %>
                 <div class="tabs">
@@ -22,7 +22,13 @@
                         <%= search %>
                     </div>
                 </div>
-            <% } %>
+            <% }else if(timeline != "none" && category == "none" && search == "none"){ %>
+                    <div class="tabs">
+                        <div class="box box2">文章存档：
+                            <%= timeline %>
+                        </div>
+                    </div>
+                <% } %>
             <div class="list">
                 <% 
                     if(data.user.articleNum != 0){

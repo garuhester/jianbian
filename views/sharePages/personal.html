@@ -3,7 +3,9 @@
         <div class="one">
             <div class="row1">
                 <img src="<%= data.user.headImage %>" alt="">
-                <span><%= data.user.name %></span>
+                <span>
+                    <%= data.user.name %>
+                </span>
                 <% if(data.isFollow){ %>
                     <div class="follow" style="background:rgb(116, 181, 255);color:#fff;pointer-events:none">
                         已关注
@@ -17,18 +19,26 @@
             </div>
             <div class="row2">
                 <div class="box" onclick="location.href='/personal/article/<%= goto %>'">
-                    <span><%= data.an %></span> 文章
+                    <span>
+                        <%= data.an %>
+                    </span> 文章
                 </div>
                 <div class="box" onclick="location.href='/personal/follow/<%= goto %>'">
-                    <span><%= data.user.followNum %></span> 关注
+                    <span>
+                        <%= data.user.followNum %>
+                    </span> 关注
                 </div>
                 <div class="box" onclick="location.href='/personal/fans/<%= goto %>'">
-                    <span><%= data.user.fansNum %></span> 粉丝
+                    <span>
+                        <%= data.user.fansNum %>
+                    </span> 粉丝
                 </div>
             </div>
             <div class="split"></div>
             <div class="row3">
-                <div class="like" onclick="location.href='/personal/likearticle/<%= goto %>'">喜欢和收藏的文章 <i class="iconfont icon-enter" style="font-weight:bold"></i></div>
+                <div class="like" onclick="location.href='/personal/likearticle/<%= goto %>'">喜欢和收藏的文章
+                    <i class="iconfont icon-enter" style="font-weight:bold"></i>
+                </div>
             </div>
             <div class="split"></div>
             <div class="row3">
@@ -41,13 +51,22 @@
                 <span>文章推荐</span>
                 <ul>
                     <% if(data.iscom.length != 0){ %>
-                    <% for(var i=0;i<data.iscom.length;i++){ %>
-                    <li><a href="/article/<%= data.iscom[i].authorId %>/<%= data.iscom[i]._id %>" class="article" target="_blank"><%= data.iscom[i].title %></a></li>
-                    <% }}else{ %>
-                        <li style="font-weight: bold;color: rgb(94, 94, 94);">
-                           无
-                        </li>
-                        <% } %>
+                        <% for(var i=0;i<data.iscom.length;i++){ %>
+                            <li>
+                                <a href="/article/<%= data.iscom[i].authorId %>/<%= data.iscom[i]._id %>" class="article" target="_blank">
+                                    <%= data.iscom[i].title %>
+                                </a>
+                            </li>
+                            <% if(data.iscom.length >= 5 && i == 4){ %>
+                                <li>
+                                    <a href="" class="moreCom">...更多推荐文章</a>
+                                </li>
+                                <% break;} %>
+                                    <% }}else{ %>
+                                        <li style="font-weight: bold;color: rgb(94, 94, 94);">
+                                            无
+                                        </li>
+                                        <% } %>
                 </ul>
             </div>
             <div class="split"></div>
@@ -55,19 +74,24 @@
                 <span>文章分类</span>
                 <%  if(data.user.categoryList.length == 1 && data.user.categoryList[0].categoryNum == 0){ %>
                     <div class="article" style="font-weight: bold;">无</div>
-                <% } %>
-                <ul>
+                    <% } %>
+                        <ul>
                     <% 
                         for(var i =0;i<data.user.categoryList.length;i++){ 
                             var cl = data.user.categoryList[i];
                             if(cl.categoryNum != 0){
                                 if(cl.categoryName == 'nocate'){
                     %>
-                                    <li><a onclick="gotoCategory('<%= cl.categoryName %>')"  class="article">无分类&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
+                                <li>
+                                    <a onclick="gotoCategory('<%= cl.categoryName %>')" class="article">无分类&nbsp;&nbsp;(<%= cl.categoryNum %>)</a>
+                                </li>
                                 <% }else{%>
-                            <li><a onclick="gotoCategory('<%= cl.categoryName %>')" class="article"><%= cl.categoryName %>&nbsp;&nbsp;(<%= cl.categoryNum %>)</a></li>
-                        <% }}} %>
-                </ul>
+                                    <li>
+                                        <a onclick="gotoCategory('<%= cl.categoryName %>')" class="article">
+                                            <%= cl.categoryName %>&nbsp;&nbsp;(<%= cl.categoryNum %>)</a>
+                                    </li>
+                                    <% }}} %>
+                        </ul>
             </div>
             <div class="split"></div>
             <div class="row4">
@@ -77,7 +101,9 @@
                         for(var i=0;i<data.showArr.length;i++){ 
                             var sarr = data.showArr[i];
                     %>
-                    <li><a href="" class="article"><%= sarr.date %> &nbsp;(<%= sarr.count %>)</a></li>
+                        <li>
+                            <a href="" class="article" onclick="goTimeline(this)"><%= sarr.date %> &nbsp;(<%= sarr.count %>)</a>
+                        </li>
                     <% } %>
                 </ul>
             </div>
@@ -85,7 +111,6 @@
         <% include ../sharePages/copyright.html %>
     </div>
     <script>
-
         var sea = window.location.search;
         var arr = {};
         if (sea.indexOf('?') != -1) {
@@ -99,14 +124,20 @@
             }
         }
 
-        function gotoCategory(id){
+        var uid = "<%= data.user._id %>";
+
+        function gotoCategory(id) {
             window.event.preventDefault();
-            var uid = "<%= data.user._id %>";
             window.location.href = "/personal/article/" + uid + "/?category=" + id;
         }
 
-        function search(text){
-            var uid = "<%= data.user._id %>";
+        function search(text) {
             window.location.href = "/personal/article/" + uid + "/?search=" + text;
+        }
+
+        function goTimeline(obj) {
+            window.event.preventDefault();
+            var time = obj.innerHTML.trim().split(" ")[0];
+            window.location.href = "/personal/article/" + uid + "/?timeline=" + time;
         }
     </script>
