@@ -33,7 +33,18 @@
                                 <% } %>
                                     <div class="info">
                                         <%= dateFormat(data.article.createTime) %> |
-                                            <b><%= data.article.lookNum %></b>浏览 | <b><%= data.article.msgNum %></b>评论 | <b><%= data.article.likeNum %></b>喜欢 | <b><%= data.article.collectNum %></b>收藏
+                                            <b>
+                                                <%= data.article.lookNum %>
+                                            </b>浏览 |
+                                            <b>
+                                                <%= data.article.msgNum %>
+                                            </b>评论 |
+                                            <b>
+                                                <%= data.article.likeNum %>
+                                            </b>喜欢 |
+                                            <b>
+                                                <%= data.article.collectNum %>
+                                            </b>收藏
                                     </div>
                     </div>
                 </div>
@@ -57,9 +68,14 @@
                             </div>
                         </div>
                         <% if(data.isFollow){ %>
-                            <div class="btn1" style="pointer-events:none"><span>已关注</span></div>
+                            <div class="btn1" style="pointer-events:none">
+                                <span>已关注</span>
+                            </div>
                             <% }else{ %>
-                                <div class="btn1" id="<%= data.user._id %>" onclick="followPerson(this)"><span><i class="iconfont icon-add"></i>关注</span></div>
+                                <div class="btn1" id="<%= data.user._id %>" onclick="followPerson(this)">
+                                    <span>
+                                        <i class="iconfont icon-add"></i>关注</span>
+                                </div>
                                 <% } %>
                     </div>
                     <div class="split" style="clear:both;margin-top:20px"></div>
@@ -73,17 +89,28 @@
                 </div>
                 <div class="menu">
                     <% if(data.isLike){ %>
-                        <div class="unlike" data-text="取消喜欢" onclick="article('undo',1,this)"><i class="iconfont icon-like_fill"></i></div>
+                        <div class="unlike" data-text="取消喜欢" onclick="article('undo',1,this)">
+                            <i class="iconfont icon-like_fill"></i>
+                        </div>
                         <% }else{ %>
-                            <div class="like" data-text="喜欢" onclick="article('do',1,this)"><i class="iconfont icon-like"></i></div>
+                            <div class="like" data-text="喜欢" onclick="article('do',1,this)">
+                                <i class="iconfont icon-like"></i>
+                            </div>
                             <% } %>
                                 <% if(data.isCollect){ %>
-                                    <div class="uncollect" data-text="取消收藏" onclick="article('undo',0,this)"><i class="iconfont icon-collection_fill"></i></div>
+                                    <div class="uncollect" data-text="取消收藏" onclick="article('undo',0,this)">
+                                        <i class="iconfont icon-collection_fill"></i>
+                                    </div>
                                     <% }else{ %>
-                                        <div class="collect" data-text="收藏" onclick="article('do',0,this)"><i class="iconfont icon-collection"></i></div>
+                                        <div class="collect" data-text="收藏" onclick="article('do',0,this)">
+                                            <i class="iconfont icon-collection"></i>
+                                        </div>
                                         <% } %>
-                                            <div class="share" data-text="分享"><i class="iconfont icon-share"></i></div>
+                                            <div class="share" data-text="分享">
+                                                <i class="iconfont icon-share"></i>
+                                            </div>
                 </div>
+                <div id="comment"></div>
     </div>
 
     <script>
@@ -95,6 +122,16 @@
                 a.undoArticle(type, obj);
             }
         }
+        new Valine({
+            el: '#comment',
+            notify: false,
+            verify: false,
+            appId: 'hDLYWpLVUxJk4XfYbXqYJF4f-gzGzoHsz',
+            appKey: 'pOVqQkC0Lk0d4I8QtWGrDniO',
+            placeholder: '写下你的评论',
+            path: window.location.pathname,
+            avatar: 'mm'
+        });
     </script>
 
     <% include ../sharePages/footer.html %>
