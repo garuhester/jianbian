@@ -38,6 +38,12 @@ function getMain(data, id, callback) {
     });
 }
 
+function getAllActicleCount(id, func) {
+    Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
+        func(a);
+    });
+}
+
 //获取个人中心文章页数据
 var getPersonalArticle = function (id, sid, currentPage, category, search, timeline) {
     return new Promise(function (resolve, reject) {
@@ -74,9 +80,11 @@ var getPersonalArticle = function (id, sid, currentPage, category, search, timel
                             Article.count({ 'authorId': id, 'status': 1, 'category': category }, function (err, a) {
                                 data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                                 data.article = article;
-                                data.an = a;
-                                getMain(data, id, function (data) {
-                                    resolve(data);
+                                getAllActicleCount(id, function (acount) {
+                                    data.an = acount;
+                                    getMain(data, id, function (data) {
+                                        resolve(data);
+                                    });
                                 });
                             });
                         });
@@ -91,9 +99,11 @@ var getPersonalArticle = function (id, sid, currentPage, category, search, timel
                             Article.count(updateStr, function (err, a) {
                                 data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                                 data.article = article;
-                                data.an = a;
-                                getMain(data, id, function (data) {
-                                    resolve(data);
+                                getAllActicleCount(id, function (acount) {
+                                    data.an = acount;
+                                    getMain(data, id, function (data) {
+                                        resolve(data);
+                                    });
                                 });
                             });
                         });
@@ -128,9 +138,11 @@ var getPersonalArticle = function (id, sid, currentPage, category, search, timel
                             var a = rArr.length;
                             data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
                             data.article = article2;
-                            data.an = a;
-                            getMain(data, id, function (data) {
-                                resolve(data);
+                            getAllActicleCount(id, function (acount) {
+                                data.an = acount;
+                                getMain(data, id, function (data) {
+                                    resolve(data);
+                                });
                             });
                         });
                     });
@@ -287,8 +299,8 @@ var getPersonalLikeAndCollect = function (id, sid, currentPage, type) {
                 article[0].collectList = pagination(pageSize, skipNum, c);
                 data.article = article[0];
                 //用户文章数
-                Article.count({ 'authorId': id, 'status': 1 }, function (err, a) {
-                    data.an = a;
+                getAllActicleCount(id, function (acount) {
+                    data.an = acount;
                     getMain(data, id, function (data) {
                         resolve(data);
                     });
@@ -296,6 +308,31 @@ var getPersonalLikeAndCollect = function (id, sid, currentPage, type) {
             });
         });
     })
+}
+
+var getPersonalMoreArticle = function (id, sid, currentPage, type) {
+    return new Promise(function (resolve, reject) {
+        var pageSize = 20;
+        var skipNum = (currentPage - 1) * pageSize;
+        var data = {};
+        data.currentPage = currentPage;
+        User.findById(id, function (err, user) {
+            data.user = user;
+            var updateStr = { 'authorId': id, 'status': 1, 'isRecommend': 1 };
+            Article.find(updateStr).populate('authorId', 'name headImage').skip(skipNum).limit(pageSize).exec(function (err, article2) {
+                //用户文章数
+                var a = article2.length;
+                data.allPage = (a % pageSize == 0) ? ~~(a / pageSize) : ~~((a / pageSize) + 1);
+                data.article = article2;
+                getAllActicleCount(id, function (acount) {
+                    data.an = acount;
+                    getMain(data, id, function (data) {
+                        resolve(data);
+                    });
+                });
+            });
+        });
+    });
 }
 
 //数组分页
@@ -308,4 +345,5 @@ module.exports = {
     deleteArticle,
     getPersonalFollowAndFans,
     getPersonalLikeAndCollect,
+    getPersonalMoreArticle,
 }

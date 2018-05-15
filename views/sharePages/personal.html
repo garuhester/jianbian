@@ -52,14 +52,16 @@
                 <ul>
                     <% if(data.iscom.length != 0){ %>
                         <% for(var i=0;i<data.iscom.length;i++){ %>
+                            <% if(i < 5){ %>
                             <li>
                                 <a href="/article/<%= data.iscom[i].authorId %>/<%= data.iscom[i]._id %>" class="article" target="_blank">
                                     <%= data.iscom[i].title %>
                                 </a>
                             </li>
-                            <% if(data.iscom.length >= 5 && i == 4){ %>
+                            <% } %>
+                            <% if(data.iscom.length >= 5 && i == 5){ %>
                                 <li>
-                                    <a href="" class="moreCom">...更多推荐文章</a>
+                                    <a href="/personal/morearticle/<%= data.user._id %>" class="moreCom">...更多推荐文章</a>
                                 </li>
                                 <% break;} %>
                                     <% }}else{ %>

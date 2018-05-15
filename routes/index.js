@@ -190,6 +190,19 @@ module.exports = function (app) {
                                 isSelf
                             });
                         });
+                } else if (type == "morearticle") {
+                    title = "渐变-更多推荐文章";
+                    personal
+                        .getPersonalMoreArticle(id, sid, currentPage, type)
+                        .then(function (data) {
+                            res.render("personal-" + type, {
+                                goto,
+                                title,
+                                user: req.session.user,
+                                data,
+                                isSelf
+                            });
+                        });
                 } else {
                     res.redirect("/nopage");
                 }
