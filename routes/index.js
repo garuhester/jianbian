@@ -5,6 +5,7 @@ var setting = require("./setting");
 var write = require("./write");
 var personal = require("./personal");
 var follow = require("./follow");
+var message = require("./message");
 var article = require("./article");
 
 //日期插件
@@ -62,7 +63,7 @@ module.exports = function (app) {
                 .getData(req.session.user.id, currentPage, articleName)
                 .then(function (data) {
                     res.render("index", {
-                        title: "渐变-首页",
+                        title: "首页",
                         user: req.session.user,
                         data
                     });
@@ -72,7 +73,7 @@ module.exports = function (app) {
                 .getData(null, currentPage, articleName)
                 .then(function (data) {
                     res.render("index", {
-                        title: "渐变-首页",
+                        title: "首页",
                         user: "no",
                         data
                     });
@@ -92,13 +93,13 @@ module.exports = function (app) {
                     //渐变圈
                     if (id == "add") {
                         res.render("follow-add", {
-                            title: "渐变-添加关注",
+                            title: "添加关注",
                             user: req.session.user,
                             data
                         });
                     } else {
                         res.render("follow", {
-                            title: "渐变-关注",
+                            title: "关注",
                             user: req.session.user,
                             data
                         });
@@ -110,11 +111,18 @@ module.exports = function (app) {
     });
 
     //消息
-    app.get("/message", function (req, res) {
+    app.get("/message/:type", function (req, res) {
         if (req.session.user) {
-            res.render("message", {
-                title: "渐变-消息",
-                user: req.session.user
+            var selfid = req.session.user.id;
+            var type = req.params.type;
+            var currentPage = req.query.page || 1;
+            message.getMessage(selfid, type, currentPage).then(function (data) {
+                res.render("message", {
+                    title: "消息",
+                    user: req.session.user,
+                    data,
+                    type,
+                });
             });
         } else {
             res.redirect("/login");
@@ -142,7 +150,7 @@ module.exports = function (app) {
             var timeline = req.query.timeline || "none";//当前存档
             if (type != "setting") {
                 if (type == "article") {
-                    title = "渐变-文章";
+                    title = "文章";
                     personal
                         .getPersonalArticle(id, sid, currentPage, category, search, timeline)
                         .then(function (data) {
@@ -162,7 +170,7 @@ module.exports = function (app) {
                             }
                         });
                 } else if (type == "follow" || type == "fans") {
-                    title = type == "follow" ? "渐变-关注" : "渐变-粉丝";
+                    title = type == "follow" ? "关注" : "粉丝";
                     personal
                         .getPersonalFollowAndFans(id, sid, currentPage, type)
                         .then(function (data) {
@@ -177,8 +185,8 @@ module.exports = function (app) {
                 } else if (type == "collectarticle" || type == "likearticle") {
                     title =
                         type == "collectarticle" ?
-                            "渐变-收藏的文章" :
-                            "渐变-喜欢的文章";
+                            "收藏的文章" :
+                            "喜欢的文章";
                     personal
                         .getPersonalLikeAndCollect(id, sid, currentPage, type)
                         .then(function (data) {
@@ -191,7 +199,7 @@ module.exports = function (app) {
                             });
                         });
                 } else if (type == "morearticle") {
-                    title = "渐变-更多推荐文章";
+                    title = "更多推荐文章";
                     personal
                         .getPersonalMoreArticle(id, sid, currentPage, type)
                         .then(function (data) {
@@ -210,7 +218,7 @@ module.exports = function (app) {
                 if (isSelf) {
                     setting.getProfile(id).then(function (data) {
                         res.render("personal-setting", {
-                            title: "渐变-设置",
+                            title: "设置",
                             user: req.session.user,
                             data
                         });

@@ -2,17 +2,67 @@
     <div class="message">
         <div class="left">
             <div class="msglist">
-                <span><i class="iconfont icon-interactive_fill"></i>评论</span>
-                <span><i class="iconfont icon-collection_fill"></i>收藏</span>
-                <span><i class="iconfont icon-like_fill"></i>喜欢</span>
-                <span><i class="iconfont icon-add" style="font-weight:bold"></i>关注</span>
+                <!-- <span>
+                    <i class="iconfont icon-interactive_fill"></i>评论</span> -->
+                <span class="collect" onclick="window.location.href = '/message/collect'">
+                    <i class="iconfont icon-collection_fill"></i>收藏</span>
+                <span class="like" onclick="window.location.href = '/message/like'">
+                    <i class="iconfont icon-like_fill"></i>喜欢</span>
+                <span class="follow" onclick="window.location.href = '/message/follow'">
+                    <i class="iconfont icon-add" style="font-weight:bold"></i>关注</span>
             </div>
             <% include ../sharePages/copyright.html %>
         </div>
         <div class="right">
-
+            <% if(type == "collect"){ %>
+                <div class="innertitle">收藏</div>
+                <% }else if(type == "like"){ %>
+                    <div class="innertitle">喜欢</div>
+                    <% }else if(type == "follow"){ %>
+                        <div class="innertitle">关注</div>
+                        <% } %>
+                            <div class="list">
+                                <% 
+                                    if(data.msgs != null && data.msgs[0].messageList.length != 0){
+                                    for(var i = 0;i< data.msgs[0].messageList.length;i++){ 
+                                        var p = data.msgs[0].messageList[i];
+                                    %>
+                                    <div class="msg">
+                                        <img src="<%= p.otherUserId.headImage %>" alt="" onclick="window.location.href = '/personal/article/<%= p.otherUserId._id %>'" style="cursor: pointer;">
+                                        <div class="info">
+                                            <div class="title">
+                                                <% if(type == "collect"){ %>
+                                                    <span style="cursor: pointer;" onclick="window.location.href = '/personal/article/<%= p.otherUserId._id %>'"><%= p.otherUserId.name %></span> 收藏了你的文章<a href="/article/<%= p.otherUserId._id %>/<%= p.artId %>" style="text-decoration: none;" target="_blank">《<%= p.msgContent %>》</a> </div>
+                                            <% }else if(type == "like"){ %>
+                                                <span style="cursor: pointer;" onclick="window.location.href = '/personal/article/<%= p.otherUserId._id %>'"><%= p.otherUserId.name %></span> 喜欢了你的文章<a href="/article/<%= p.otherUserId._id %>/<%= p.artId %>" style="text-decoration: none;" target="_blank">《<%= p.msgContent %>》</a></div>
+                                        <% }else if(type == "follow"){ %>
+                                            <span style="cursor: pointer;" onclick="window.location.href = '/personal/article/<%= p.otherUserId._id %>'"><%= p.otherUserId.name %></span> 关注了你</div>
+                                         <% } %>
+                                            <div class="time">
+                                                <%= dateFormat(p.msgTime) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <% }}else{ %>
+                                <% if(type == "collect"){ %>
+                                    <div class="msg">无收藏消息</div>
+                                    <% }else if(type == "like"){ %>
+                                        <div class="msg">无喜欢消息</div>
+                                        <% }else if(type == "follow"){ %>
+                                            <div class="msg">无关注消息</div>
+                                            <% } %>
+                                                <% } %>
+                            </div>
+                            <% if(data.msgs != null && data.msgs[0].messageList.length != 0){ %>
+                                <% include ../sharePages/page.html %>
+                                    <% } %>
         </div>
     </div>
+
+    <script>
+        var type = "<%= type %>";
+        document.querySelector("." + type).style.background = "rgb(233, 233, 233)";
+    </script>
 
 
     <% include ../sharePages/footer.html %>

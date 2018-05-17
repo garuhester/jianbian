@@ -322,6 +322,7 @@ ul.personnav {
     margin-left: 5px;
     border: 1px solid #ddd;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .index .right .author .list .person .name {
@@ -447,6 +448,7 @@ ul.personnav {
     border-radius: 50%;
     border: 1px solid #ddd;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .index .left .list .article .top .name,
@@ -606,6 +608,7 @@ ul.personnav {
     margin-top: -50px;
     float: left;
     border: 2px solid #ddd;
+    object-fit: cover;
 }
 
 .setting .right #editprofile .row1 .changeimage {
@@ -734,6 +737,7 @@ ul.personnav {
     margin-top: -35px;
     margin-left: 10px;
     border: 1px solid #ddd;
+    object-fit: cover;
 }
 
 .personal .right .row1 span {
@@ -1031,6 +1035,7 @@ ul.personnav {
     margin-left: 20px;
     float: left;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .personal .left .list .followperson .info .name,
@@ -1169,6 +1174,7 @@ ul.personnav {
     margin-top: -25px;
     margin-left: 10px;
     float: left;
+    object-fit: cover;
 }
 
 .followed .left .userlist .user .name {
@@ -1195,6 +1201,33 @@ ul.personnav {
 
 .message .left .msglist span:hover {
     background: rgb(233, 233, 233);
+}
+.message .right .list .msg{
+    background: #fff;
+    padding: 10px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+.message .right .list .msg img{
+    height: 60px;
+    width:60px;
+    display: block;
+    padding: 5px;
+    border-radius: 50%;
+    float: left;
+    object-fit: cover;
+}
+.message .right .list .msg .info{
+    position: absolute;
+    left: 89px;
+    top: 50%;
+    transform: translate(0,-50%);
+    overflow: hidden;
+}
+.message .right .list .msg .info .time{
+    font-size: 14px;
+    color: #6f6f6f;
 }
 
 /* ---------------------------------------- */
@@ -1519,6 +1552,7 @@ ul.personnav {
     margin-left: 10px;
     cursor: pointer;
     border: 1px solid #ddd;
+    object-fit: cover;
 }
 
 .intoarticle .userinfo .name,
@@ -1729,8 +1763,28 @@ ul.personnav {
     font-size: 1.5rem;
     background: #fff;
     padding: 20px;
+    border-bottom: 1px solid rgb(240, 240, 240);
 }
 
 #comment {
     margin-top: 50px;
+}
+
+.msga {
+    position: relative;
+}
+.msgnum {
+    position: absolute;
+    display: block;
+    top: 2px;
+    right: 2px;
+    height: 18px;
+    width: 18px;
+    font-size: 12px;
+    line-height: 18px;
+    border-radius: 10px;
+    background: rgb(255, 95, 95);
+    color: #fff;
+    padding-left: 6px;
+    padding-right: 6px;
 }

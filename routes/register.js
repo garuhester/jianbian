@@ -1,6 +1,7 @@
 var User = require('../schemas/user');
 var Article = require('../schemas/article');
 var Follow = require('../schemas/follow');
+var Message = require('../schemas/message');
 var Collect = require('../schemas/collect');
 
 var doRegister = function (req, res) {
@@ -30,15 +31,20 @@ var doRegister = function (req, res) {
                         userId: r._id,
                     });
                     c.save(function (err, c) {
-                        User.findByIdAndUpdate(r._id, {
-                            $push: {
-                                categoryList: {
-                                    categoryName: 'nocate'
+                        var msg = new Message({
+                            userId: r._id,
+                        });
+                        msg.save(function (err, msg) {
+                            User.findByIdAndUpdate(r._id, {
+                                $push: {
+                                    categoryList: {
+                                        categoryName: 'nocate'
+                                    }
                                 }
-                            }
-                        }, function (err, cate) {
-                            //注册成功
-                            res.json({ result: 1 });
+                            }, function (err, cate) {
+                                //注册成功
+                                res.json({ result: 1 });
+                            });
                         });
                     });
                 });

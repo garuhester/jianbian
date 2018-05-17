@@ -1,14 +1,5 @@
-function logout() {
-    $.ajax({
-        type: 'post',
-        url: '/logout',
-        success() {
-            window.location.reload();
-        }
-    });
-}
 
-$(function() {
+$(function () {
     var url = location.href.split('/')[3];
     if (url == 'follow') {
         $('ul#nav li:eq(2) a').addClass('active');
@@ -27,6 +18,16 @@ $(function() {
     }
 });
 
+function logout() {
+    $.ajax({
+        type: 'post',
+        url: '/logout',
+        success() {
+            window.location.reload();
+        }
+    });
+}
+
 // person-setting
 function setting() {
     $('#editprofile').css({ 'display': 'block' });
@@ -35,7 +36,7 @@ function setting() {
 
 function change(first, second) {
     $('#' + first).css({ 'display': 'block' });
-    $('.' + first).css({ 'background': 'rgb(247, 247, 247)', 'box-shadow': 'inset 5px 0px 0 0 rgb(116, 181, 255)'});
+    $('.' + first).css({ 'background': 'rgb(247, 247, 247)', 'box-shadow': 'inset 5px 0px 0 0 rgb(116, 181, 255)' });
     $('#' + second).css({ 'display': 'none' });
     $('.' + second).css({ 'background': '#fff', 'box-shadow': 'none' });
 }
@@ -143,10 +144,10 @@ function loadArticle(obj) {
     location.href = "/follow/" + obj.id;
 }
 
-var Article = function(aid) {
+var Article = function (aid) {
     var s = document.createElement('style');
     document.body.appendChild(s);
-    this.doArticle = function(type, obj) {
+    this.doArticle = function (type, obj) {
         $.ajax({
             type: 'post',
             url: '/doarticle',
@@ -156,7 +157,7 @@ var Article = function(aid) {
             },
             success(data) {
                 if (data.result == 0) {
-                    var re = confirm("登录后才可以关注(#^.^#)");
+                    var re = confirm("登录后才可以操作哟(#^.^#)");
                     if (re) {
                         location.href = "/login";
                     }
@@ -174,7 +175,7 @@ var Article = function(aid) {
             }
         });
     }
-    this.undoArticle = function(type, obj) {
+    this.undoArticle = function (type, obj) {
         $.ajax({
             type: 'post',
             url: '/undoarticle',

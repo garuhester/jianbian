@@ -1,6 +1,7 @@
 var User = require('../schemas/user.js');
 var Article = require('../schemas/article.js');
 var Follow = require('../schemas/follow');
+var Message = require('../schemas/message');
 var eventproxy = require('eventproxy');
 var moment = require('moment');
 
@@ -72,11 +73,18 @@ var followPerson = function (req, res) {
                             }
                             Follow.findOneAndUpdate({ 'userId': otherid }, { '$push': { 'followList': updateStr2 }, '$inc': { 'fansNum': 1 } }, function (err, follow) {
                                 User.findByIdAndUpdate(otherid, { '$inc': { 'fansNum': 1 } }, function () {
-                                    //关注成功
-                                    res.json({ result: 3 });
-                                })
+                                    var msgStr = {
+                                        otherUserId: id,
+                                        msgContent: "",
+                                        msgType: 2
+                                    };
+                                    Message.findOneAndUpdate({ 'userId': otherid }, { '$push': { 'messageList': msgStr } }, function (err, msg) {
+                                        //关注成功
+                                        res.json({ result: 3 });
+                                    });
+                                });
                             });
-                        })
+                        });
                     });
                 } else {
                     //已经关注
@@ -110,7 +118,13 @@ var unFollowPerson = function (req, res) {
                         }
                         Follow.findOneAndUpdate({ 'userId': otherid }, { '$pull': { 'followList': updateStr2 }, '$inc': { 'fansNum': -1 } }, function (err, r) {
                             User.findByIdAndUpdate(otherid, { '$inc': { 'fansNum': -1 } }, function () {
-                                res.json({ result: 1 });
+                                var msgStr = {
+                                    otherUserId: id,
+                                    msgType: 2
+                                };
+                                Message.findOneAndUpdate({ 'userId': otherid }, { '$pull': { 'messageList': msgStr } }, function (err, msg) {
+                                    res.json({ result: 1 });
+                                });
                             });
                         });
                     });

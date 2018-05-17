@@ -100,13 +100,16 @@
                 <span>文章存档</span>
                 <ul>
                     <% 
+                        if(data.showArr.length != 0){
                         for(var i=0;i<data.showArr.length;i++){ 
                             var sarr = data.showArr[i];
                     %>
                         <li>
                             <a href="" class="article" onclick="goTimeline(this)"><%= sarr.date %> &nbsp;(<%= sarr.count %>)</a>
                         </li>
-                    <% } %>
+                    <% }}else{ %>
+                    <div class="article" style="font-weight: bold;">无</div>
+                        <% } %>
                 </ul>
             </div>
         </div>
