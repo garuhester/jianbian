@@ -6,13 +6,13 @@ function connect() {
     mongoose.connect(DB_URL);
 
     //mongodb status
-    mongoose.connection.on('connected', function() {
+    mongoose.connection.on('connected', function () {
         console.log("mongodb connected success");
     });
-    mongoose.connection.on('error', function(err) {
+    mongoose.connection.on('error', function (err) {
         console.log("mongodb connected error " + err);
     });
-    mongoose.connection.on('disconnected', function() {
+    mongoose.connection.on('disconnected', function () {
         console.log("mongodb disconnected");
     });
 }
